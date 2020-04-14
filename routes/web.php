@@ -2,19 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Auth::routes(); 
+
 
 Route::get('/', function () {
-    return view('index');
+    return view('welcome');
 });
 
 Route::get('/books', function () {
@@ -25,6 +17,21 @@ Route::get('/categories', function () {
     return view('category');
 });
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+/* 
+bisa cek di doc bagian controller -> Rute Sumber Daya Parsial 
+
+controller folder admin->userController                  kecuali show , create , store
+                                                             maksudnya yang gak dipake                
+                                                             
+ Route::resource('/admin/users', 'Admin\UserController' , ['except' => ['show' , 'create' , 'store']]);
+ */
+
+//  membuat group route => silahkan cek di : php artisan route:list
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
+    Route::resource('/users', 'UserController' , ['except' => ['show' , 'create' , 'store']]);
+});
