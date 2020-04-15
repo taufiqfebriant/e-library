@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+
+
+
 class LoginController extends Controller
 {
     /*
@@ -28,6 +31,7 @@ class LoginController extends Controller
      */
     protected $redirectTo = RouteServiceProvider::HOME;
 
+    
     /**
      * Create a new controller instance.
      *
@@ -37,4 +41,18 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+
+    // public function redirectTo()
+    // {
+    //     // jika yang login admin maka di arahkan ke halaman user management
+    //     if (Auth::user()->hasRole('admin')) {
+    //         $this->redirectTo = route('admin.users.index');
+    //         return $this->redirectTo();
+    //     }
+    //         // jika halaman user maka diarahkan ke halaman dashboard
+    //         $this->redirectTo = route('home');
+    //         return $this->redirectTo();
+        
+    // }
 }

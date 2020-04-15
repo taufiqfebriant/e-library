@@ -61,9 +61,11 @@
                                         {{ __('Logout') }}
                                     </a>
 
+                                    @can('manage-users')
                                     <a href="{{ route('admin.users.index') }}" class="dropdown-item">
                                         User Management
                                     </a>
+                                    @endcan
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
@@ -77,7 +79,12 @@
         </nav>
 
         <main class="py-4">
-            @yield('content')
+
+            <div class="container">
+                @include('layouts.partials.alerts')
+                @yield('content')
+            </div>
+            
         </main>
     </div>
 </body>

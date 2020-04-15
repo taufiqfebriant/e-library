@@ -32,6 +32,6 @@ controller folder admin->userController                  kecuali show , create ,
  */
 
 //  membuat group route => silahkan cek di : php artisan route:list
-Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function(){
     Route::resource('/users', 'UserController' , ['except' => ['show' , 'create' , 'store']]);
 });
