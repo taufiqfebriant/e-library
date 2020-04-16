@@ -17,10 +17,9 @@ class CreateBooksTable extends Migration
             $table->id();
             $table->string('title',100);
             $table->text('synopsis');
-            $table->foreignId('author_id')
-                    ->constrained()
-                    ->onDelete('cascade')
-                    ->onUpdate('restrict');
+            $table->string('cover')->nullable();
+            $table->unsignedSmallInteger('pages');
+            $table->string('preview')->nullable();
             $table->foreignId('category_id')
                     ->constrained()
                     ->onDelete('cascade')
@@ -29,15 +28,6 @@ class CreateBooksTable extends Migration
                     ->constrained()
                     ->onDelete('cascade')
                     ->onUpdate('restrict');
-            $table->foreignId('trailer_id')
-                    ->constrained()
-                    ->onDelete('cascade')
-                    ->onUpdate('restrict');
-            $table->foreignId('review_id')
-                    ->constrained()
-                    ->onDelete('cascade')
-                    ->onUpdate('restrict');
-            
             $table->timestamps();
         });
     }
