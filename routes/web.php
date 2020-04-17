@@ -9,6 +9,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/satubuku',function(){
+    return view('satuHalamanBuku');
+});
+
 Route::get('/books', function () {
     return view('book');
 });

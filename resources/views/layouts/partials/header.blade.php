@@ -2,7 +2,12 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>E-Library | Home</title>
+
+
+        <!-- jquery -->
+        <script src="https://code.jquery.com/jquery-3.4.1.js"           integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+        </script>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -11,17 +16,20 @@
         <!-- font dari google -->
         <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
 
-        <!-- untuk css dan js mode offline -->
-        
+        <!-- css master frontend -->
+
         <!-- 
-                taruh file di public
-                jika ingin memanggil menggunakan : asset('')
+                Ada 2 cara pemanggilan file css dan js 
+                
+                note : filenya di taruh di public
          -->
 
-        <!-- style -->
-        <style>
-                body{
-                        font-family: 'Quicksand', sans-serif;
-                }
-        </style>
+        <!-- cara 1 memanggil file css dan cara ke 2 ada di footer.js-->
+        <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
+        <!-- owlcarausel -->
+        <link rel="stylesheet" href="{{ asset('assets/Owl/assets/owl.carousel.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('assets/Owl/assets/owl.theme.default.min.css') }}">
+        
+        
 </head>

@@ -17,7 +17,9 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a href="/satubuku" class="nav-link">Tapai</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -110,8 +112,6 @@
 
       
         @include('layouts.partials.footer')
-
-
 
     </body>
 </html>

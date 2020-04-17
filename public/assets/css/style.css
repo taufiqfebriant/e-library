@@ -1,0 +1,57 @@
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+
+
+/* Halamn-Utama section-jumbotrons */
+#jumbotrons{
+    height: 500px;
+    background-image: url('/images/aa.jpg');
+    width: 100%;
+    background-repeat: no-repeat;
+    background-origin: border-box;
+    background-position: center;
+    background-size: cover;
+    /* filter: blur(4px); */
+}
+
+/* Halaman-Utaama  buku*/
+.buku{
+    height: auto;
+    /* padding: 20px; */
+}
+section.buku img{
+    width: 100%;
+    height: 50%;
+    position: relative;
+}
+
+/* Halaman-utama 3 buku terbaik */
+.bukuTerbaik{
+    height:auto;
+    padding: 20px;
+    background: #f7f7f7;
+}
+#card-non-bg{
+    background: none;
+}
+
+/* Halaman Satu halaman */
+.satuHalaman{
+    background-color:#f5f6f9;
+    height: auto;
+    padding-bottom: 20px;
+}
+
+#app-footer{
+    background-color:#f9f9f9;
+    color:#8c8c8c;
+}
+.text-col{
+    margin-top: 50px;
+}
+ul.demo{
+    list-style-type: none;
+}
