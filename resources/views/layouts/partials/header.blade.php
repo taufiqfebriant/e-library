@@ -31,5 +31,7 @@
         <link rel="stylesheet" href="{{ asset('assets/Owl/assets/owl.carousel.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/Owl/assets/owl.theme.default.min.css') }}">
         
+        <!-- fontawesome -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
         
 </head>
