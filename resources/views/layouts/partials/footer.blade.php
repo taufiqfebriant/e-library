@@ -1,46 +1,120 @@
-<footer id="app-footer">
+<footer class="footer-area footer--light">
+  <div class="footer-big">
     <div class="container">
-        <div class="row mt-3">
-            <div class="col-md-12">
-                <div class="text-col">
-                    
-                <h4><b>
-                        This website is from Indonesia
-                    </b>
-                </h4
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere minima perferendis officiis, dignissimos, velit porro esse cum libero ad ab repudiandae modi eos corrupti aliquid omnis labore itaque illo, eligendi nostrum? Voluptas quae debitis quos doloremque ipsam? Repudiandae repellat ad ex maiores suscipit laudantium tenetur, unde odit totam delectus minus hic eveniet dolorem atque? Accusamus deserunt ratione delectus expedita tempora repellendus corrupti, reiciendis sed! Repudiandae blanditiis incidunt officiis asperiores. Suscipit neque voluptate eum sapiente veniam quaerat, sed ad explicabo culpa vero nesciunt ipsum tempora laudantium temporibus ab assumenda! Deleniti sed accusantium quia corporis omnis harum consectetur, dolores incidunt culpa natus?</p>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-md-4">
-                      <b>About Us</b> <br> <br>
-                      <ul class="demo">
-                          <li>a</li>
-                          <li>a</li>
-                          <li>a</li>
-                      </ul>
-                    </div>
-                    <div class="col-md-4">
-                    <b>About Us</b> <br> <br>
-                      <ul class="demo">
-                          <li>a</li>
-                          <li>a</li>
-                          <li>a</li>
-                      </ul>
-                    </div>
-                    <div class="col-md-4">
-                    <b>About Us</b> <br> <br>
-                      <ul class="demo">
-                          <li>a</li>
-                          <li>a</li>
-                          <li>a</li>
-                      </ul>
-                    </div>
-                </div>
+      <div class="row">
+        <div class="col-md-3 col-sm-12">
+          <div class="footer-widget">
+            <div class="widget-about">
+              <img src="http://placehold.it/250x80" alt="" class="img-fluid">
+              <p></p>
             </div>
-
+          </div>
         </div>
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu footer-menu--1">
+              <h4 class="footer-widget-title">Top Rated Book</h4>
+              <ul>
+                <li>
+                  <a href="#">Book 1</a>
+                </li>
+                <li>
+                  <a href="#">Book 1</a>
+                </li>
+                <li>
+                  <a href="#">Book 1</a>
+                </li>
+                <li>
+                  <a href="#">Book 1</a>
+                </li>
+                <li>
+                  <a href="#">Book 1</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu">
+              <h4 class="footer-widget-title">Categories</h4>
+              <ul>
+                <li>
+                  <a href="#">Category</a>
+                </li>
+                <li>
+                  <a href="#">Category</a>
+                </li>
+                <li>
+                  <a href="#">Category</a>
+                </li>
+                <li>
+                  <a href="#">Category</a>
+                </li>
+                <li>
+                  <a href="#">Category</a>
+                </li>
+                <li>
+                  <a href="#">Category</a>
+                </li>
+                <li>
+                  <a href="#">Category</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 col-sm-4">
+          <div class="footer-widget">
+            <div class="footer-menu no-padding">
+              <h4 class="footer-widget-title">Help Support</h4>
+              <ul>
+                <li>
+                  <a href="#">Support Forum</a>
+                </li>
+                <li>
+                  <a href="#">Terms &amp; Conditions</a>
+                </li>
+                <li>
+                  <a href="#">Support Policy</a>
+                </li>
+                <li>
+                  <a href="#">Refund Policy</a>
+                </li>
+                <li>
+                  <a href="#">FAQs</a>
+                </li>
+                <li>
+                  <a href="#">Buyers Faq</a>
+                </li>
+                <li>
+                  <a href="#">Sellers Faq</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+  </div>
+
+  <div class="mini-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="copyright-text">
+            <p>© 2020
+              <a href="#">E-Library</a>. All rights reserved. Created by
+              <a href="#">Syameer Technology</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>
 
 

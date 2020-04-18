@@ -21,6 +21,8 @@ Route::get('/categories', function () {
     return view('category');
 });
 
+// search book testing
+Route::get('/search' , 'FrontpageController@searchBooks')->name('search');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
