@@ -18,7 +18,7 @@ class CreateBooksTable extends Migration
             $table->string('title',100);
             $table->text('synopsis');
             $table->string('cover')->nullable();
-            $table->unsignedSmallInteger('pages');
+            $table->string('file');
             $table->string('preview')->nullable();
             $table->foreignId('category_id')
                     ->constrained()

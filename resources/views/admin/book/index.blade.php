@@ -31,9 +31,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="card col-12">
-                            <div class="card-body">
-                                {{ $dataTable->table() }}
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    {{ $dataTable->table() }}
+                                </div>
                             </div>
                         </div>
                     </div>

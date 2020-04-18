@@ -38,9 +38,11 @@
                                     <dt class="col-sm-2">Sampul</dt>
                                     <dd class="col-sm-10">
                                         @if ($book->cover)
-                                            <a href="{{ $book->file('cover') }}" data-toggle="lightbox">
-                                                <img src="{{ $book->file('cover') }}" class="img-thumbnail" style="width: 150px">
+                                            <a href="{{ asset("storage/{$book->cover}") }}" data-toggle="lightbox">
+                                                <img src="{{ asset("storage/{$book->cover}") }}" class="img-thumbnail" style="width: 150px">
                                             </a>
+                                        @else
+                                            Tidak ada sampul
                                         @endif
                                     </dd>
                                     <dt class="col-sm-2">Penulis</dt>
@@ -51,7 +53,7 @@
                                     </dd>
                                     <dt class="col-sm-2">Kategori</dt>
                                     <dd class="col-sm-10">{{ $book->category->name }}</dd>
-                                    <dt class="col-sm-2">Kategori</dt>
+                                    <dt class="col-sm-2">Penerbit</dt>
                                     <dd class="col-sm-10">{{ $book->publisher->name }}</dd>
                                     <dt class="col-sm-2">Jumlah halaman</dt>
                                     <dd class="col-sm-10">{{ $book->pages }} halaman</dd>

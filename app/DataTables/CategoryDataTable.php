@@ -44,6 +44,7 @@ class CategoryDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('category-table')
+                    ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

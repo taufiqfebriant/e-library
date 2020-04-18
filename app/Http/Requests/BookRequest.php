@@ -30,7 +30,7 @@ class BookRequest extends FormRequest
             'author_id' => 'required',
             'category_id' => 'required',
             'publisher_id' => 'required',
-            'pages' => 'required|numeric',
+            'file' => 'required|file|mimes:pdf',
             'preview' => 'nullable|file|mimes:pdf'
         ];
     }

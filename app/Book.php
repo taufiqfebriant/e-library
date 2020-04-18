@@ -10,7 +10,8 @@ class Book extends Model
 
     public function authors()
     {
-        return $this->belongsToMany('App\Author');
+        return $this->belongsToMany('App\Author')
+                    ->using('App\AuthorBook');
     }
 
     public function category()
@@ -23,8 +24,14 @@ class Book extends Model
         return $this->belongsTo('App\Publisher');
     }
     
-    public function file($type)
+    public function fileUrl($type)
     {
         if ($this->{$type}) return asset("storage/{$this->{$type}}");
+    }
+
+    public function countPages($path) {
+        $pdftext = file_get_contents($path);
+        $num = preg_match_all("/\/Page\W/", $pdftext, $dummy);
+        return $num;
     }
 }
