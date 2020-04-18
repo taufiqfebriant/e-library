@@ -12,7 +12,7 @@
                             Decorate your life by reading books
                         </b>
                     </h4>
-                    <input type="search" class="form-control form-control-lg mt-5" placeholder="Find the book you like">
+                    <input type="search" id= "search_data" class="form-control form-control-lg mt-5" placeholder="Find the book you like" autocomplete="off">
                 </div>
             </div>
         </div>
@@ -33,7 +33,10 @@
                             <div class="">
                                 <div class="card border-0 shadow">
                                     <img class="card-img-top" src="/images/hp.jpg" alt="Card image cap">
-                                    <div class="card-body"> Some more card content </div>
+                                    <div class="card-body d-flex"> 
+                                        <p class="w-100">Harry Potter</p>
+                                            <button type="submit" class="btn btn-danger btn-flat btn-sm flex-md-shrink-1"> <i class="fas fa-shopping-bag"></i></button> 
+                                     </div>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +44,10 @@
                             <div class="">
                                 <div class="card border-0 shadow">
                                     <img class="card-img-top" src="/images/hp.jpg" alt="Card image cap">
-                                    <div class="card-body"> Some more card content </div>
+                                    <div class="card-body d-flex"> 
+                                        <p class="w-100">Harry Potter</p>
+                                            <button type="submit" class="btn btn-danger btn-flat btn-sm flex-md-shrink-1"> <i class="fas fa-shopping-bag"></i></button> 
+                                     </div>
                                 </div>
                             </div>
                         </div>
@@ -49,7 +55,10 @@
                             <div class="">
                                 <div class="card border-0 shadow">
                                     <img class="card-img-top" src="/images/hp.jpg" alt="Card image cap">
-                                    <div class="card-body"> Some more card content </div>
+                                    <div class="card-body d-flex"> 
+                                        <p class="w-100">Harry Potter</p>
+                                            <button type="submit" class="btn btn-danger btn-flat btn-sm flex-md-shrink-1"> <i class="fas fa-shopping-bag"></i></button> 
+                                     </div>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +66,10 @@
                             <div class="">
                                 <div class="card border-0 shadow">
                                     <img class="card-img-top" src="/images/hp.jpg" alt="Card image cap">
-                                    <div class="card-body"> Some more card content </div>
+                                    <div class="card-body d-flex"> 
+                                        <p class="w-100">Harry Potter</p>
+                                            <button type="submit" class="btn btn-danger btn-flat btn-sm flex-md-shrink-1"> <i class="fas fa-shopping-bag"></i></button> 
+                                     </div>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +105,9 @@
                                         <h5 class="card-title"> <b>Harry Potter </b>
                                         </h5>
                                         <p class="card-text">By J.K. Rowling</p>
-                                        <p class="card-text">Rating</p>
+                                        <p class="card-text">Rating
+                                        <button type="button" class="btn btn-danger btn-sm"> <i class="fas fa-shopping-bag"></i></button>
+                                        </p>
                                     </div>
                                     </div>
                                 </div>
@@ -116,7 +130,9 @@
                                             <b>Harry Potter </b>
                                         </h5>
                                         <p class="card-text">J.K. Rowling</p>
-                                        <p class="card-text">Rating</p>
+                                        <p class="card-text">Rating
+                                        <button type="button" class="btn btn-danger btn-sm"> <i class="fas fa-shopping-bag"></i></button>
+                                        </p>
                                     </div>
                                     </div>
                                 </div>
@@ -137,7 +153,9 @@
                                     <div class="card-body">
                                         <h5 class="card-title"><b>Harry Potter </b></h5>
                                         <p class="card-text">J.K. Rowling</p>
-                                        <p class="card-text">Rating</p>
+                                        <p class="card-text">Rating
+                                        <button type="button" class="btn btn-danger btn-sm"> <i class="fas fa-shopping-bag"></i></button>
+                                        </p>
                                     </div>
                                     </div>
                                 </div>
@@ -172,6 +190,9 @@
                                         <small class="text-muted">Andrea Hirata</small><br>
                                         <b>Rating</b>
                                     </p>
+                                    <div class="card-text">
+                                        <button type="button" class="btn btn-danger btn-sm"> <i class="fas fa-shopping-bag"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -186,8 +207,13 @@
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h5 class="card-title font-weight-bold ">Laskar Pelangi </h5>
-                                    <p class="card-text">.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Andrea Hirata</small><br>
+                                        <b>Rating</b>
+                                    </p>
+                                    <div class="card-text">
+                                        <button type="button" class="btn btn-danger btn-sm"> <i class="fas fa-shopping-bag"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -202,8 +228,13 @@
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h5 class="card-title font-weight-bold">Laskar Pelangi </h5>
-                                    <p class="card-text">.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Andrea Hirata</small><br>
+                                        <b>Rating</b>
+                                    </p>
+                                    <div class="card-text">
+                                        <button type="button" class="btn btn-danger btn-sm"> <i class="fas fa-shopping-bag"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -218,8 +249,13 @@
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h5 class="card-title font-weight-bold">Laskar Pelangi </h5>
-                                    <p class="card-text">.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Andrea Hirata</small><br>
+                                        <b>Rating</b>
+                                    </p>
+                                    <div class="card-text">
+                                        <button type="button" class="btn btn-danger btn-sm"> <i class="fas fa-shopping-bag"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -234,8 +270,13 @@
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h5 class="card-title font-weight-bold">Laskar Pelangi </h5>
-                                    <p class="card-text">.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Andrea Hirata</small><br>
+                                        <b>Rating</b>
+                                    </p>
+                                    <div class="card-text">
+                                        <button type="button" class="btn btn-danger btn-sm"> <i class="fas fa-shopping-bag"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -250,8 +291,13 @@
                             <div class="col-md-7">
                                 <div class="card-body">
                                     <h5 class="card-title font-weight-bold">Laskar Pelangi </h5>
-                                    <p class="card-text">.</p>
-                                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                                    <p class="card-text">
+                                        <small class="text-muted">Andrea Hirata</small><br>
+                                        <b>Rating</b>
+                                    </p>
+                                    <div class="card-text">
+                                        <button type="button" class="btn btn-danger btn-sm"> <i class="fas fa-shopping-bag"></i></button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

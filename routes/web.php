@@ -21,6 +21,8 @@ Route::get('/categories', function () {
     return view('category');
 });
 
+// search book testing
+Route::get('/search' , 'FrontpageController@searchBooks')->name('search');
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -36,7 +38,7 @@ controller folder admin->userController                  kecuali show , create ,
  */
 
 //  membuat group route => silahkan cek di : php artisan route:list
-Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
     Route::resource('dashboard', 'DashboardController');
     Route::resource('authors', 'AuthorController');
     Route::resource('categories', 'CategoryController');

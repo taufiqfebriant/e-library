@@ -44,6 +44,7 @@ class AuthorDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('author-table')
+                    ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
