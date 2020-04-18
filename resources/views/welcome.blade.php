@@ -12,7 +12,7 @@
                             Decorate your life by reading books
                         </b>
                     </h4>
-                    <input type="search" class="form-control form-control-lg mt-5" placeholder="Find the book you like">
+                    <input type="search" id= "search_data" class="form-control form-control-lg mt-5" placeholder="Find the book you like" autocomplete="off">
                 </div>
             </div>
         </div>
