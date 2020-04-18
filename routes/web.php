@@ -20,9 +20,12 @@ Route::get('/books', function () {
 Route::get('/categories', function () {
     return view('category');
 });
-
+Route::get('/packets', function () {
+    return view('packets');
+});
 // search book testing
 Route::get('/search' , 'FrontpageController@searchBooks')->name('search');
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');
