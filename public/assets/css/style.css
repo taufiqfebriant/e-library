@@ -8,13 +8,12 @@ body{
 /* Halamn-Utama section-jumbotrons */
 #jumbotrons{
     height: 500px;
-    background-image: url('/images/bg-utama.jpg');
+    background-image: url('/images/bg-utama2.jpg');
     width: 100%;
     background-repeat: no-repeat;
     background-origin: border-box;
     background-position: center;
     background-size: cover;
-    /* filter: blur(4px); */
 }
 
 /* Halaman-Utaama  buku*/
@@ -81,7 +80,7 @@ ul {
     font-size:16px;
     line-height:30px;
     font-weight:300
-    
+
    }
    h4 {
     font-family:Rubik,sans-serif;
@@ -173,4 +172,173 @@ ul {
      padding-left:0
     }
    }
-   
+
+   /* Navbar */
+   .form-control {
+    box-shadow: none;
+    border-radius: 4px;
+}
+
+.form-control:focus {
+    border-color: #f08373;
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+.navbar-header.col {
+    padding: 0 !important;
+}	
+.navbar {
+    background: #fff;
+    padding-left: 16px;
+    padding-right: 16px;
+    border-bottom: 1px solid #dfe3e8;
+    border-radius: 0;
+}
+.navbar .navbar-brand, .navbar .navbar-brand:hover, .navbar .navbar-brand:focus {
+    padding-left: 0;
+    font-size: 20px;
+    padding-right: 50px;
+}
+.navbar .navbar-brand b {
+    font-weight: bold;
+    color: #eb5844;		
+}
+.navbar ul.nav li a {
+    color: #888;
+}
+.navbar ul.nav li a:hover, .navbar ul.nav li a:focus {
+    color: #f08373 !important;
+}
+.navbar ul.nav li.active > a, .navbar ul.nav li.open > a {
+    color: #eb5844 !important;
+    background: transparent !important;
+}
+.search-box {
+    width: 100%;
+    position: relative;
+}	
+.search-box input {		
+    border-color: #dfe3e8;        
+    box-shadow: none
+}
+.search-box input, .search-box .btn {
+    min-height: 38px;
+    border-radius: 2px;
+}
+.search-box .input-group-btn .btn {
+    border-color: #eb5844;
+    background: #eb5844;
+    outline: none;
+}
+.navbar .nav-item i {
+    font-size: 18px;
+    line-height: 16px;
+}
+
+.nav-item-circular{
+    background: blueviolet;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+
+.nav-item-circular:hover{
+    background: blue;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: cornsilk;
+}
+
+.navbar .navbar-right .dropdown-toggle::after {
+    display: none;
+}
+.navbar .dropdown-menu {
+    border-radius: 1px;
+    border-color: #e5e5e5;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.navbar .dropdown-menu li a {
+    padding: 6px 20px;
+}
+.navbar .navbar-right .dropdown-menu {
+    width: 400px;
+    padding: 20px;
+    left: auto;
+    right: 0;
+    font-size: 14px;
+}
+
+
+/* Start of Circular User */
+/* .avatar-me-wrapper {
+    min-height: 48px;
+    overflow: hidden;
+    padding-left: 58px;
+    position: relative;
+  }
+  
+  .avatar-me {
+    background-color: #e74c3c;
+    color: #fff;
+    display: block;
+    height: 48px;
+    left: 0;
+    overflow: hidden;
+    padding: 0 10px;
+    position: absolute;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    top: 0;
+    white-space: nowrap;
+    width: 48px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+  }
+  
+  .avatar-me {
+    line-height: 48px;
+    font-size: 18px;
+    font-weight: 300;
+  }
+  
+  /* For mobile */
+  @media screen and (min-width: 481px) {
+  
+  .avatar-me-wrapper {
+    min-height: 64px;
+    padding-left: 79px;
+  }
+  
+  .avatar-me,
+  .user-name { line-height: 64px; }
+  
+  .avatar-me {
+    height: 64px;
+    width: 64px;
+  }
+  
+  .avatar-me { font-size: 24px; }
+  
+  } */
+
+  /* End of Circular User */
+
+.hide {
+    display: none !important;
+}
+@media (max-width: 768px){
+    .navbar .navbar-right .dropdown-menu {
+        width: 100%;
+        background: transparent;
+        padding: 10px 20px;
+    }
+    .navbar .input-group {
+        width: 100%;
+    }
+}   
