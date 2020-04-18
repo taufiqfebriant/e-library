@@ -4,8 +4,8 @@
 @section('body-class', 'sidebar-mini')
 
 @section('links')
-    <!-- Ekko Lightbox -->
-    <link rel="stylesheet" href="{{ asset('vendors/admin-lte/plugins/ekko-lightbox/ekko-lightbox.css') }}">
+<!-- Ekko Lightbox -->
+<link rel="stylesheet" href="{{ asset('vendors/admin-lte/plugins/ekko-lightbox/ekko-lightbox.css') }}">
 @endsection
 
 @section('content')
@@ -38,17 +38,18 @@
                                     <dt class="col-sm-2">Sampul</dt>
                                     <dd class="col-sm-10">
                                         @if ($book->cover)
-                                            <a href="{{ asset("storage/{$book->cover}") }}" data-toggle="lightbox">
-                                                <img src="{{ asset("storage/{$book->cover}") }}" class="img-thumbnail" style="width: 150px">
-                                            </a>
+                                        <a href="{{ asset("storage/{$book->cover}") }}" data-toggle="lightbox">
+                                            <img src="{{ asset("storage/{$book->cover}") }}" class="img-thumbnail"
+                                                style="width: 150px">
+                                        </a>
                                         @else
-                                            Tidak ada sampul
+                                        Tidak ada sampul
                                         @endif
                                     </dd>
                                     <dt class="col-sm-2">Penulis</dt>
                                     <dd class="col-sm-10">
                                         @foreach ($book->authors as $author)
-                                            {{ $author->name . ($loop->last ? '' : ', ') }}
+                                        {{ $author->name . ($loop->last ? '' : ', ') }}
                                         @endforeach
                                     </dd>
                                     <dt class="col-sm-2">Kategori</dt>
@@ -56,17 +57,27 @@
                                     <dt class="col-sm-2">Penerbit</dt>
                                     <dd class="col-sm-10">{{ $book->publisher->name }}</dd>
                                     <dt class="col-sm-2">Jumlah halaman</dt>
-                                    <dd class="col-sm-10">{{ $book->pages }} halaman</dd>
+                                    <dd class="col-sm-10">{{ $book->countPages($book->file) }} halaman</dd>
+                                    <dt class="col-sm-2">Dokumen</dt>
+                                    <dd class="col-sm-10">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary btn-sm">PDF</button>
+                                            <button type="button"
+                                                class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split"
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                <span class="sr-only">Toggle Dropdown</span>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="{{ route('admin.books.file', compact('book')) }}">File</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item" href="{{ route('admin.books.preview', compact('book')) }}">Cuplikan</a>
+                                            </div>
+                                        </div>
+                                    </dd>
                                 </dl>
                             </div>
                             <div class="card-footer">
                                 <a href="{{ route('admin.books.index') }}" class="btn btn-default">Kembali</a>
-                                <div class="float-right">
-                                    <a href="{{ route('admin.books.preview', compact('book')) }}" class="btn btn-primary d-flex align-items-center" target="_blank">
-                                        <span class="mr-2">Lihat cuplikan</span>
-                                        <i class="fas fa-file-pdf"></i>
-                                    </a>
-                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -81,6 +92,6 @@
 @endsection
 
 @push('scripts')
-    <!-- Ekko Lightbox -->
-    <script src="{{ asset('vendors/admin-lte/plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+<!-- Ekko Lightbox -->
+<script src="{{ asset('vendors/admin-lte/plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
 @endpush

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Book extends Model
 {
@@ -24,14 +25,9 @@ class Book extends Model
     {
         return $this->belongsTo('App\Publisher');
     }
-    
-    public function fileUrl($type)
-    {
-        if ($this->{$type}) return asset("storage/{$this->{$type}}");
-    }
 
     public function countPages($path) {
-        $pdftext = file_get_contents($path);
+        $pdftext = Storage::get($path);
         $num = preg_match_all("/\/Page\W/", $pdftext, $dummy);
         return $num;
     }

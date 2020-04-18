@@ -115,7 +115,15 @@ class BookController extends Controller
 
     public function preview(Book $book)
     {
-        return view('admin.book.preview', compact('book'));
+        return view('admin.book.pdf', compact('book'));
+    }
+
+    public function file(Book $book)
+    {
+        if (file_exists(storage_path("app/{$book->file}"))) {
+            return response()->file(storage_path("app/{$book->file}"));
+        }
+        abort(404);
     }
 
     private function storeFiles($book)
