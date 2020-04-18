@@ -44,6 +44,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
     Route::resource('categories', 'CategoryController');
     Route::resource('publishers', 'PublisherController');
     Route::get('books/{book}/preview', 'BookController@preview')->name('books.preview');
+    Route::get('books/{book}/file', 'BookController@file')->name('books.file');
     Route::resource('books', 'BookController');
     Route::resource('/users', 'UserController' , ['except' => ['show' , 'create' , 'store']]);
 });
