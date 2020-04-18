@@ -126,6 +126,10 @@
 <!-- OwlCarouselJs -->
 <script src="assets/Owl/owl.carousel.min.js"></script>
 
+<!-- Circular Avatar -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="src/jquery.avatarme-1.0.min.js"></script>
+
 <!-- cara 2 untuk pemanggilan file -->
 <script src="/assets/js/script.js"></script>
 <script src="/assets/js/owlScript.js"></script>
