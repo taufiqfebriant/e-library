@@ -55,6 +55,12 @@ ul.demo{
     list-style-type: none;
 }
 
+/* paket img margin left */
+.marginLeft{
+    margin-left: 90px;
+}
+
+
 /* Footer */
 ul {
     padding:0;
@@ -489,8 +495,6 @@ ul {
 
 
 @media (min-width: 1200px){
-    .col-xl-3 {
-
-    }
+  
     
 }

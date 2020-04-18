@@ -20,7 +20,9 @@ Route::get('/books', function () {
 Route::get('/categories', function () {
     return view('category');
 });
-Route::get('/packets', function () {
+
+
+Route::get('/paket', function () {
     return view('packets');
 });
 // search book testing
