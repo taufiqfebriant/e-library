@@ -20,9 +20,12 @@ Route::get('/books', function () {
 Route::get('/categories', function () {
     return view('category');
 });
-
+Route::get('/packets', function () {
+    return view('packets');
+});
 // search book testing
 Route::get('/search' , 'FrontpageController@searchBooks')->name('search');
+
 
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -38,12 +41,13 @@ controller folder admin->userController                  kecuali show , create ,
  */
 
 //  membuat group route => silahkan cek di : php artisan route:list
-Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
+Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function() {
     Route::resource('dashboard', 'DashboardController');
     Route::resource('authors', 'AuthorController');
     Route::resource('categories', 'CategoryController');
     Route::resource('publishers', 'PublisherController');
     Route::get('books/{book}/preview', 'BookController@preview')->name('books.preview');
+    Route::get('books/{book}/file', 'BookController@file')->name('books.file');
     Route::resource('books', 'BookController');
     Route::resource('/users', 'UserController' , ['except' => ['show' , 'create' , 'store']]);
 });

@@ -44,6 +44,7 @@ class BookDataTable extends DataTable
     {
         return $this->builder()
                     ->setTableId('book-table')
+                    ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')

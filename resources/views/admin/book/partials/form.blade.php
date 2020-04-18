@@ -36,7 +36,7 @@
                 </div>
             </div>
             @if ($book->cover)
-                <a href="{{ $book->file('cover') }}" class="small float-right mt-2" data-toggle="lightbox">Lihat sampul aktif</a>
+                <a href="{{ asset("storage/{$book->cover}") }}" class="small float-right mt-2" data-toggle="lightbox">Lihat sampul aktif</a>
             @endif
         </div>
     </div>
@@ -93,15 +93,18 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="pages" class="col-sm-2 col-form-label">Jumlah Halaman</label>
+        <label for="file" class="col-sm-2 col-form-label">File</label>
         <div class="col-sm-10">
-            <input type="number" min="0" name="pages" class="form-control @error('pages') is-invalid @enderror"
-                id="pages" value="{{ old('pages', $book->pages) }}">
-            @error('pages')
-            <span class="invalid-feedback" role="alert">
-                {{ $message }}
-            </span>
-            @enderror
+            <div class="input-group">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file"
+                        name="file">
+                    <label class="custom-file-label" for="file">Pilih file</label>
+                </div>
+            </div>
+            @if ($book->file)
+                <a href="{{ route('admin.books.preview', compact('book')) }}" target="_blank" class="small float-right mt-2">Lihat file aktif</a>
+            @endif
         </div>
     </div>
     <div class="form-group row">
