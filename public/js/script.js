@@ -99,7 +99,7 @@ $(function () {
     $(this).ekkoLightbox({
       alwaysShowClose: true
     });
-  });
+  }); // disini
 });
 
 /***/ }),
