@@ -111,7 +111,7 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /opt/lampp_7_3_11/htdocs/e-library/resources/js/script.js */"./resources/js/script.js");
+module.exports = __webpack_require__(/*! D:\xampp\htdocs\e-library\resources\js\script.js */"./resources/js/script.js");
 
 
 /***/ })
