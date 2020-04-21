@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -21,10 +22,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index(Request $request)
+    public function index()
     {
-        $request->session()->flash('success','testing success flash message');
-
-        return view('home');
+        $books = Book::all();
+        return view('home', compact('books'));
     }
 }

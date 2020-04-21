@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
 
     
     /**
@@ -41,11 +41,16 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    // public function redirectTo()
-    // {
-    //     if (Auth::user()->hasRole('admin')) {
-            
-    //     }
-    // }
+    public function redirectTo()
+    {
+        $user = Auth::user();
 
+        // Check user role
+        if ($user->hasRole('admin')) {
+            return '/admin/dashboard';
+        } elseif ($user->hasRole('member')) {
+            return '/';
+        }
+        return '/login';
+    }
 }

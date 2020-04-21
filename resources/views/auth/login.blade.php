@@ -1,7 +1,5 @@
 @extends('layouts.body')
-
 @section('title', 'Login')
-
 @section('content')
 <body>
     <div id="app">
@@ -59,93 +57,66 @@
                 </div>
             </div>
         </nav>    
+        <div class="limiter">
+            <div class="container-login100">
+                <div class="wrap-login100">
+                    <div class="login100-form-title" style="background-color: darkcyan;">
+                        <span class="login100-form-title-1">
+                            Sign In
+                        </span>
+                    </div>
 
-    <div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<div class="login100-form-title" style="background-color: darkcyan;">
-					<span class="login100-form-title-1">
-						Sign In
-					</span>
-				</div>
+                    <form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+                            <span class="label-input100">{{ __('E-Mail Address') }}</span>
+                            <input id="email" type="email" class=" input100 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <span class="focus-input100"></span>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-				<form class="login100-form validate-form" method="POST" action="{{ route('login') }}">
-                    @csrf
-					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-						<span class="label-input100">{{ __('E-Mail Address') }}</span>
-                        <input id="email" type="email" class=" input100 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                        <span class="focus-input100"></span>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-					</div>
+                        <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
+                            <span class="label-input100">{{ __('Password') }}</span>
+                            <input id="password" type="password" class="input100 @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <span class="focus-input100"></span>
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
 
-					<div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-						<span class="label-input100">{{ __('Password') }}</span>
-                        <input id="password" type="password" class="input100 @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-                        <span class="focus-input100"></span>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-					</div>
+                        <div class="flex-sb-m w-full p-b-30">
+                            <!-- <div class="contact100-form-checkbox">
+                                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                                <label class="label-checkbox100" for="ckb1">
+                                    Remember me
+                                </label>
+                            </div>
+                            <div>
+                            <a href="#" class="txt1">
+                                    Forgot Password?
 
-					<div class="flex-sb-m w-full p-b-30">
-						<!-- <div class="contact100-form-checkbox">
-							<input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-							<label class="label-checkbox100" for="ckb1">
-								Remember me
-							</label>
-						</div>
-						<div>
-						<a href="#" class="txt1">
-								Forgot Password?
-
-							</a>
-						</div> -->
-					</div>
-						<div class="container-login100-form-btn">
-					 	<button class="login100-form-btn" type="submit">
-                         {{ __('Login') }}
-						</button>
-					</div>
-					<div class="container-goto-register">
-						<br>
-						<p>Have no E-library Account? <a href="{{ route('register') }}" class="register-text">Register!</a></p>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-
+                                </a>
+                            </div> -->
+                        </div>
+                            <div class="container-login100-form-btn">
+                            <button class="login100-form-btn" type="submit">
+                            {{ __('Login') }}
+                            </button>
+                        </div>
+                        <div class="container-goto-register">
+                            <br>
+                            <p>Have no E-library Account? <a href="{{ route('register') }}" class="register-text">Register!</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
-
-
-
-
-
-
-<!-- script js login dan register -->
-
-	<!--===============================================================================================-->
-	<!-- <script src="/assets_login/vendor/jquery/jquery-3.2.1.min.js"></script> -->
-	<!--===============================================================================================-->
-	<!-- <script src="/assets_login/vendor/animsition/js/animsition.min.js"></script> -->
-	<!--===============================================================================================-->
-	<!-- <script src="/assets_login/vendor/bootstrap/js/popper.js"></script>
-	<script src="/assets_login/vendor/bootstrap/js/bootstrap.min.js"></script> -->
-	<!--===============================================================================================-->
-	<!-- <script src="/assets_login/vendor/select2/select2.min.js"></script> -->
-	<!--===============================================================================================-->
-	<!-- <script src="/assets_login/vendor/daterangepicker/moment.min.js"></script>
-	<script src="/assets_login/vendor/daterangepicker/daterangepicker.js"></script> -->
-	<!--===============================================================================================-->
-	<!-- <script src="/assets_login/vendor/countdowntime/countdowntime.js"></script> -->
-	<!--===============================================================================================-->
-    <script src="/assets_login/js/main.js"></script>
-    
 @endsection
