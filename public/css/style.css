@@ -1,0 +1,54 @@
+.btn-darkslategray,
+.btn-darkslategray.disabled,
+.btn-darkslategray:disabled {
+    color: white;
+    background-color: #363062;
+    border-color: #363062;
+}
+
+.btn-darkslategray:hover {
+    color: white;
+    background-color: #221c4e;
+    border-color: #1d1749;
+}
+
+.btn-darkslategray:focus,
+.btn-darkslategray.focus {
+    color: #fff;
+    background-color: #221c4e;
+    border-color: #1d1749;
+    box-shadow: 0 0 0 0.2rem rgba(36, 30, 80, 0.5);
+}
+
+.btn-darkslategray:not(:disabled):not(.disabled):active,
+.btn-darkslategray:not(:disabled):not(.disabled).active,
+.show > .btn-darkslategray.dropdown-toggle {
+    color: #fff;
+    background-color: #1d1749;
+    border-color: #171143;
+}
+
+.btn-darkslategray:not(:disabled):not(.disabled):active:focus,
+.btn-darkslategray:not(:disabled):not(.disabled).active:focus,
+.show > .btn-darkslategray.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.2rem rgba(36, 30, 80, 0.5);
+}
+
+.bg-darkslategray {
+    background-color: #363062 !important;
+}
+
+a.bg-darkslategray:hover,
+a.bg-darkslategray:focus,
+button.bg-darkslategray:hover,
+button.bg-darkslategray:focus {
+    background-color: #1d1749 !important;
+}
+
+.nav-white .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-white .nav-link:not(.active):hover {
+    color: #fff;
+}

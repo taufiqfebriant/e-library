@@ -3,6 +3,11 @@
 @section('title', 'Detail Transaksi')
 @section('body-class', 'sidebar-mini')
 
+@section('links')
+<!-- Ekko Lightbox -->
+<link rel="stylesheet" href="{{ asset('vendors/admin-lte/plugins/ekko-lightbox/ekko-lightbox.css') }}">
+@endsection
+
 @section('content')
 <!-- Site wrapper -->
 <div class="wrapper">
@@ -33,12 +38,23 @@
                                     <dt class="col-sm-2">Harga</dt>
                                     <dd class="col-sm-10">{{ $transaction->plan->price }}</dd>
                                     <dt class="col-sm-2">Bukti pembayaran</dt>
-                                    <dd class="col-sm-10">{{ $transaction->plan->price }}</dd>
+                                    <dd class="col-sm-10">
+                                        <a href="{{ route('admin.transactions.receipt', $transaction->id) }}" data-toggle="lightbox" data-type="image">
+                                            <img src="{{ route('admin.transactions.receipt', $transaction->id) }}" alt="Bukti pembayaran transaksi nomor {{ $transaction->id }}" style="width: 400px">
+                                        </a>
+                                    </dd>
                                 </dl>
                             </div>
-                            <div class="card-footer">
-                                <a href="{{ route('admin.transactions.index') }}" class="btn btn-default">Kembali</a>
-                            </div>
+                            <form class="card-footer" action="{{ route('admin.transactions.update', compact('transaction')) }}" method="post">
+                                @csrf
+                                @method('PATCH')
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ route('admin.transactions.index') }}" class="btn btn-default">Kembali</a>
+                                    @if (!$transaction->confirmed_at && !$transaction->confirmed_by)
+                                        <button class="btn btn-primary">Konfirmasi</button>
+                                    @endif
+                                </div>
+                            </form>
                             <!-- /.card-body -->
                         </div>
                     </div>

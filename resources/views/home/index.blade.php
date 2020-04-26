@@ -2,6 +2,8 @@
 
 @section('content')
     <body>
-        <h1>Halaman utama</h1>
+        @include('partials.navbar')
+        <h1 class="mt-5">Ini halaman beranda</h1>
+        @include('partials.footer')
     </body>
 @endsection

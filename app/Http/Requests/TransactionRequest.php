@@ -26,7 +26,7 @@ class TransactionRequest extends FormRequest
         return [
             'user_id' => 'sometimes|required',
             'plan_id' => 'sometimes|required',
-            'receipt' => 'sometimes|required|file'
+            'receipt' => 'sometimes|required|file',
         ];
     }
 }

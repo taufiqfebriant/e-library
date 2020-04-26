@@ -26,6 +26,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('plans', 'PlanController');
     Route::get('transactions', 'TransactionController@index')->name('transactions.index');
     Route::get('transactions/{transaction}', 'TransactionController@show')->name('transactions.show');
+    Route::get('transactions/receipts/{receipt}', 'TransactionController@receipt')->name('transactions.receipt');
     Route::patch('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
     Route::resource('/users', 'UserController' , ['except' => ['show' , 'create' , 'store']]);
 });

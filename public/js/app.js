@@ -37326,10 +37326,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Custom scripts
-
-
-__webpack_require__(/*! ./script */ "./resources/js/script.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 /***/ }),
 
@@ -37378,24 +37375,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/script.js":
-/*!********************************!*\
-  !*** ./resources/js/script.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(function () {
-  $(document).on("click", '[data-toggle="lightbox"]', function (event) {
-    event.preventDefault();
-    $(this).ekkoLightbox({
-      alwaysShowClose: true
-    });
-  }); // disini
-});
-
-/***/ }),
-
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -37414,8 +37393,8 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\xampp\htdocs\e-library\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\xampp\htdocs\e-library\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /opt/lampp_7_3_11/htdocs/e-library/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /opt/lampp_7_3_11/htdocs/e-library/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

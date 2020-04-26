@@ -68,6 +68,7 @@ class TransactionDataTable extends DataTable
         return [
             Column::make('id'),
             Column::make('user.name')->title('Nama'),
+            Column::make('plan.name')->title('Paket'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

@@ -1,4 +1,4 @@
-<footer class="footer-area footer--light">
+{{-- <footer class="footer-area footer--light">
   <div class="footer-big">
     <div class="container">
       <div class="row">
@@ -132,4 +132,26 @@
 
 <!-- cara 2 untuk pemanggilan file -->
 <script src="/assets/js/script.js"></script>
-<script src="/assets/js/owlScript.js"></script>
+<script src="/assets/js/owlScript.js"></script> --}}
+<footer class="bg-darkslategray text-white text-center py-5">
+    <div class="d-flex justify-content-center align-items-center">
+        <a class="h4 mb-0 text-white text-decoration-none" href="{{ route('home.index') }}">{{ config('app.name', 'E-Library') }}</a>
+        <div class="pl-4">
+            <ul class="nav nav-white">
+                <li class="nav-item">
+                    <a class="nav-link pl-0" href="#">Tentang kami</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Jelajahi</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Kontak</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Peta situs</a>
+                </li>
+            </ul>
+            <p class="text-left mt-0">&copy; {{ now()->year . ' ' . config('app.name', 'E-Library') }}. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
