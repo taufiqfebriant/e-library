@@ -1,14 +1,21 @@
 @extends('layouts.body')
+
+@section('links')
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/util.css">
+@endsection
+
 @section('title', 'Login')
 @section('content')
 <body>
     <div id="app">
-        {{-- <div class="limiter">
+        <div class="limiter">
             <div class="container-login100">
                 <div class="wrap-login100">
+
                     <div class="login100-form-title" style="background-color: darkcyan;">
                         <span class="login100-form-title-1">
-                            Sign In
+                           <h3><a href="{{ url ('/')}}" class="text-white"> E-Library </a> |  Sign In</h3> 
                         </span>
                     </div>
 
@@ -62,8 +69,8 @@
                     </form>
                 </div>
             </div>
-        </div> --}}
-        <div class="container">
+        </div> 
+        <!-- <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-8">
                     <div class="card">
@@ -131,7 +138,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </body>
 @endsection
