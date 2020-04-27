@@ -11,7 +11,12 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a href="/plans" class="nav-link">Paket</a>
+                </li>
+
                 <!-- Authentication Links -->
+                
                 @guest
                     <li class="nav-item">
                         <a class="btn btn-darkslategray rounded-0 px-4" href="{{ route('login') }}">Masuk</a>

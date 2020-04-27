@@ -1,5 +1,10 @@
 @extends('layouts.body')
 
+@section('links')
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/util.css">
+@endsection
+
 @section('content')
 <body>
     <div id="app">

@@ -2,6 +2,8 @@
 
 @section('title', 'Paket')
 
+@include('partials.navbar')
+
 @section('content')
 <body>
     <div class="container text-center">
@@ -101,5 +103,6 @@
                 </div> -->
         </div>
     </div>
+    @include('partials.footer')
 </body>
 @endsection

@@ -7,6 +7,10 @@
 
 @section('title', 'Transaksi')
 
+
+@include('partials.navbar')
+
+
 @section('content')
     <body>
         <div class="container">
@@ -45,5 +49,7 @@
             </div>
             <button class="btn btn-primary">Kirim</button>
         </form> -->
+
+        @include('partials.footer')
     </body>
 @endsection
