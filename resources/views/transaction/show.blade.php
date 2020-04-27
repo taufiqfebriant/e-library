@@ -7,6 +7,8 @@
 
 @section('title', 'Transaksi')
 
+@include('partials.navbar')
+
 @section('content')
     <body>
         <div class="container">
