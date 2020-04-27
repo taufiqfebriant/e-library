@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\DataTables\UsersDataTable;
 use App\Http\Controllers\Controller;
-
-
-use Gate;
+use Illuminate\Support\Facades\Gate;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
@@ -23,10 +22,9 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(UsersDataTable $dataTable)
     {
-        $users = User::all();
-        return view('admin.user.index')->with('users',$users);
+        return $dataTable->render('admin.user.index');
     }
 
     /**
@@ -69,17 +67,15 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
         if (Gate::denies('edit-users')) {
             return redirect(route('admin.users.index'));
         }
-       $roles = Role::all();
+        $roles = Role::all();
 
-       return view('admin.user.edit')->with([
-           'user' => $user,
-           'roles' => $roles
-       ]);
-
+        return view('admin.user.edit')->with([
+            'user' => $user,
+            'roles' => $roles
+        ]);
     }
 
     /**

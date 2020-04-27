@@ -25,6 +25,14 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.users.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Pengguna
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('admin.authors.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-user-edit"></i>
                         <p>
@@ -69,6 +77,14 @@
                         <i class="nav-icon fas fa-exchange-alt"></i>
                         <p>
                             Transaksi
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.subscriptions.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-calendar-alt"></i>
+                        <p>
+                            Langganan
                         </p>
                     </a>
                 </li>
