@@ -1,3 +1,7 @@
+body {
+    background-color: #fff;
+}
+
 .btn-darkslategray,
 .btn-darkslategray.disabled,
 .btn-darkslategray:disabled {
@@ -45,10 +49,60 @@ button.bg-darkslategray:focus {
     background-color: #1d1749 !important;
 }
 
+.navbar-user {
+    transition: background-color 200ms linear;
+}
+
+.navbar-user .nav-link:not(.btn-light) {
+    color: #fff;
+}
+
 .nav-white .nav-link {
     color: rgba(255, 255, 255, 0.7);
 }
 
 .nav-white .nav-link:not(.active):hover {
     color: #fff;
+}
+
+.text-slategray {
+    color: #827397 !important;
+}
+
+a.text-slategray:hover,
+a.text-slategray:focus {
+    color: #5c516d !important;
+}
+
+.text-base {
+    font-size: 1rem;
+}
+
+.tracking-widest {
+    letter-spacing: 0.1em;
+}
+
+.transition-3d-hover {
+    transition: all 0.2s ease-in-out;
+}
+
+.transition-3d-hover:hover {
+    transform: translateY(-3px);
+}
+
+/*------------ Custom styles ------------*/
+.why-us img.rounded-circle {
+    width: 140px;
+    height: 140px;
+}
+
+.slick-next,
+.slick-prev {
+    top: 40%;
+}
+
+.slick-next:before,
+.slick-prev:before {
+    color: #363062;
+    font-size: 25px;
 }

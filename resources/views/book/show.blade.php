@@ -74,7 +74,11 @@
                     <td>{{$book->countPages($book->file)}} Halaman</td>
                 </tr>
             </table>
-            <button type="submit" class="btn btn-primary shadow-lg btn-flat"> Pinjam </button>
+            <form action="{{ route('books.update', compact('book')) }}" method="post">
+                @method('PATCH')
+                @csrf
+                <button class="btn btn-primary shadow-lg btn-flat">Pinjam</button>
+            </form>
             <p class="mt-5">Kategori :  
                 <span class="badge badge-dark">
                     {{ $book->category->name }}

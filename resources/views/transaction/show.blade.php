@@ -16,8 +16,8 @@
                 <div class="col-12">
                     <i class="fas fa-wallet" style="font-size: 128px;"></i>
                         <p>Transaksi nomor {{ $transaction->id }}</p>
-                            <p>Silahkan transfer tepat sebesar</p>
-                            <h4>Rp 152.258</h4>
+                        <p>Silahkan transfer tepat sebesar</p>
+                        <h4>Rp{{ number_format($transaction->plan->price, 0, ',', '.') }}</h4>
                         <p>Pembayaran dapat dilakukan ke rekening Berikut</p>
 
                     <hr>
