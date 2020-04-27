@@ -39,9 +39,13 @@
                                     <dd class="col-sm-10">{{ $transaction->plan->price }}</dd>
                                     <dt class="col-sm-2">Bukti pembayaran</dt>
                                     <dd class="col-sm-10">
-                                        <a href="{{ route('admin.transactions.receipt', $transaction->id) }}" data-toggle="lightbox" data-type="image">
-                                            <img src="{{ route('admin.transactions.receipt', $transaction->id) }}" alt="Bukti pembayaran transaksi nomor {{ $transaction->id }}" style="width: 400px">
-                                        </a>
+                                        @if ($transaction->paid_at && $transaction->receipt)
+                                            <a href="{{ route('admin.transactions.receipt', $transaction->id) }}" data-toggle="lightbox" data-type="image">
+                                                <img src="{{ route('admin.transactions.receipt', $transaction->id) }}" alt="Bukti pembayaran transaksi nomor {{ $transaction->id }}" style="width: 400px">
+                                            </a>
+                                        @else
+                                            Member belum melakukan pembayaran.
+                                        @endif
                                     </dd>
                                 </dl>
                             </div>
@@ -50,7 +54,7 @@
                                 @method('PATCH')
                                 <div class="d-flex justify-content-between">
                                     <a href="{{ route('admin.transactions.index') }}" class="btn btn-default">Kembali</a>
-                                    @if (!$transaction->confirmed_at && !$transaction->confirmed_by)
+                                    @if ($transaction->paid_at && $transaction->receipt && !$transaction->confirmed_at && !$transaction->confirmed_by)
                                         <button class="btn btn-primary">Konfirmasi</button>
                                     @endif
                                 </div>

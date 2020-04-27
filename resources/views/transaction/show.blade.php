@@ -47,5 +47,7 @@
             </div>
             <button class="btn btn-primary">Kirim</button>
         </form> -->
+
+        @include('partials.footer')
     </body>
 @endsection

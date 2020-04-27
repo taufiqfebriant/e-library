@@ -39,6 +39,9 @@
 
 @section('title', 'Detail buku')
 
+
+@include('partials.navbar')
+
 @section('content')
     <body>
         <div class="container">
@@ -234,5 +237,7 @@
             </div>
         </div>
         </div>
+        @include('partials.footer')
     </body>
 @endsection
+
