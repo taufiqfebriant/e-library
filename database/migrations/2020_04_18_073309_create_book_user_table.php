@@ -17,6 +17,7 @@ class CreateBookUserTable extends Migration
             $table->unsignedBigInteger('book_id');
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
+            $table->timestamp('ends_at')->nullable();
 
             $table->primary(['book_id', 'user_id']);
             $table->foreign('book_id')

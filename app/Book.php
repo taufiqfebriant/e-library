@@ -7,13 +7,17 @@ use Illuminate\Support\Facades\Storage;
 
 class Book extends Model
 {
-    // field yang tidak boleh di isi
     protected $guarded = [];
 
     public function authors()
     {
         return $this->belongsToMany('App\Author')
                     ->using('App\AuthorBook');
+    }
+
+    public function users()
+    {
+        return $this->belongsToMany('App\User')->withTimestamps();
     }
 
     public function category()

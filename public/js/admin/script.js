@@ -5,6 +5,4 @@ $(function() {
             alwaysShowClose: true
         });
     });
-
-    // disini
 });

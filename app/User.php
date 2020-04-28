@@ -47,6 +47,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Transaction');
     }
 
+    public function subscription()
+    {
+        return $this->hasOne('App\Subscription');
+    }
+
+    public function books()
+    {
+        return $this->belongsToMany('App\Book')->withTimestamps();
+    }
+
     public function hasAnyRoles($roles)
     {
         if ($this->roles()->whereIn('name', $roles)->first()) {

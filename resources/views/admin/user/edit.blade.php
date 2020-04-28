@@ -1,64 +1,41 @@
-@extends('layouts.app')
+@extends('admin.layouts.body')
+
+@section('title', 'Ubah Pengguna')
+@section('body-class', 'sidebar-mini')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Edit Users {{$user->name}}</div>
+    <!-- Site wrapper -->
+    <div class="wrapper">
+        <!-- Navbar -->
+        @include('admin.partials.navbar')
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        @include('admin.partials.sidebar')
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <section class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h1>Ubah Pengguna</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-default">
+                                <form class="form-horizontal" method="post" action="{{ route('admin.users.update', compact('user')) }}">
+                                    @method('PATCH')
 
-                <div class="card-body">
-                    <form method="post" action="{{ route('admin.users.update', $user) }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                    @include('admin.user.partials.form')
+                                </form>
                             </div>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" required autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-                        
-                        @csrf
-                        {{ method_field('PUT') }}
-                        <div class="form-group row">
-                        <label for="roles" class="col-md-4 col-form-label text-md-right">Roles</label>
-
-                            <div class="col-md-6">
-                            @foreach($roles as $role)
-                                <div class="form-check">
-                                    <input type="checkbox" name="roles[]" value="{{ $role->id }}"
-                                    @if($user->roles->pluck('id')->contains($role->id)) checked @endif>
-                                    <label for="">{{ $role->name }}</label>
-                                </div>
-                            @endforeach
-                            </div>
-
-                        </div>
-                            <button type="submit" class="btn btn-primary">Update</button>
-                    </form>
-                </div>
-            </div>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </section>
         </div>
+        <!-- /.content-wrapper -->
+        @include('admin.partials.footer')
     </div>
-</div>
 @endsection

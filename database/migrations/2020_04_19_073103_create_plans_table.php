@@ -18,6 +18,7 @@ class CreatePlansTable extends Migration
             $table->string('name', 70);
             $table->text('description');
             $table->unsignedInteger('price');
+            $table->unsignedTinyInteger('months');
             $table->timestamps();
         });
     }

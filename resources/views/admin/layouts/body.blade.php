@@ -22,5 +22,6 @@
         @stack('scripts')
         <!-- AdminLTE App -->
         <script src="{{ asset('vendors/admin-lte/dist/js/adminlte.min.js') }}"></script>
+        <script src="{{ asset('js/admin/script.js') }}"></script>
     </body>
 @endsection

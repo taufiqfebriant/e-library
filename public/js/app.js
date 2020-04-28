@@ -37326,10 +37326,7 @@ module.exports = function(module) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // Custom scripts
-
-
-__webpack_require__(/*! ./script */ "./resources/js/script.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 /***/ }),
 
@@ -37375,24 +37372,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
-
-/***/ }),
-
-/***/ "./resources/js/script.js":
-/*!********************************!*\
-  !*** ./resources/js/script.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(function () {
-  $(document).on("click", '[data-toggle="lightbox"]', function (event) {
-    event.preventDefault();
-    $(this).ekkoLightbox({
-      alwaysShowClose: true
-    });
-  }); // disini
-});
 
 /***/ }),
 
