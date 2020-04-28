@@ -64,6 +64,14 @@
                         </p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('admin.transactions.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-exchange-alt"></i>
+                        <p>
+                            Transaksi
+                        </p>
+                    </a>
+                </li>
             </ul>
         </nav>
         <!-- /.sidebar-menu -->

@@ -25,8 +25,8 @@ class CreateTransactionsTable extends Migration
                 ->onDelete('cascade');
             $table->timestamp('created_at')->nullable();
             $table->timestamp('paid_at')->nullable();
-            $table->string('receipt');
-            $table->unsignedBigInteger('confirmed_by');
+            $table->string('receipt')->nullable();
+            $table->unsignedBigInteger('confirmed_by')->nullable();
             $table->timestamp('confirmed_at')->nullable();
 
             $table->foreign('confirmed_by')

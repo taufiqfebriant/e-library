@@ -3,21 +3,22 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\BookRequest;
-use App\DataTables\BookDataTable;
+use App\Http\Requests\PlanRequest;
+use App\DataTables\PlanDataTable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
+use App\Plan;
 
-class BookController extends Controller
+class PlanController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(BookDataTable $dataTable)
+    public function index(PlanDataTable $dataTable)
     {
-        return $dataTable->render('admin.book.index');
+        return $dataTable->render('admin.plan.index');
     }
 
     /**
@@ -25,26 +26,21 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Book $book)
+    public function create(Plan $plan)
     {
-        $authors = Author::all();
-        $categories = Category::all();
-        $publishers = Publisher::all();
-        return view('admin.book.create', compact('book', 'authors', 'categories', 'publishers'));
+        return view('admin.plan.create', compact('plan'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \App\Http\Requests\BookRequest
+     * @return \App\Http\Requests\PlanRequest
      */
-    public function store(BookRequest $request)
+    public function store(PlanRequest $request)
     {
-        $book = Book::create(Arr::except($request->validated(), 'author_id'));
-        $this->storeFiles($book);
-        $book->authors()->sync($request->author_id);
-        return redirect()->route('admin.books.show', compact('book'));
+        $plan = Plan::create($request->validated());
+        return redirect()->route('admin.plans.show', compact('plan'));
     }
 
     /**
@@ -53,9 +49,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Book $book)
+    public function show(Plan $plan)
     {
-        return view('admin.book.show', compact('book'));
+        return view('admin.plan.show', compact('plan'));
     }
 
     /**
@@ -64,12 +60,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book)
+    public function edit(Plan $plan)
     {
-        $authors = Author::all();
-        $categories = Category::all();
-        $publishers = Publisher::all();
-        return view('admin.book.edit', compact('book', 'authors', 'categories', 'publishers'));
+        return view('admin.plan.edit', compact('plan'));
     }
 
     /**
@@ -79,21 +72,10 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BookRequest $request, Book $book)
+    public function update(PlanRequest $request, Plan $plan)
     {
-        if ($request->hasFile('cover')) {
-            Storage::disk('public')->delete($book->cover);
-        }
-        if ($request->hasFile('file')) {
-            Storage::delete($book->file);
-        }
-        if ($request->hasFile('preview')) {
-            Storage::disk('public')->delete($book->preview);
-        }
-        $book->update(Arr::except($request->validated(), 'author_id'));
-        $this->storeFiles($book);
-        $book->authors()->sync($request->author_id);
-        return redirect()->route('admin.books.show', compact('book'));
+        $plan->update($request->validated());
+        return redirect()->route('admin.plans.show', compact('plan'));
     }
 
     /**
@@ -102,38 +84,9 @@ class BookController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book)
+    public function destroy(Plan $plan)
     {
-        $book->authors()->sync([]);
-        $book->delete();
-        return redirect()->route('admin.books.index');
-    }
-
-    public function preview(Book $book)
-    {
-        return view('admin.book.pdf', compact('book'));
-    }
-
-    public function file(Book $book)
-    {
-        if (file_exists(storage_path("app/{$book->file}"))) {
-            return response()->file(storage_path("app/{$book->file}"));
-        }
-        abort(404);
-    }
-
-    private function storeFiles($book)
-    {
-        if (request()->hasFile('cover')) {
-            $book->update(['cover' => request()->cover->store('uploads/book/covers', 'public')]);
-        }
-
-        if (request()->hasFile('file')) {
-            $book->update(['file' => request()->file->store('uploads/book/files')]);
-        }
-
-        if (request()->hasFile('preview')) {
-            $book->update(['preview' => request()->preview->store('uploads/book/previews', 'public')]);
-        }
+        $plan->delete();
+        return redirect()->route('admin.plans.index');
     }
 }
