@@ -37,14 +37,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function books()
+    {
+        return $this->belongsToMany('App\Book')->withTimestamps();
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+    
     public function roles()
     {
         return $this->belongsToMany('App\Role');
-    }
-
-    public function transactions()
-    {
-        return $this->hasMany('App\Transaction');
     }
 
     public function subscription()
@@ -52,9 +57,9 @@ class User extends Authenticatable
         return $this->hasOne('App\Subscription');
     }
 
-    public function books()
+    public function transactions()
     {
-        return $this->belongsToMany('App\Book')->withTimestamps();
+        return $this->hasMany('App\Transaction');
     }
 
     public function hasAnyRoles($roles)

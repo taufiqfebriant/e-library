@@ -45,6 +45,7 @@
     
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/a0e3cdff18.js" crossorigin="anonymous" defer></script>
     @stack('scripts')
     <script src="{{ asset('js/script.js') }}" defer></script>
 	<!-- Styles -->
@@ -54,5 +55,10 @@
 @endsection
 
 @section('body')
-    @yield('content')
+    <body>
+        <div id="app" class="vh-100">
+            @includeWhen(session('message'), 'partials.toast', ['message' => session('message'), 'type' => session('type')])
+            @yield('content')
+        </div>
+    </body>
 @endsection

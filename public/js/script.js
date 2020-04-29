@@ -1,4 +1,7 @@
 $(function () {
+    let rating = $('.rating')
+    
+    $('.toast').toast('show')
     changeNavbarUser() 
     
     if (window.location.pathname === '/')  {
@@ -26,4 +29,13 @@ $(function () {
             $('.navbar-user .nav-link.btn-light').removeClass('text-body btn-light').addClass('btn-primary')
         }
     }
+
+    rating.starRating({
+        starSize: 25,
+        useFullStars: true,
+        disableAfterRate: false,
+        callback: function(currentRating) {
+            rating.next('#rating').val(currentRating)
+        }
+    });
 })

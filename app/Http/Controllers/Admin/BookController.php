@@ -11,6 +11,7 @@ use App\Author;
 use App\Category;
 use App\Publisher;
 use Illuminate\Support\Facades\Storage;
+use Spatie\PdfToImage\Pdf;
 
 class BookController extends Controller
 {
@@ -131,13 +132,13 @@ class BookController extends Controller
         if (request()->hasFile('cover')) {
             $book->update(['cover' => request()->cover->store('uploads/book/covers', 'public')]);
         }
-
+        
         if (request()->hasFile('file')) {
-            $book->update(['file' => request()->file->store('uploads/book/files')]);
+            $book->update(['file' => request()->file->store('uploads/book/files/pdfs')]);
         }
 
         if (request()->hasFile('preview')) {
-            $book->update(['preview' => request()->preview->store('uploads/book/previews', 'public')]);
+            $book->update(['preview' => request()->preview->store('uploads/book/previews/pdfs', 'public')]);
         }
     }
 }

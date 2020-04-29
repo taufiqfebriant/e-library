@@ -74,6 +74,15 @@ a.text-slategray:focus {
     color: #5c516d !important;
 }
 
+.text-lightgray {
+    color: #d3d3d3 !important;
+}
+
+a.text-lightgray:hover,
+a.text-lightgray:focus {
+    color: #adadad !important;
+}
+
 .text-base {
     font-size: 1rem;
 }
@@ -105,4 +114,10 @@ a.text-slategray:focus {
 .slick-prev:before {
     color: #363062;
     font-size: 25px;
+}
+
+.custom-toast {
+    left: 50%;
+    bottom: 15%;
+    transform: translate(-50%, -15%);
 }
