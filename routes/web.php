@@ -7,6 +7,7 @@ Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('books/{book}', 'BookController@show')->name('books.show');
 Route::get('users/{user}', 'UserController@show')->name('users.show');
 Route::get('plans', 'PlanController@index')->name('plans.index');
+Route::get('cari', 'SearchController@index')->name('search.index');
 Route::middleware(['auth'])->group(function () {
     Route::post('transactions', 'TransactionController@store')->name('transactions.store');
     Route::get('transactions/{transaction}', 'TransactionController@show')->name('transactions.show');
