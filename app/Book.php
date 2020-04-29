@@ -15,11 +15,6 @@ class Book extends Model
                     ->using('App\AuthorBook');
     }
 
-    public function users()
-    {
-        return $this->belongsToMany('App\User')->withTimestamps();
-    }
-
     public function category()
     {
         return $this->belongsTo('App\Category');
@@ -28,6 +23,16 @@ class Book extends Model
     public function publisher()
     {
         return $this->belongsTo('App\Publisher');
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany('App\Review');
+    }
+    
+    public function users()
+    {
+        return $this->belongsToMany('App\User')->withTimestamps();
     }
 
     public function countPages($path) {

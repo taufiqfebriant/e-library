@@ -14,6 +14,8 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
     Route::patch('books/{book}', 'BookController@update')->name('books.update');
     Route::get('books/read/{book}', 'BookController@read')->name('books.read');
+    Route::get('books/files/{file}', 'BookController@file')->name('books.file');
+    Route::post('reviews', 'ReviewController@store')->name('reviews.store');
 });
 
 // search book testing
