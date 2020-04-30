@@ -7,7 +7,7 @@
 @section('content')
 <body>
     <div class="container text-center">
-        <div class="row mb-5 mt-5">
+        <div class="row mb-5 mt-5 pt-5">
             <div class="col-12">
                 <h3 class="text-uppercase font-weight-bold text-info">Take your subscription</h3>
                 <p class="text-center my-3">

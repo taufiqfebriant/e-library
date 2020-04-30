@@ -13,6 +13,8 @@
 @section('content')
     <body>
         @include('partials.navbar')
+
+        @guest
         <section class="hero-section bg-darkslategray vh-100 text-white">
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center">
@@ -27,6 +29,7 @@
                 </div>
             </div>
         </section>
+
         <section class="why-us py-5">
             <div class="container">
                 <div class="row">
@@ -84,6 +87,317 @@
                 </div>
             </div>
         </section>
+
+        @else
+        <section id="bukuTerbaik" class="bukuTerbaik mb-5">
+        <div class="container">
+            <div class="row p-4">
+                <div class="col-md-12">
+                    <h1 class="text-center">Buku terbaik</h1>
+                </div>
+            </div>
+            <div class="row">
+
+            @foreach($bestBooks as $bbook)
+            
+               <div class="col-md-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="./images/pinokio.jpg" alt="Card image cap">
+                        <div class="card-body"> 
+                        <h5>{{$bbook->title}}</h5>
+                        <p class="card-text">
+                            Carlo Collodi <br>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </p>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+                <!-- <div class="col-md-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="./images/binatang.jpg" alt="Card image cap">
+                        <div class="card-body"> 
+                        <h5>Pinocio</h5>
+                        <p class="card-text">
+                            Carlo Collodi <br>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card h-100">
+                        <img class="card-img-top" src="./images/hp.png" alt="Card image cap">
+                        <div class="card-body"> 
+                        <h5>Pinocio</h5>
+                        <p class="card-text">
+                            Carlo Collodi <br>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <section id="bukuDisukai" class="bukuDisukai">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-md-12 col-12">
+                    <h4>Buku yang anda sukai</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12"> 
+                    <div class="autoplay">
+                        <div>your content1</div>
+                        <div>your content2</div>
+                        <div>your content3</div>
+                        <div>your content4</div>
+                        <div>your content5</div>
+                        <div>your content6</div>
+                    </div>
+                    <!-- <div class="owl-carousel">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/pinokio.jpg" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Pinocio</h5>
+                                
+                                <p class="card-text">
+                                    Carlo Collodi 
+                                    <p class="text-muted">- Dongeng</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/pinokio.jpg" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Pinocio</h5>
+                                
+                                <p class="card-text">
+                                    Carlo Collodi 
+                                    <p class="text-muted">- Dongeng</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/pinokio.jpg" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Pinocio</h5>
+                                
+                                <p class="card-text">
+                                    Carlo Collodi 
+                                    <p class="text-muted">- Dongeng</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/pinokio.jpg" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Pinocio</h5>
+                                
+                                <p class="card-text">
+                                    Carlo Collodi 
+                                    <p class="text-muted">- Dongeng</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/pinokio.jpg" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Pinocio</h5>
+                                
+                                <p class="card-text">
+                                    Carlo Collodi 
+                                    <p class="text-muted">- Dongeng</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/pinokio.jpg" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Pinocio</h5>
+                                
+                                <p class="card-text">
+                                    Carlo Collodi 
+                                    <p class="text-muted">- Dongeng</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="bukuTerbaru" class="bukuTerbaru">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-md-12 col-12">
+                    <h4>Buku Terbaru hadir untuk anda</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="owl-carousel">
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/hp.png" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Harry potter</h5>
+                                
+                                <p class="card-text">
+                                    J.K Rowling
+                                    <p class="text-muted">- Mistis</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/hp.png" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Harry potter</h5>
+                                
+                                <p class="card-text">
+                                    J.K Rowling
+                                    <p class="text-muted">- Mistis</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/hp.png" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Harry potter</h5>
+                                
+                                <p class="card-text">
+                                    J.K Rowling
+                                    <p class="text-muted">- Mistis</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/hp.png" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Harry potter</h5>
+                                
+                                <p class="card-text">
+                                    J.K Rowling
+                                    <p class="text-muted">- Mistis</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/hp.png" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Harry potter</h5>
+                                
+                                <p class="card-text">
+                                    J.K Rowling
+                                    <p class="text-muted">- Mistis</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                        <div class="card h-100">
+                            <img class="card-img-top" src="./images/hp.png" alt="Card image cap">
+                            <div class="card-body"> 
+                                <h5>Harry potter</h5>
+                                
+                                <p class="card-text">
+                                    J.K Rowling
+                                    <p class="text-muted">- Mistis</p>
+                                </p>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        @endguest
+
         @include('partials.footer')
     </body>
 @endsection

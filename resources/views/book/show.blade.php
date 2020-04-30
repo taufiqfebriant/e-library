@@ -45,7 +45,7 @@
 @section('content')
     <body>
         <div class="container">
-        <div class="row mt-5 mb-4">
+        <div class="row mt-5 mb-4 pt-5">
             <div class="col-md-3">
             <img src="{{ asset("storage/{$book->cover}") }}" class="img-thumbnail">
             </div>

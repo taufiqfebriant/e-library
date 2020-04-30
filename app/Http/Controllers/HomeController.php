@@ -5,9 +5,11 @@ use App\Book;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Book $book)
     {
         $books = Book::latest()->take(10)->get();
-        return view('home.index', compact('books'));
+
+        $bestBooks = Book::find(3)->get();
+        return view('home.index', compact('books','bestBooks'));
     }
 }
