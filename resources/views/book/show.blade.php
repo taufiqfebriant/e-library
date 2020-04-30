@@ -1,92 +1,63 @@
 @extends('layouts.body')
+@section('title', 'Detail Buku')
+
+@push('scripts')
+    <script src="{{ asset('vendors/star-rating-svg/jquery.star-rating-svg.min.js') }}" defer></script>
+@endpush
+
 @section('links')
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <!-- owl carousel -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
-
-    <!-- owl carousel js -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
-    <script>
-        $(document).ready(function(){
-            $('.owl-carousel').owlCarousel({
-                loop:true,
-                margin:10,
-                responsiveClass:true,
-                responsive:{
-                    0:{
-                        items:1,
-                        nav:true
-                    },
-                    600:{
-                        items:3,
-                        nav:false
-                    },
-                    1000:{
-                        items:5,
-                        nav:true,
-                        loop:false
-                    }
-                }
-            })
-        })
-    </script> 
-
+    <link rel="stylesheet" href="{{ asset('vendors/star-rating-svg/css/star-rating-svg.css') }}">
 @endsection
 
-@section('title', 'Detail buku')
-
-
-@include('partials.navbar')
-
 @section('content')
-    <body>
-        <div class="container">
-        <div class="row mt-5 mb-4 pt-5">
+    @include('partials.navbar')
+    <div class="container pt-5">
+        <div class="row mt-5 mb-4">
             <div class="col-md-3">
-            <img src="{{ asset("storage/{$book->cover}") }}" class="img-thumbnail">
+                <img src="{{ asset("storage/{$book->cover}") }}" class="img-thumbnail border-0 bg-transparent p-0">
             </div>
             <div class="col-md-9">
-
-            <h3 class="text-uppercase"> {{ $book->title }} </h3>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="far fa-star"></i>
-            
-            <table class="mb-5">
-                <tr>
-                    <td>Penulis  </td>
-                    @foreach ($book->authors as $author)
-                        <td>  {{ $author->name . ($loop->last ? '' : ', ') }}</td>
-                    @endforeach
-                </tr>
-                <tr>
-                    <td>Penerbit </td>
-                    <td>{{ $book->publisher->name }}</td>
-                </tr>
-                <tr>
-                    <td>Jumlah Halaman  </td>
-                    <td>{{$book->countPages($book->file)}} Halaman</td>
-                </tr>
-            </table>
-            <form action="{{ route('books.update', compact('book')) }}" method="post">
-                @method('PATCH')
-                @csrf
-                <button class="btn btn-primary shadow-lg btn-flat">Pinjam</button>
-            </form>
-            <p class="mt-5">Kategori :  
-                <span class="badge badge-dark">
-                    {{ $book->category->name }}
-                </span>
-            </p>
+                <h3 class="font-weight-bold mt-2">{{ $book->title }}</h3>
+                {{-- <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i> --}}
+                <table class="mb-5">
+                    <tr>
+                        <td>Penulis</td>
+                        @foreach ($book->authors as $author)
+                            <td>{{ $author->name . ($loop->last ? '' : ', ') }}</td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>Penerbit </td>
+                        <td>{{ $book->publisher->name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Jumlah Halaman</td>
+                        <td>{{ $book->countPages($book->file) }} halaman</td>
+                    </tr>
+                </table>
+                @if (auth()->check() && $book->users->contains(auth()->user()->id))
+                    <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary">Baca</a>
+                @else
+                    <div class="d-flex">
+                        <form action="{{ route('books.update', compact('book')) }}" method="post">
+                            @method('PATCH')
+                            @csrf
+                            <button class="btn btn-primary shadow-lg btn-flat mr-2">Pinjam</button>
+                        </form>
+                        <a href="{{ route('books.read', compact('book')) }}" class="btn btn-darkslategray">Lihat Cuplikan</a>
+                    </div>
+                @endif
+                <p class="mt-5">Kategori :  
+                    <span class="badge badge-dark">
+                        {{ $book->category->name }}
+                    </span>
+                </p>
             </div>
         </div>
-
         <div class="row mb-5">
             <div class="col-md-12">
             <ul class="nav nav-tabs justify-content-center" id="myTab" role="tablist">
@@ -99,26 +70,48 @@
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active p-2" id="home" role="tabpanel" aria-labelledby="home-tab">
-                <p>
-                   {{ $book->synopsis }}
-                </p>
+                    <p>
+                    {{ $book->synopsis }}
+                    </p>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                <div class="media">
-                    <img class="d-flex align-self-start mr-3" src="/images/user.jpg" alt="Generic placeholder image">
-                    <div class="media-body">
-                    <h5 class="mt-0">Dafrin Maulana</h5>
-                    <p>Wah buku ini sangat bagus sekali jadi saya memberi bintang 2</p>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    </div>
-                </div>
-                
+                    @if (auth()->check() && $book->users->contains(auth()->user()->id))
+                        <form action="{{ route('reviews.store') }}" method="post">
+                            @csrf
+
+                            <input type="hidden" name="book_id" value="{{ $book->id }}">
+                            <h4 class="my-3">Beri buku ini penilaian</h4>
+                            <div class="row align-items-center">
+                                <div class="rating col-auto"></div>
+                                <input type="hidden" name="rating" id="rating" value="2">
+                                <div class="col">
+                                    <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <button class="btn btn-primary mt-3 float-right">Kirim Ulasan</button>
+                            </div>
+                        </form>
+                    @endif
+                    <h4 class="my-3">Penilaian</h4>
+                    <hr>
+                    @forelse ($book->reviews as $review)
+                        <h5>{{ $review->user->name }}</h5>
+                        <div class="stars">
+                            @for ($i = 1; $i <= 5; $i++)
+                                <span class="text-{{ $i <= $review->rating ? 'warning' : 'lightgray' }}">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            @endfor
+                        </div>
+                        <p class="mt-2">{{ $review->comment }}</p>
+                    @empty
+                        <p>Tidak ada penilaian</p>
+                    @endforelse
                 </div>
             </div>
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-12">
             <h3 class="text-center py-5">Buku yang serupa</h3>
@@ -240,8 +233,7 @@
                 </div>
             </div>
         </div>
-        </div>
-        @include('partials.footer')
-    </body>
+    </div>
+    @include('partials.footer')
 @endsection
 

@@ -7,12 +7,15 @@ Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('books/{book}', 'BookController@show')->name('books.show');
 Route::get('users/{user}', 'UserController@show')->name('users.show');
 Route::get('plans', 'PlanController@index')->name('plans.index');
+Route::get('cari', 'SearchController@index')->name('search.index');
 Route::middleware(['auth'])->group(function () {
     Route::post('transactions', 'TransactionController@store')->name('transactions.store');
     Route::get('transactions/{transaction}', 'TransactionController@show')->name('transactions.show');
     Route::patch('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
     Route::patch('books/{book}', 'BookController@update')->name('books.update');
     Route::get('books/read/{book}', 'BookController@read')->name('books.read');
+    Route::get('books/files/{file}', 'BookController@file')->name('books.file');
+    Route::post('reviews', 'ReviewController@store')->name('reviews.store');
 });
 
 // search book testing
