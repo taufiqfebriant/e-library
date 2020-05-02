@@ -20,10 +20,15 @@ class TransactionController extends Controller
 
     public function update(TransactionRequest $request, Transaction $transaction)
     {
+        $validateData = $request->validate([
+            'receipt' => 'required|mimes:jpeg,jpg,png'
+        ]);
+
         $transaction->update([
             'paid_at' => now(),
             'receipt' => $request->receipt->store('uploads/transaction/receipts')
-        ]);
-        return redirect()->route('users.show');
+        ],$validateData);
+
+        return redirect()->route('users.show')->with('success','Berhasil upload tranksaksi');
     }
 }

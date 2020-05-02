@@ -27,6 +27,16 @@
                         Sudah membayar? <label for="receipt">Unggah bukti pembayaran di bawah ini.</label>
                         </div>
 
+
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                     @endif
                     <form action="{{ route('transactions.update', compact('transaction')) }}" method="post" class="p-3" enctype="multipart/form-data">
                         @csrf
                         @method('PATCH')
