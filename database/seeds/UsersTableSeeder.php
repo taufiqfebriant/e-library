@@ -21,12 +21,20 @@ class UsersTableSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
+            'whatsapp' => '082335623028',
+            'facebook' => 'dafrin maulana',
+            'twitter'   => 'dafrintweet',
+            'instagram' => 'www.instagram.com'
         ]);
         $member = User::create([
             'name' => 'Member',
             'email' => 'member@member.com',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
+            'whatsapp' => '082335623658',
+            'facebook' => 'taufiq',
+            'twitter'   => 'taufiqtwitter',
+            'instagram' => 'www.instagram.com'
         ]);
 
         $admin->roles()->attach($adminRole);

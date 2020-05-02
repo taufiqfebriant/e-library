@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Book $book)
     {
         $latestBooks = Book::latest()->take(10)->get();
         $likedBooks = auth()->check() ? Book::whereIn('category_id', auth()->user()->categories)->get() : [];
