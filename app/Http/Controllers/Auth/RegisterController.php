@@ -54,6 +54,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'category_id' => ['required']
         ]);
     }
 
@@ -71,10 +72,21 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $role = Role::select('id')->where('name','user')->first();
-
+        $role = Role::select('id')->where('name', 'member')->first();
         $user->roles()->attach($role);
+        $user->categories()->attach($data['category_id']);
 
         return $user;
+    }
+
+    public function redirectTo()
+    {
+        $user = auth()->user();
+
+        // Check user role
+        if ($user->hasRole('admin')) {
+            return '/admin/dashboard';
+        }
+        return '/';
     }
 }

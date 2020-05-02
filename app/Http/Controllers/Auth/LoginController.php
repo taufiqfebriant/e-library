@@ -48,9 +48,7 @@ class LoginController extends Controller
         // Check user role
         if ($user->hasRole('admin')) {
             return '/admin/dashboard';
-        } elseif ($user->hasRole('member')) {
-            return '/';
         }
-        return '/login';
+        return '/';
     }
 }

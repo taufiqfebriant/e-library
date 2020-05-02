@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Book')->withTimestamps();
     }
 
+    public function categories()
+    {
+        return $this->belongsToMany('App\Category')->withTimestamps();
+    }
+
     public function reviews()
     {
         return $this->hasMany('App\Review');
@@ -60,6 +65,14 @@ class User extends Authenticatable
     public function transactions()
     {
         return $this->hasMany('App\Transaction');
+    }
+
+    public function subscribed()
+    {
+        if (auth()->user()->subscription && auth()->user()->subscription->ends_at >= date('Y-m-d H:i:s')) {
+            return true;
+        }
+        return false;
     }
 
     public function hasAnyRoles($roles)

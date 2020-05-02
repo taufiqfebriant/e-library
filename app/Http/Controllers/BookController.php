@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Transaction;
 use Carbon\Carbon;
 
 class BookController extends Controller
@@ -14,14 +15,18 @@ class BookController extends Controller
 
     public function update(Book $book)
     {
-        if (!auth()->user()->subscription) {
-            return redirect()->route('plans.index');
-        } else {
+        if (auth()->user()->subscribed()) {
             if (auth()->user()->books->count() === 2) {
                 return back()->with(['type' => 'danger', 'message' => 'Gagal meminjam buku. Jumlah peminjaman buku telah mencapai angka maksimal']);
             }
             $book->users()->sync([auth()->user()->id => ['ends_at' => (new Carbon($book->updated_at))->addDays(7)]]);
             return redirect()->route('books.read', compact('book'));
+        } else {
+            $paidTransactions = Transaction::whereNotNull(['paid_at', 'receipt'])->where('user_id', auth()->user()->id)->first();
+            if ($paidTransactions) {
+                return back()->with(['type' => 'danger', 'message' => 'Admin belum mengonfirmasi pembayaran Anda.']);
+            }
+            return redirect()->route('plans.index');
         }
     }
 

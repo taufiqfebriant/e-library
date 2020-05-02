@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark pt-3 pb-2 bg-transparent fixed-top navbar-user">
+<nav class="navbar navbar-expand-md navbar-dark pt-3 pb-2 bg-transparent fixed-top navbar-user {{ auth()->check() ? 'navbar-authenticated' : '' }}">
     <div class="container">
         <a class="navbar-brand pt-0" href="{{ url('/') }}">
             {{ config('app.name', 'E-Library') }}
