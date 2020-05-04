@@ -31,8 +31,8 @@
                 </div>
                 <!-- /.div -->
                 <div>
-                    <a href="#" class="list-group-item active list-group-item-success">Authors
-                    </a>
+                    <p href="#" class="list-group-item active list-group-item-success">Authors
+                    </p>
                     <ul class="list-group">
                         <li class="list-group-item">Author 1
                              <span class="label label-danger pull-right">300</span>
@@ -46,7 +46,46 @@
                     </ul>
                 </div>
                 <!-- /.div -->
- 
+
+                 <div>
+                    <h2>Star Rating</h2>
+                    <a href="#"><div class="5-stars">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        </div></a>
+                        <a href="#"><div class="4-stars">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                        </div></a>
+                        <a href="#"> <div class="3-stars">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div></a>
+                        <a href="#"><div class="2-stars">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div></a>
+                        <a href="#"> <div class="1-star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div></a>
+                 </div>
+
                 <!-- /.div -->
             </div>
             <!-- /.col -->
