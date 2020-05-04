@@ -4,8 +4,8 @@
 @section('links')
     <link rel="stylesheet" href="{{ asset('vendors/admin-lte/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-    {{-- <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/util.css"> --}}
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/util.css"> 
     <!-- Select2 -->
 @endsection
 
@@ -117,7 +117,7 @@
                             <div class="form-group">
                                 <label for="category_id">Kategori yang Anda sukai</label>
                                 <select class="form-control select2bs4 @error('category_id') is-invalid @enderror" name="category_id[]" id="category_id" multiple="multiple" style="width: 100%" required>
-                                    @foreach ($categories as $category)
+                                    @foreach ($errors as $category)
                                         <option value="{{ $category->id }}" {{ old('category_id') === $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                     @endforeach
                                 </select>

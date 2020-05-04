@@ -34,11 +34,14 @@
                     @method('PATCH')
                     @csrf
                     
-                    <div class="input-group mt-3">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input @error('cover') is-invalid @enderror" id="receipt" name="receipt">
-                            <label class="custom-file-label" for="receipt">Pilih file</label>
-                        </div>
+                    <div class="custom-file mt-3">
+                        <input type="file" class="custom-file-input @error('cover') is-invalid @enderror" id="receipt" name="receipt">
+                        <label class="custom-file-label" for="receipt">Pilih file</label>
+                        @error('receipt')
+                            <span class="invalid-feedback" role="alert">
+                                {{ $message }}
+                            </span>
+                        @enderror
                     </div>
                     <div class="clearfix mt-3">
                         <button class="btn btn-primary float-right" type="submit">Unggah</button>

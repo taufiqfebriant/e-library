@@ -25,7 +25,7 @@ class TransactionRequest extends FormRequest
     {
         return [
             'plan_id' => 'sometimes|required',
-            'receipt' => 'sometimes|required|file',
+            'receipt' => 'sometimes|required|image|mimes:jpeg,jpg,png',
         ];
     }
 }
