@@ -29,7 +29,7 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.div -->
+
                 <div>
                     <p href="#" class="list-group-item active list-group-item-success">Authors
                     </p>
@@ -45,7 +45,6 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.div -->
 
                  <div>
                     <h2>Star Rating</h2>
@@ -86,9 +85,7 @@
                         </div></a>
                  </div>
 
-                <!-- /.div -->
             </div>
-            <!-- /.col -->
             <div class="col-md-9">
                 <div>
                     <ol class="breadcrumb">
@@ -96,7 +93,6 @@
                         <li class="active">Mystery</li>
                     </ol>
                 </div>
-                <!-- /.div -->
                 <div class="row">
                     <div class="btn-group alg-right-pad">
                         <button type="button" class="btn btn-default"><strong>1235  </strong>items</button>
@@ -113,10 +109,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.row -->
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
+                        <div class="thumbnail book-box">
                             <img src="img/books/Buku2 Rumah Cahaya Online1.jpg" alt="" />
                             <div class="caption">
                                 <h3 class="text-center"><a href="#">Book 1 </a></h3>
@@ -129,7 +124,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-md-4 col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
+                        <div class="thumbnail book-box">
                             <img src="img/books/Buku2 Rumah Cahaya Online2.jpg" alt="" />
                             <div class="caption">
                                 <h3 class="text-center"><a href="#">Book 2 </a></h3>
@@ -140,9 +135,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.col -->
                     <div class="col-md-4 col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
+                        <div class="thumbnail book-box">
                             <img src="img/books/Buku2 Rumah Cahaya Online3.jpg" alt="" />
                             <div class="caption">
                                 <h3 class="text-center"><a href="#">Book 3</a></h3>
@@ -153,9 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
                 <div class="row">
                     <ul class="pagination alg-right-pad">
                         <li><a href="#">&laquo;</a></li>
@@ -168,9 +160,7 @@
                     </ul>
                 </div>
             </div>
-            <!-- /.col -->
         </div>
-        <!-- /.row -->
     </div>
     @include('partials.footer')
 </body>
