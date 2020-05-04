@@ -28,6 +28,11 @@
                             <a href="{{ route('users.show', auth()->user()) }}" class="dropdown-item">
                                 Akun saya
                             </a>
+                            @if (Auth::user()->hasRole('admin'))
+                                <a href="{{ route('admin.dashboard.index') }}" class="dropdown-item">
+                                    Panel Admin
+                                </a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

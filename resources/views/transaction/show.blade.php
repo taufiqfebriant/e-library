@@ -1,53 +1,61 @@
 @extends('layouts.body')
-
-@yield('link')
- <!-- Font Awesome -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-
-
 @section('title', 'Transaksi')
 
-@include('partials.navbar')
-
 @section('content')
-    <body>
-        <div class="container">
-            <div class="row text-center">
-                <div class="col-12">
-                    <i class="fas fa-wallet" style="font-size: 128px;"></i>
-                        <p>Transaksi nomor {{ $transaction->id }}</p>
-                        <p>Silahkan transfer tepat sebesar</p>
-                        <h4>Rp{{ number_format($transaction->plan->price, 0, ',', '.') }}</h4>
-                        <p>Pembayaran dapat dilakukan ke rekening Berikut</p>
-
-                    <hr>
-                        Rek BCA : 321654354684354
-                    <hr>
-                        <div class="alert alert-warning" >
-                        Sudah membayar? <label for="receipt">Unggah bukti pembayaran di bawah ini.</label>
-                        </div>
-
-                    <form action="{{ route('transactions.update', compact('transaction')) }}" method="post" class="p-3" enctype="multipart/form-data">
-                        @csrf
-                        @method('PATCH')
-                        <input type="file"  id="receipt" name="receipt">
-                        <button class="btn btn-primary btn-flat" type="submit">Kirim</button>
-                    </form>
+    @include('partials.navbar')
+    <div class="container space-top-3 space-bottom-2">
+        <div class="row">
+            <div class="col-12 text-center pb-4">
+                <h1 class="text-uppercase font-weight-bold text-darkslategray">Transaksi</h1>
+            </div>
+            <div class="col-auto py-4 pr-4 border-right">
+                <h5 class="text-black-50">Nomor Transaksi</h5>
+                <h3 class="mb-4">#{{ $transaction->id }}</h3>
+                <h5 class="text-black-50">Tanggal transaksi</h5>
+                <h3 class="mb-4">{{ $transaction->created_at }}</h3>
+                <h5 class="text-black-50">Paket</h5>
+                <h3 class="mb-4">{{ $transaction->plan->name }}</h3>
+                <h5 class="text-black-50">Harga</h5>
+                <h3 class="mb-4">@money($transaction->plan->price, 'IDR', true)</h3>
+            </div>
+            <div class="col pl-4 my-auto">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <h5>Transfer ke nomor rekening</h5>
+                        <h3 class="mb-0">BCA 0123456789</h3>
+                    </div>
+                    <span class="text-darkslategray">
+                        <i class="fas fa-exchange-alt fa-4x"></i>
+                    </span>
                 </div>
+                <hr>
+                <h5>Sudah transfer? Unggah bukti pembayaran di bawah ini</h5>
+                <form action="{{ route('transactions.update', compact('transaction')) }}" method="post" enctype="multipart/form-data">
+                    @method('PATCH')
+                    @csrf
+                    
+                    <div class="input-group mt-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input @error('cover') is-invalid @enderror" id="receipt" name="receipt">
+                            <label class="custom-file-label" for="receipt">Pilih file</label>
+                        </div>
+                    </div>
+                    <div class="clearfix mt-3">
+                        <button class="btn btn-primary float-right" type="submit">Unggah</button>
+                    </div>
+                </form>
             </div>
         </div>
-        <!-- <p>Transaksi nomor {{ $transaction->id }}</p>
-        Paket: {{ $transaction->plan->name }}
-        <form action="{{ route('transactions.update', compact('transaction')) }}" method="post" class="p-3" enctype="multipart/form-data">
-            @csrf
-            @method('PATCH')
-            <div class="form-group">
-                <label for="receipt">Unggah bukti pembayaran</label>
-                <input type="file" class="form-control" id="receipt" name="receipt">
-            </div>
-            <button class="btn btn-primary">Kirim</button>
-        </form> -->
-
-        @include('partials.footer')
-    </body>
+    </div>
+    @include('partials.footer')
 @endsection
+
+@push('scripts')
+    <!-- bs-custom-file-input -->
+    <script src="{{ asset('vendors/admin-lte/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+    <script>
+        $(function () {
+            bsCustomFileInput.init();
+        })
+    </script>
+@endpush

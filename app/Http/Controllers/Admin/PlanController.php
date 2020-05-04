@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlanRequest;
-use App\DataTables\PlanDataTable;
+use App\DataTables\PlansDataTable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use App\Plan;
@@ -16,7 +16,7 @@ class PlanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(PlanDataTable $dataTable)
+    public function index(PlansDataTable $dataTable)
     {
         return $dataTable->render('admin.plan.index');
     }

@@ -24,7 +24,6 @@ class TransactionRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'sometimes|required',
             'plan_id' => 'sometimes|required',
             'receipt' => 'sometimes|required|file',
         ];

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\DataTables\CategoryDataTable;
+use App\DataTables\CategoriesDataTable;
 use App\Category;
 
 class CategoryController extends Controller
@@ -14,7 +14,7 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(CategoryDataTable $dataTable)
+    public function index(CategoriesDataTable $dataTable)
     {
         return $dataTable->render('admin.category.index');
     }

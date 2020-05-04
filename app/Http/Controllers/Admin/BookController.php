@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
-use App\DataTables\BookDataTable;
+use App\DataTables\BooksDataTable;
 use Illuminate\Support\Arr;
 use App\Book;
 use App\Author;
 use App\Category;
 use App\Publisher;
 use Illuminate\Support\Facades\Storage;
-use Spatie\PdfToImage\Pdf;
 
 class BookController extends Controller
 {
@@ -20,7 +19,7 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(BookDataTable $dataTable)
+    public function index(BooksDataTable $dataTable)
     {
         return $dataTable->render('admin.book.index');
     }

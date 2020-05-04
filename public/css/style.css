@@ -395,3 +395,7 @@ a.text-darkslategray:focus {
     left: 1rem;
     bottom: 1rem;
 }
+
+.plan .card-text {
+    height: 120px;
+}

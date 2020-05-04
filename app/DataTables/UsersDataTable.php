@@ -21,7 +21,8 @@ class UsersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin.user.partials.action');
+            ->addColumn('action', 'admin.user.partials.action')
+            ->addIndexColumn();
     }
 
     /**
@@ -67,7 +68,7 @@ class UsersDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('name'),
+            Column::make('name')->title('Nama'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Book;
 use App\Review;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
