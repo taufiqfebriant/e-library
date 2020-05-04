@@ -8,12 +8,12 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-3">
-                    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" id="v-pills-dataPribadi-tab" data-toggle="pill" href="#v-pills-dataPribadi" role="tab" aria-controls="v-pills-dataPribadi" aria-selected="true">Data Pribadi</a>
-                        <a class="nav-link" id="v-pills-bukuSaya-tab" data-toggle="pill" href="#v-pills-bukuSaya" role="tab" aria-controls="v-pills-bukuSaya" aria-selected="false">Buku Saya</a>
-                        <a class="nav-link" id="v-pills-gantiPassword-tab" data-toggle="pill" href="#v-pills-gantiPassword" role="tab" aria-controls="v-pills-gantiPassword" aria-selected="false">Ganti Password</a>
+                        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="v-pills-dataPribadi-tab" data-toggle="pill" href="#v-pills-dataPribadi" role="tab" aria-controls="v-pills-dataPribadi" aria-selected="true">Data Pribadi</a>
+                            <a class="nav-link" id="v-pills-bukuSaya-tab" data-toggle="pill" href="#v-pills-bukuSaya" role="tab" aria-controls="v-pills-bukuSaya" aria-selected="false">Buku Saya</a>
+                            <a class="nav-link" id="v-pills-gantiPassword-tab" data-toggle="pill" href="#v-pills-gantiPassword" role="tab" aria-controls="v-pills-gantiPassword" aria-selected="false">Ganti Password</a>
 
-                    </div>
+                        </div>
                     </div>
                     <div class="col-9">
                     <div class="tab-content" id="v-pills-tabContent">
@@ -21,6 +21,11 @@
                         <div class="tab-pane fade show active" id="v-pills-dataPribadi" role="tabpanel" aria-labelledby="v-pills-dataPribadi-tab">
                             <div class="container">
                                 <div class="row text-center mt-4">
+                                @if(session()->get('success'))
+                                    <div class="alert alert-success">
+                                    {{ session()->get('success') }}  
+                                    </div><br />
+                                @endif
                                     <div class="col-12">
                                         <h3>Data Pribadi</h3>
                                         <p>Info tentang saya sendiri seperti nama,kontak,No. telp,dll</p>
@@ -41,24 +46,15 @@
                                                             <td>Nama</td>
                                                             <td> {{ $user->name }} </td>
                                                         </tr>
-                                                        <!-- <tr>
-                                                            <td>Tanggal Lahir</td>
-                                                            <td>03 Januari 2001</td>
-                                                        </tr> -->
-                                                        <!-- <tr>
-                                                            <td>Jenis Kelamin</td>
-                                                            <td>Laki-laki</td>
-                                                        </tr> -->
                                                     </tbody>
                                                 </table>
                                             </div>
                                             </div>
                                         </div>
-                                        <div class="card mt-2">
-                                            <div class="card-body">
+                                    <div class="card mt-2">
+                                        <div class="card-body">
                                             <h4 class="card-title">  
                                                 <h3>Info Kontak</h3>
-                                            
                                             <div class="card-text">
                                                 <table class="table table-light">
                                                     <tbody>
@@ -68,25 +64,28 @@
                                                         </tr>
                                                         <tr>
                                                             <td>Whatsapp</td>
-                                                            <td>+6282335623028</td>
+                                                            <td> {{$user->whatsapp}} </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Twitter</td>
-                                                            <td></td>
+                                                            <td> {{$user->twitter}} </td>
                                                         </tr>
                                                         <tr>
                                                             <td>Instagram</td>
-                                                            <td></td>
+                                                            <td>{{$user->instagram}}</td>
                                                         </tr>
                                                         <tr>
                                                             <td>Facebook</td>
-                                                            <td></td>
+                                                            <td>{{$user->facebook}}</td>
                                                         </tr>
                                                         
                                                     </tbody>
                                                 </table>
                                             </div>
                                             </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <a href="{{ route('users.edit',$user->id) }}" class="btn btn-primary btn-sm">Edit Profile</a>
                                         </div>
                                     </div>  
                                 </div>
@@ -145,27 +144,36 @@
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="card-text">
-                                                    <table class="table table-light">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>Password Lama</td>
-                                                                <td><input type="text" name="" id="" class="form-control"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Password Baru</td>
-                                                                <td><input type="text" name="" id="" class="form-control"></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>Konfirmasi Password</td>
-                                                                <td><input type="text" name="" id=" " class="form-control"></td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
+                                                    <form action="{{ route('users.changepassword') }}" method="POST">
+                                                        @csrf 
+   
+                                                        @foreach ($errors->all() as $error)
+                                                            <p class="text-danger">{{ $error }}</p>
+                                                        @endforeach 
+                                                        <table class="table table-light">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>Password Lama</td>
+                                                                    <td><input type="password" name="current_password" id="" class="form-control"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Password Baru</td>
+                                                                    <td><input type="password" name="new_password" id="" class="form-control"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Konfirmasi Password</td>
+                                                                    <td><input type="password" name="new_confirm_password" id=" " class="form-control"></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                   
                                                 </div>
                                             </div>
                                             <div class="card-footer">
                                                 <input type="submit" class="btn btn-block btn-primary " value="Ubah">
                                             </div>
+
+                                            </form>
                                         </div>
                                     </div>  
                                 </div>

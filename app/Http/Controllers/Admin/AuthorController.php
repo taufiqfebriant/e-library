@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorRequest;
-use App\DataTables\AuthorDataTable;
+use App\DataTables\AuthorsDataTable;
 use App\Author;
 
 class AuthorController extends Controller
@@ -14,7 +14,7 @@ class AuthorController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(AuthorDataTable $dataTable)
+    public function index(AuthorsDataTable $dataTable)
     {
         return $dataTable->render('admin.author.index');
     }

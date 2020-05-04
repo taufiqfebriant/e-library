@@ -11,8 +11,8 @@
 @endsection
 
 @section('content')
-    <body>
-        @include('partials.navbar')
+    @include('partials.navbar')
+    @guest
         <section class="hero-section bg-darkslategray vh-100 text-white">
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center">
@@ -27,6 +27,7 @@
                 </div>
             </div>
         </section>
+
         <section class="why-us py-5">
             <div class="container">
                 <div class="row">
@@ -68,7 +69,7 @@
                     </div>
                     <div class="col-12">
                         <div class="book-carousel">
-                            @foreach ($books as $book)
+                            @foreach ($latestBooks as $book)
                                 <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
                                     <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
                                     <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
@@ -84,6 +85,93 @@
                 </div>
             </div>
         </section>
-        @include('partials.footer')
-    </body>
+    @else
+        <div class="space-2">
+            <section class="top-books bg-light py-5 text-center">
+                <div class="container">
+                    {{-- <div class="row top-books-carousel">
+                        @foreach ($topBooks as $review)
+                            <div class="col-5">
+                                <div class="row">
+                                    <div class="col-5">
+                                        <img src="{{ asset("storage/{$review->book->cover}") }}" alt="Book's cover" class="img-fluid">
+                                    </div>
+                                    <div class="col-7">
+                                        <h5>{{ $review->book->title }}</h5>
+                                        <div class="d-flex">
+                                            <span class="bg-warning">
+                                                <i class="fas-fa-star"></i>
+                                            </span>
+                                            <span>{{ $review->ratings }}</span>
+                                        </div>
+                                    </div>
+                                </div>    
+                            </div>
+                        @endforeach
+                    </div> --}}
+                </div>
+            </section>
+            <div class="container">
+                <form action="" class="d-flex pt-4">
+                    <input type="text" name="keyword" id="keyword" class="form-control form-control-lg w-75 mr-3">
+                    <button class="btn btn-darkslategray w-25 text-base">
+                        <i class="fas fa-search fa-sm mr-1"></i>
+                        <span>Cari</span>
+                    </button>
+                </form>
+            </div>
+            <section class="liked-categories pt-5 pb-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 pb-3">
+                            <div class="d-flex align-items-center justify-content-between">
+                                <h3 class="mb-0">Berdasarkan kategori yang Anda sukai</h3>
+                                <a href="{{ route('categories.index') }}" class="text-base text-decoration-none text-darkslategray">Lihat semua kategori</a>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="book-carousel">
+                                @foreach ($likedBooks as $book)
+                                    <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
+                                        <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
+                                        <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
+                                        <p class="text-muted">
+                                            @foreach ($book->authors as $author)
+                                                {{ $author->name . ($loop->last ? '' : ', ') }}
+                                            @endforeach
+                                        </p>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="latest-books py-3">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 pb-3">
+                            <h3>Buku terbaru</h3>
+                        </div>
+                        <div class="col-12">
+                            <div class="book-carousel">
+                                @foreach ($latestBooks as $book)
+                                    <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
+                                        <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
+                                        <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
+                                        <p class="text-muted">
+                                            @foreach ($book->authors as $author)
+                                                {{ $author->name . ($loop->last ? '' : ', ') }}
+                                            @endforeach
+                                        </p>
+                                    </a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    @endguest
+    @include('partials.footer')
 @endsection

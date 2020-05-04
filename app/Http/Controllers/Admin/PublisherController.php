@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PublisherRequest;
-use App\DataTables\PublisherDataTable;
+use App\DataTables\PublishersDataTable;
 use App\Publisher;
 
 class PublisherController extends Controller
@@ -14,7 +14,7 @@ class PublisherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(PublisherDataTable $dataTable)
+    public function index(PublishersDataTable $dataTable)
     {
         return $dataTable->render('admin.publisher.index');
     }

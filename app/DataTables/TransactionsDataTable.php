@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Plan;
+use App\Transaction;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PlanDataTable extends DataTable
+class TransactionsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,18 +21,28 @@ class PlanDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin.plan.partials.action');
+            ->addColumn('status', function (Transaction $transaction) {
+                if ($transaction->confirmed_by && $transaction->confirmed_at) {
+                    return 'Terkonfirmasi';
+                } else {
+                    if ($transaction->paid_at && $transaction->receipt) {
+                        return 'Menunggu konfirmasi';
+                    }
+                }
+                return 'Belum membayar';
+            })
+            ->addColumn('action', 'admin.transaction.partials.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \Plan $model
+     * @param \App\Transaction $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Plan $model)
+    public function query(Transaction $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['user', 'plan'])->select('transactions.*');
     }
 
     /**
@@ -43,12 +53,12 @@ class PlanDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('plan-table')
+                    ->setTableId('transaction-table')
                     ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->buttons(
                         Button::make('create'),
                         Button::make('export'),
@@ -67,7 +77,9 @@ class PlanDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('name')->title('Nama'),
+            Column::make('user.name')->title('Nama'),
+            Column::make('plan.name')->title('Paket'),
+            Column::computed('status'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
@@ -84,6 +96,6 @@ class PlanDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Plan_' . date('YmdHis');
+        return 'Transaction_' . date('YmdHis');
     }
 }

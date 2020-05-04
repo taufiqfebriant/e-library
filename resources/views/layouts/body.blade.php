@@ -42,12 +42,6 @@
     
     <!-- fontawesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script> --}}
-    
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="https://kit.fontawesome.com/a0e3cdff18.js" crossorigin="anonymous" defer></script>
-    @stack('scripts')
-    <script src="{{ asset('js/script.js') }}" defer></script>
 	<!-- Styles -->
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
     @yield('links')
@@ -60,5 +54,10 @@
             @includeWhen(session('message'), 'partials.toast', ['message' => session('message'), 'type' => session('type')])
             @yield('content')
         </div>
+        <!-- Scripts -->
+        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="https://kit.fontawesome.com/a0e3cdff18.js" crossorigin="anonymous"></script>
+        @stack('scripts')
+        <script src="{{ asset('js/script.js') }}"></script>
     </body>
 @endsection

@@ -2,14 +2,14 @@
 
 namespace App\DataTables;
 
-use App\Book;
+use App\Plan;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class BookDataTable extends DataTable
+class PlansDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,16 +21,16 @@ class BookDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin.book.partials.action');
+            ->addColumn('action', 'admin.plan.partials.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Book $model
+     * @param \Plan $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Book $model)
+    public function query(Plan $model)
     {
         return $model->newQuery();
     }
@@ -43,12 +43,12 @@ class BookDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('book-table')
+                    ->setTableId('plan-table')
                     ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->buttons(
                         Button::make('create'),
                         Button::make('export'),
@@ -67,7 +67,7 @@ class BookDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('title')->title('Judul'),
+            Column::make('name')->title('Nama'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
@@ -84,6 +84,6 @@ class BookDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Book_' . date('YmdHis');
+        return 'Plan_' . date('YmdHis');
     }
 }

@@ -7,7 +7,8 @@ Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('books/{book}', 'BookController@show')->name('books.show');
 Route::get('users/{user}', 'UserController@show')->name('users.show');
 Route::get('plans', 'PlanController@index')->name('plans.index');
-Route::get('cari', 'SearchController@index')->name('search.index');
+Route::get('categories', 'CategoryController@index')->name('categories.index');
+Route::get('search/{keyword}', 'SearchController@show')->name('search.show');
 Route::middleware(['auth'])->group(function () {
     Route::post('transactions', 'TransactionController@store')->name('transactions.store');
     Route::get('transactions/{transaction}', 'TransactionController@show')->name('transactions.show');
@@ -36,3 +37,8 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::get('subscriptions', 'SubscriptionController@index')->name('subscriptions.index');
     Route::resource('users', 'UserController' , ['except' => ['show' , 'create' , 'store']]);
 });
+
+// untuk user
+Route::get('/users/edit/{id}','UserController@edit')->name('users.edit');
+Route::patch('/users/{user}','UserController@update')->name('users.update');
+Route::post('change-password','UserController@changepassword')->name('users.changepassword');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\DataTables\TransactionDataTable;
+use App\DataTables\TransactionsDataTable;
 use App\Http\Requests\TransactionRequest;
 use App\Transaction;
 use App\Subscription;
@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class TransactionController extends Controller
 {
-    public function index(TransactionDataTable $dataTable)
+    public function index(TransactionsDataTable $dataTable)
     {
         return $dataTable->render('admin.transaction.index');
     }
@@ -25,7 +25,7 @@ class TransactionController extends Controller
     {
         $transaction->update([
             'confirmed_by' => auth()->user()->id,
-            'confirmed_at' => date('Y-m-d H:i:s')
+            'confirmed_at' => Carbon::now()
         ]);
         Subscription::create([
             'user_id' => $transaction->user_id,

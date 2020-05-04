@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark pt-3 pb-2 bg-transparent fixed-top navbar-user">
+<nav class="navbar navbar-expand-md navbar-dark pt-3 pb-2 bg-transparent fixed-top navbar-user {{ auth()->check() ? 'navbar-authenticated' : '' }}">
     <div class="container">
         <a class="navbar-brand pt-0" href="{{ url('/') }}">
             {{ config('app.name', 'E-Library') }}
@@ -28,6 +28,11 @@
                             <a href="{{ route('users.show', auth()->user()) }}" class="dropdown-item">
                                 Akun saya
                             </a>
+                            @if (Auth::user()->hasRole('admin'))
+                                <a href="{{ route('admin.dashboard.index') }}" class="dropdown-item">
+                                    Panel Admin
+                                </a>
+                            @endif
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                 document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}

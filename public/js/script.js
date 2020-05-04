@@ -1,6 +1,4 @@
 $(function () {
-    let rating = $('.rating')
-    
     $('.toast').toast('show')
     changeNavbarUser() 
     
@@ -11,7 +9,7 @@ $(function () {
     }
 
     function changeNavbarUser() {
-        if (window.location.pathname === '/') {
+        if (window.location.pathname === '/' && !$('.navbar-user').hasClass('navbar-authenticated')) {
             if ($(this).scrollTop() > $('.navbar-user').height()) {
                 if ($('.navbar-user').hasClass('bg-transparent')) {
                     $('.navbar-user').removeClass('bg-transparent').addClass('bg-white shadow-sm')
@@ -29,13 +27,4 @@ $(function () {
             $('.navbar-user .nav-link.btn-light').removeClass('text-body btn-light').addClass('btn-primary')
         }
     }
-
-    rating.starRating({
-        starSize: 25,
-        useFullStars: true,
-        disableAfterRate: false,
-        callback: function(currentRating) {
-            rating.next('#rating').val(currentRating)
-        }
-    });
 })
