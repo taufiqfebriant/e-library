@@ -29,10 +29,10 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.div -->
+
                 <div>
-                    <a href="#" class="list-group-item active list-group-item-success">Authors
-                    </a>
+                    <p href="#" class="list-group-item active list-group-item-success">Authors
+                    </p>
                     <ul class="list-group">
                         <li class="list-group-item">Author 1
                              <span class="label label-danger pull-right">300</span>
@@ -45,11 +45,47 @@
                         </li>
                     </ul>
                 </div>
-                <!-- /.div -->
- 
-                <!-- /.div -->
+
+                 <div>
+                    <h2>Star Rating</h2>
+                    <a href="#"><div class="5-stars">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                        </div></a>
+                        <a href="#"><div class="4-stars">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                        </div></a>
+                        <a href="#"> <div class="3-stars">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div></a>
+                        <a href="#"><div class="2-stars">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div></a>
+                        <a href="#"> <div class="1-star">
+                            <span class="fa fa-star checked"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                            <span class="fa fa-star"></span>
+                        </div></a>
+                 </div>
+
             </div>
-            <!-- /.col -->
             <div class="col-md-9">
                 <div>
                     <ol class="breadcrumb">
@@ -57,7 +93,6 @@
                         <li class="active">Mystery</li>
                     </ol>
                 </div>
-                <!-- /.div -->
                 <div class="row">
                     <div class="btn-group alg-right-pad">
                         <button type="button" class="btn btn-default"><strong>1235  </strong>items</button>
@@ -74,10 +109,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.row -->
                 <div class="row">
                     <div class="col-md-4 col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
+                        <div class="thumbnail book-box">
                             <img src="img/books/Buku2 Rumah Cahaya Online1.jpg" alt="" />
                             <div class="caption">
                                 <h3 class="text-center"><a href="#">Book 1 </a></h3>
@@ -90,7 +124,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-md-4 col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
+                        <div class="thumbnail book-box">
                             <img src="img/books/Buku2 Rumah Cahaya Online2.jpg" alt="" />
                             <div class="caption">
                                 <h3 class="text-center"><a href="#">Book 2 </a></h3>
@@ -101,9 +135,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.col -->
                     <div class="col-md-4 col-sm-6 col-xs-6">
-                        <div class="thumbnail product-box">
+                        <div class="thumbnail book-box">
                             <img src="img/books/Buku2 Rumah Cahaya Online3.jpg" alt="" />
                             <div class="caption">
                                 <h3 class="text-center"><a href="#">Book 3</a></h3>
@@ -114,9 +147,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.col -->
                 </div>
-                <!-- /.row -->
                 <div class="row">
                     <ul class="pagination alg-right-pad">
                         <li><a href="#">&laquo;</a></li>
@@ -129,9 +160,7 @@
                     </ul>
                 </div>
             </div>
-            <!-- /.col -->
         </div>
-        <!-- /.row -->
     </div>
     @include('partials.footer')
 </body>
