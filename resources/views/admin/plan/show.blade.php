@@ -31,7 +31,9 @@
                                     <dt class="col-sm-2">Deskripsi</dt>
                                     <dd class="col-sm-10">{{ $plan->description }}</dd>
                                     <dt class="col-sm-2">Harga</dt>
-                                    <dd class="col-sm-10">{{ $plan->price }}</dd>
+                                    <dd class="col-sm-10">@money($plan->price, 'IDR', true)</dd>
+                                    <dt class="col-sm-2">Durasi</dt>
+                                    <dd class="col-sm-10">{{ $plan->months }} bulan</dd>
                                 </dl>
                             </div>
                             <div class="card-footer">

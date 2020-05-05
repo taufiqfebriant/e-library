@@ -10,6 +10,7 @@ class BookController extends Controller
 {
     public function show(Book $book)
     {
+        $book = $book->withCount('users')->get()->find($book->id);
         return view('book.show', compact('book'));
     }
 
@@ -19,7 +20,7 @@ class BookController extends Controller
             if (auth()->user()->books->count() === 2) {
                 return back()->with(['type' => 'danger', 'message' => 'Gagal meminjam buku. Jumlah peminjaman buku telah mencapai angka maksimal']);
             }
-            $book->users()->sync([auth()->user()->id => ['ends_at' => (new Carbon($book->updated_at))->addDays(7)]]);
+            $book->users()->attach([auth()->user()->id => ['ends_at' => (new Carbon($book->updated_at))->addDays(7)]]);
             return redirect()->route('books.read', compact('book'));
         } else {
             $paidTransactions = Transaction::whereNotNull(['paid_at', 'receipt'])->where('user_id', auth()->user()->id)->first();

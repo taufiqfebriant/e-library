@@ -35,7 +35,7 @@
                     @csrf
                     
                     <div class="custom-file mt-3">
-                        <input type="file" class="custom-file-input @error('cover') is-invalid @enderror" id="receipt" name="receipt">
+                        <input type="file" class="custom-file-input @error('receipt') is-invalid @enderror" id="receipt" name="receipt">
                         <label class="custom-file-label" for="receipt">Pilih file</label>
                         @error('receipt')
                             <span class="invalid-feedback" role="alert">

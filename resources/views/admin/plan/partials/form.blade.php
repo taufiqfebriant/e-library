@@ -35,6 +35,22 @@
             @enderror
         </div>
     </div>
+    <div class="form-group row">
+        <label for="months" class="col-sm-2 col-form-label">Durasi</label>
+        <div class="col-sm-10">
+            <div class="input-group">
+                <input type="number" min="1" name="months" class="form-control @error('months') is-invalid @enderror" id="months" placeholder="Durasi" value="{{ old('months', $plan->months) }}" aria-label="Plan's months" aria-describedby="months-addon">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="months-addon">bulan</span>
+                </div>
+            </div>
+            @error('months')
+                <span class="invalid-feedback" role="alert">
+                    {{ $message }}
+                </span>
+            @enderror
+        </div>
+    </div>
 </div>
 <!-- /.card-body -->
 <div class="card-footer">

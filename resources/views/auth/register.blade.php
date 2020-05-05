@@ -2,11 +2,11 @@
 @section('title', 'Daftar')
 
 @section('links')
+    <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('vendors/admin-lte/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/util.css"> 
-    <!-- Select2 -->
+    {{-- <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/util.css">  --}}
 @endsection
 
 @section('content')
@@ -117,7 +117,7 @@
                             <div class="form-group">
                                 <label for="category_id">Kategori yang Anda sukai</label>
                                 <select class="form-control select2bs4 @error('category_id') is-invalid @enderror" name="category_id[]" id="category_id" multiple="multiple" style="width: 100%" required>
-                                    @foreach ($errors as $category)
+                                    @foreach ($categories as $category)
                                         <option value="{{ $category->id }}" {{ old('category_id') === $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                     @endforeach
                                 </select>
@@ -132,11 +132,9 @@
                             </div>
                         </form>
                         <p class="text-center mb-0 mt-4">Sudah mempunyai akun? <a href="{{ route('login') }}" class="text-darkslategray font-weight-bold">Masuk</a></p>
-                        <div class="d-flex align-items-center justify-content-center pt-4">
-                            <a href="{{ route('home.index') }}" class="text-darkslategray">
-                                <i class="fas fa-arrow-left fa-sm mr-2"></i>
-                                <span>Kembali</span>
-                            </a>
+                        <div class="d-flex align-items-center justify-content-center pt-4 text-darkslategray">
+                            <i class="fas fa-arrow-left fa-xs mr-2"></i>
+                            <a href="{{ route('home.index') }}" class="text-darkslategray">Kembali ke Beranda</a>
                         </div>
                     </div>
                 </div>
