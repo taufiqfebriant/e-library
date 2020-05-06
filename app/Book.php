@@ -32,12 +32,17 @@ class Book extends Model
     
     public function users()
     {
-        return $this->belongsToMany('App\User')->withTimestamps();
+        return $this->belongsToMany('App\User')->withTimestamps()->withPivot('returned_at');
     }
 
     public function countPages($path) {
         $pdftext = Storage::get($path);
         $num = preg_match_all("/\/Page\W/", $pdftext, $dummy);
         return $num;
+    }
+    
+    public function hasUser()
+    {
+        return $this->users()->where('user_id', auth()->user()->id)->wherePivot('returned_at', NULL)->exists();
     }
 }

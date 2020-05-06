@@ -39,7 +39,7 @@ class User extends Authenticatable
 
     public function books()
     {
-        return $this->belongsToMany('App\Book')->withTimestamps();
+        return $this->belongsToMany('App\Book')->withTimestamps()->withPivot('returned_at');
     }
 
     // public function book_users()
@@ -94,5 +94,13 @@ class User extends Authenticatable
             return true;
         } 
         return false;
+    }
+
+    public function isAdministrator() {
+        return $this->roles()->where('name', 'admin')->exists();
+    }
+
+    public function isMember() {
+        return $this->roles()->where('name', 'member')->exists();
     }
 }
