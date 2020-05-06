@@ -22,7 +22,6 @@
                 </div>
             </div>
         </section>
-
         <section class="why-us py-5">
             <div class="container">
                 <div class="row">
@@ -108,8 +107,8 @@
                 </div>
             </section>
             <div class="container">
-                <form action="" class="d-flex pt-4">
-                    <input type="text" name="keyword" id="keyword" class="form-control form-control-lg w-75 mr-3">
+                <form action="{{ route('search.index') }}" class="d-flex pt-4" method="get">
+                    <input type="text" name="q" id="q" class="form-control form-control-lg w-75 mr-3" placeholder="Ketik judul buku..." required>
                     <button class="btn btn-darkslategray w-25 text-base">
                         <i class="fas fa-search fa-sm mr-1"></i>
                         <span>Cari</span>

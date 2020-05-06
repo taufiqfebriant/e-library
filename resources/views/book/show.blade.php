@@ -66,7 +66,7 @@
                     <h4 class="my-3">Beri buku ini penilaian</h4>
                     <div class="row align-items-center">
                         <div class="rating col-auto"></div>
-                        <input type="hidden" name="rating" id="rating" value="2">
+                        <input type="hidden" name="rating" id="rating">
                         <div class="col">
                             <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
                         </div>

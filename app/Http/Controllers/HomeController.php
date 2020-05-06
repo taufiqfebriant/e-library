@@ -10,7 +10,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $top10Books = Book::withCount('users')->has('users', '>', 0)->get();
+        $top10Books = Book::withCount('users')->has('users', '>', 0)->take(10)->get();
         $latestBooks = Book::latest()->take(10)->get();
         return view('home.index', compact('latestBooks', 'top10Books'));
     }

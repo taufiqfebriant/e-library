@@ -8,7 +8,7 @@ Route::get('books/{book}', 'BookController@show')->name('books.show');
 Route::get('users/{user}', 'UserController@show')->name('users.show');
 Route::get('plans', 'PlanController@index')->name('plans.index');
 Route::get('categories', 'CategoryController@index')->name('categories.index');
-Route::get('search/{keyword}', 'SearchController@show')->name('search.show');
+Route::get('search', 'SearchController@index')->name('search.index');
 Route::middleware(['auth'])->group(function () {
     Route::post('transactions', 'TransactionController@store')->name('transactions.store');
     Route::get('transactions/{transaction}', 'TransactionController@show')->name('transactions.show');
@@ -20,7 +20,7 @@ Route::middleware(['auth'])->group(function () {
 });
 
 // search book testing
-Route::get('/search' , 'FrontpageController@searchBooks')->name('search');
+// Route::get('/search' , 'FrontpageController@searchBooks')->name('search');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
     Route::resource('dashboard', 'DashboardController');
     Route::resource('authors', 'AuthorController');
