@@ -2,16 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Book;
 use Illuminate\Http\Request;
 use App\User;
 use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
+use App\Transaction;
 
 class UserController extends Controller
 {
-    public function show( User $user )
+    public function show( User $user , Transaction $transaction , Book $book )
     {
-        return view('user.show',compact('user'));
+        $transaksi = Transaction::where('user_id', auth()->user()->id)->get();
+
+        // $bukus = Book::wherePivot('user_id', auth()->user()->id)->get();
+        // dd(auth()->user()->books());exit;
+
+        return view('user.show',compact(['user','transaksi']));
     }
     public function edit($id)
     {  

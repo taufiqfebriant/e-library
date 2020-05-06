@@ -42,6 +42,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Book')->withTimestamps()->withPivot('returned_at');
     }
 
+    // public function book_users()
+    // {
+    //     return $this->belongsToMany('App\Book')->withTimestamps();
+    // }
+    
     public function categories()
     {
         return $this->belongsToMany('App\Category')->withTimestamps();
