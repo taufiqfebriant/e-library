@@ -21,12 +21,14 @@ class TransactionController extends Controller
 
     public function show(Transaction $transaction)
     {
+        $this->authorize('update-transaction', $transaction);
         if ($transaction->paid_at && $transaction->receipt) abort(404);
         return view('transaction.show', compact('transaction'));
     }
-
+    
     public function update(Request $request, Transaction $transaction)
     {
+        $this->authorize('update-transaction', $transaction);
         $validatedData = $request->validate([
             'receipt' => 'required|image|mimes:jpeg,jpg,png',
         ]);
@@ -34,6 +36,6 @@ class TransactionController extends Controller
             'paid_at' => Carbon::now(),
             'receipt' => request()->receipt->store('uploads/transaction/receipts')
         ], $validatedData);
-        return redirect()->route('users.show', auth()->user()->id);
+        return redirect()->route('users.transactions', auth()->user()->id);
     }
 }

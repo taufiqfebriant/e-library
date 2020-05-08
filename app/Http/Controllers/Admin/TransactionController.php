@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\DataTables\TransactionsDataTable;
+use App\DataTables\Admin\TransactionsDataTable;
 use App\Http\Requests\TransactionRequest;
 use App\Transaction;
 use App\Subscription;

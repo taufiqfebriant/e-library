@@ -1,15 +1,15 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Admin;
 
-use App\Category;
+use App\Plan;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class CategoriesDataTable extends DataTable
+class PlansDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,16 +21,16 @@ class CategoriesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin.category.partials.action');
+            ->addColumn('action', 'admin.plan.partials.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Category $model
+     * @param \Plan $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Category $model)
+    public function query(Plan $model)
     {
         return $model->newQuery();
     }
@@ -43,7 +43,7 @@ class CategoriesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('category-table')
+                    ->setTableId('plan-table')
                     ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
@@ -84,6 +84,6 @@ class CategoriesDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Category_' . date('YmdHis');
+        return 'Plan_' . date('YmdHis');
     }
 }

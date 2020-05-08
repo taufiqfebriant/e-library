@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlanRequest;
-use App\DataTables\PlansDataTable;
+use App\DataTables\Admin\PlansDataTable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use App\Plan;

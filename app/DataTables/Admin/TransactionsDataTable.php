@@ -1,16 +1,15 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Admin;
 
-use App\Book;
+use App\Transaction;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
-use Carbon\Carbon;
 
-class BooksDataTable extends DataTable
+class TransactionsDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,32 +21,28 @@ class BooksDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function (Book $book) {
-                return view('user.partials.actions.books', compact('book'));
+            ->addColumn('status', function (Transaction $transaction) {
+                if ($transaction->confirmed_by && $transaction->confirmed_at) {
+                    return 'Terkonfirmasi';
+                } else {
+                    if ($transaction->paid_at && $transaction->receipt) {
+                        return 'Menunggu konfirmasi';
+                    }
+                }
+                return 'Belum membayar';
             })
-            ->editColumn('created_at', function (Book $book) {
-                return $book->created_at ? with(new Carbon($book->created_at))->format('Y-m-d H:i:s') : '';
-            })
-            ->editColumn('ends_at', function (Book $book) {
-                return $book->ends_at ? with(new Carbon($book->ends_at))->format('Y-m-d H:i:s') : '';
-            })
-            ->filterColumn('created_at', function ($query, $keyword) {
-                $query->whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
-            })
-            ->filterColumn('ends_at', function ($query, $keyword) {
-                $query->whereRaw("DATE_FORMAT(ends_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
-            });
+            ->addColumn('action', 'admin.transaction.partials.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Book $model
+     * @param \App\Transaction $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query()
+    public function query(Transaction $model)
     {
-        return auth()->user()->books();
+        return $model->newQuery()->with(['user', 'plan'])->select('transactions.*');
     }
 
     /**
@@ -58,7 +53,7 @@ class BooksDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('books-table')
+                    ->setTableId('transaction-table')
                     ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
@@ -70,9 +65,7 @@ class BooksDataTable extends DataTable
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
-                    )->parameters([
-                        'responsive' => true
-                    ]);
+                    );
     }
 
     /**
@@ -84,10 +77,9 @@ class BooksDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('title')->title('Judul buku'),
-            Column::make('created_at')->title('Tanggal pinjam'),
-            Column::make('ends_at')->title('Tanggal berakhir'),
-            Column::make('returned_at')->title('Tanggal pengembalian'),
+            Column::make('user.name')->title('Nama'),
+            Column::make('plan.name')->title('Paket'),
+            Column::computed('status'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
@@ -104,6 +96,6 @@ class BooksDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Books_' . date('YmdHis');
+        return 'Transaction_' . date('YmdHis');
     }
 }

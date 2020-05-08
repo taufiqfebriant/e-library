@@ -1,15 +1,15 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Admin;
 
-use App\Publisher;
+use App\User;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class PublishersDataTable extends DataTable
+class UsersDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,16 +21,17 @@ class PublishersDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin.publisher.partials.action');
+            ->addColumn('action', 'admin.user.partials.action')
+            ->addIndexColumn();
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Publisher $model
+     * @param \App\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Publisher $model)
+    public function query(User $model)
     {
         return $model->newQuery();
     }
@@ -43,7 +44,7 @@ class PublishersDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('publisher-table')
+                    ->setTableId('users-table')
                     ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
@@ -72,8 +73,7 @@ class PublishersDataTable extends DataTable
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
-                  ->addClass('text-center')
-                  ->title('Opsi')
+                  ->addClass('text-center'),
         ];
     }
 
@@ -84,6 +84,6 @@ class PublishersDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Publisher_' . date('YmdHis');
+        return 'Users_' . date('YmdHis');
     }
 }

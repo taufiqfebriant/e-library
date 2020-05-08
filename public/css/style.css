@@ -49,6 +49,17 @@ button.bg-darkslategray:focus {
     background-color: #1d1749 !important;
 }
 
+.bg-lavender {
+    background-color: #e8f0fe !important;
+}
+
+a.bg-lavender:hover,
+a.bg-lavender:focus,
+button.bg-lavender:hover,
+button.bg-lavender:focus {
+    background-color: #b7d0fc !important;
+}
+
 .navbar-user {
     transition: background-color 200ms linear;
 }
@@ -65,8 +76,17 @@ button.bg-darkslategray:focus {
     color: #fff;
 }
 
+.side-nav .nav-link.active {
+    color: #827397;
+    background-color: #e8f0fe;
+}
+
 .text-slategray {
     color: #827397 !important;
+}
+
+.text-base {
+    font-size: 1rem;
 }
 
 a.text-slategray:hover,
@@ -90,10 +110,6 @@ a.text-lightgray:focus {
 a.text-darkslategray:hover,
 a.text-darkslategray:focus {
     color: #1a172f !important;
-}
-
-.text-base {
-    font-size: 1rem;
 }
 
 .tracking-widest {
@@ -398,4 +414,8 @@ a.text-darkslategray:focus {
 
 .plan .card-text {
     height: 120px;
+}
+
+.iti {
+    width: 100%;
 }

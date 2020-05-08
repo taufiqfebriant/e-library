@@ -5,11 +5,18 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes(); 
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('books/{book}', 'BookController@show')->name('books.show');
-Route::get('users/{user}', 'UserController@show')->name('users.show');
 Route::get('plans', 'PlanController@index')->name('plans.index');
 Route::get('categories', 'CategoryController@index')->name('categories.index');
 Route::get('search', 'SearchController@index')->name('search.index');
 Route::middleware(['auth'])->group(function () {
+    Route::get('users/{user}', 'UserController@show')->name('users.show');
+    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+    Route::patch('users/{user}', 'UserController@update')->name('users.update');
+    Route::get('users/{user}/books', 'UserController@books')->name('users.books');
+    Route::patch('users/{user}/books/{book}', 'UserController@returnBook')->name('users.return-book');
+    Route::get('users/{user}/transactions', 'UserController@transactions')->name('users.transactions');
+    Route::get('users/{user}/change-password', 'UserController@changePassword')->name('users.change-password');
+    Route::patch('users/{user}/update-password', 'UserController@updatePassword')->name('users.update-password');
     Route::post('transactions', 'TransactionController@store')->name('transactions.store');
     Route::get('transactions/{transaction}', 'TransactionController@show')->name('transactions.show');
     Route::patch('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
@@ -37,8 +44,3 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::get('subscriptions', 'SubscriptionController@index')->name('subscriptions.index');
     Route::resource('users', 'UserController' , ['except' => ['show' , 'create' , 'store']]);
 });
-
-// untuk user
-Route::get('/users/edit/{id}','UserController@edit')->name('users.edit');
-Route::patch('/users/{user}','UserController@update')->name('users.update');
-Route::post('change-password','UserController@changepassword')->name('users.changepassword');

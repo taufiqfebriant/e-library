@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthorRequest;
-use App\DataTables\AuthorsDataTable;
+use App\DataTables\Admin\AuthorsDataTable;
 use App\Author;
 
 class AuthorController extends Controller

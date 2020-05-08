@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -41,15 +42,15 @@ class User extends Authenticatable
     {
         return $this->belongsToMany('App\Book')->withTimestamps()->withPivot('returned_at');
     }
-
-    // public function book_users()
-    // {
-    //     return $this->belongsToMany('App\Book')->withTimestamps();
-    // }
     
     public function categories()
     {
         return $this->belongsToMany('App\Category')->withTimestamps();
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
     }
 
     public function reviews()
@@ -74,7 +75,7 @@ class User extends Authenticatable
 
     public function subscribed()
     {
-        if (auth()->user()->subscription && auth()->user()->subscription->ends_at >= date('Y-m-d H:i:s')) {
+        if (auth()->user()->subscription && auth()->user()->subscription->ends_at >= Carbon::now()) {
             return true;
         }
         return false;
