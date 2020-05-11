@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -97,6 +98,24 @@ class User extends Authenticatable
         return false;
     }
 
+    public function initials()
+    {
+        $words = Str::of($this->name)->explode(' ');
+        if (count($words) >= 2) {
+            return Str::upper(Str::substr($words[0], 0, 1) . Str::substr(end($words)[0], 0, 1));
+        }
+        return $this->initialsFromSingleWord();
+    }
+
+    protected function initialsFromSingleWord()
+    {
+        preg_match_all('#([A-Z]+)#', $this->name, $capitals);
+        if (count($capitals[1]) >= 2) {
+            return Str::substr(implode('', $capitals[1]), 0, 2);
+        }
+        return Str::upper(Str::substr($this->name, 0, 1));
+    }
+    
     public function isAdministrator() {
         return $this->roles()->where('name', 'admin')->exists();
     }

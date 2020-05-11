@@ -11,12 +11,12 @@
         <section class="hero-section bg-darkslategray vh-100 text-white">
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center">
-                    <div class="col-6">
+                    <div class="col-lg-6">
                         <h1 class="display-4">Temukan <span class="text-primary">ribuan</span> buku.</h1>
                         <p class="text-base">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque provident natus hic, nobis, impedit, perferendis animi.</p>
                         <a href="{{ route('plans.index') }}" class="btn btn-primary text-uppercase tracking-widest">Berlangganan sekarang</a>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 d-none d-lg-block">
                         <img src="{{ asset('images/undraw_reading_list_4boi.svg') }}" class="w-100" alt="Ilustrasi membaca">
                     </div>
                 </div>
@@ -28,7 +28,7 @@
                     <div class="col-12 pb-4">
                         <h1>Kenapa kami?</h1>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4 pb-3 pb-lg-0">
                         <div class="card">
                             <div class="card-body text-center">
                                 <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
@@ -36,7 +36,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4 pb-3 pb-lg-0">
                         <div class="card">
                             <div class="card-body text-center">
                                 <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
@@ -44,7 +44,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body text-center">
                                 <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
@@ -110,8 +110,8 @@
                 <form action="{{ route('search.index') }}" class="d-flex pt-4" method="get">
                     <input type="text" name="q" id="q" class="form-control form-control-lg w-75 mr-3" placeholder="Ketik judul buku..." required>
                     <button class="btn btn-darkslategray w-25 text-base">
-                        <i class="fas fa-search fa-sm mr-1"></i>
-                        <span>Cari</span>
+                        <i class="fas fa-search fa-sm mr-lg-1"></i>
+                        <span class="d-none d-lg-unset">Cari</span>
                     </button>
                 </form>
             </div>
@@ -121,7 +121,6 @@
                         <div class="col-12 pb-3">
                             <div class="d-flex align-items-center justify-content-between">
                                 <h3 class="mb-0 pl-2">Berdasarkan kategori yang Anda sukai</h3>
-                                <a href="{{ route('categories.index') }}" class="text-base text-decoration-none text-darkslategray">Lihat semua kategori</a>
                             </div>
                         </div>
                         <div class="col-12">

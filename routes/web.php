@@ -1,8 +1,9 @@
 <?php
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Auth::routes(); 
+Auth::routes();
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('books/{book}', 'BookController@show')->name('books.show');
 Route::get('plans', 'PlanController@index')->name('plans.index');
@@ -10,6 +11,7 @@ Route::get('categories', 'CategoryController@index')->name('categories.index');
 Route::get('search', 'SearchController@index')->name('search.index');
 Route::middleware(['auth'])->group(function () {
     Route::get('users/{user}', 'UserController@show')->name('users.show');
+    Route::get('users/{user}/personal-info', 'UserController@personalInfo')->name('users.personal-info');
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
     Route::patch('users/{user}', 'UserController@update')->name('users.update');
     Route::get('users/{user}/books', 'UserController@books')->name('users.books');

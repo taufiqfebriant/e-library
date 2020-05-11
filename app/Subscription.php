@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subscription extends Model
 {
     protected $guarded = [];
+    protected $dates = ['ends_at'];
 
     public function user()
     {

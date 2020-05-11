@@ -1,14 +1,20 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('admin.dashboard.index') }}" class="brand-link text-center">
+    <a href="{{ route('admin.dashboard.index') }}" class="brand-link">
+        <i class="fas fa-book ml-3 mr-2"></i>
         <span class="brand-text font-weight-light">{{ config('app.name', 'E-Library') }}</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="user-panel py-3 d-flex align-items-center">
+            <div class="image">
+                <div class="bg-white rounded-circle text-center d-flex align-items-center justify-content-center" style="width: 30px; height: 30px;">
+                    <span>{{ auth()->user()->initials() }}</span>
+                </div>
+            </div>
             <div class="info">
-                <a href="#" class="d-block">User</a>
+                <span class="text-white">{{ auth()->user()->name }}</span>
             </div>
         </div>
         <!-- Sidebar Menu -->

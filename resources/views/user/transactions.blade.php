@@ -8,14 +8,28 @@
 @endsection
 
 @section('content')
+    <div class="modal fade" id="userNavModal" tabindex="-1" role="dialog" aria-labelledby="userNavModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    @include('user.partials.sidenav')
+                </div>
+            </div>
+        </div>
+    </div>
     @include('partials.navbar')
     <div class="container space-2">
         <div class="row pt-5">
-            <div class="col-3">
+            <div class="col-lg-3 d-none d-lg-block">
                 @include('user.partials.sidenav')
             </div>
-            <div class="col-9">
-                <h3 class="mb-0">Riwayat Transaksi</h3>
+            <div class="col-lg-9">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h3 class="mb-0">Riwayat Transaksi</h3>
+                    <button class="btn btn-lavender d-lg-none" data-toggle="modal" data-target="#userNavModal">
+                        <i class="fas fa-ellipsis-h fa-lg"></i>
+                    </button>
+                </div>
                 <div class="card mt-4">
                     <div class="card-body">
                         {{ $dataTable->table() }}

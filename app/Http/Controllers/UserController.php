@@ -16,20 +16,25 @@ class UserController extends Controller
 {
     public function show(User $user)
     {
-        $this->authorize('view-user', $user);
-        $transaksi = Transaction::where('user_id', auth()->user()->id)->get();
-        return view('user.show', compact('user', 'transaksi'));
+        $this->authorize('show-user', $user);
+        return view('user.show', compact('user'));
+    }
+    
+    public function personalInfo(User $user)
+    {
+        $this->authorize('show-user', $user);
+        return view('user.personal-info', compact('user'));
     }
 
     public function edit(User $user)
     {
-        $this->authorize('view-user', $user);
+        $this->authorize('show-user', $user);
         return view('user.edit', compact('user'));
     }
     
     public function update(User $user)
     {
-        $this->authorize('view-user', $user);
+        $this->authorize('show-user', $user);
         $validatedData = request()->validate([
             'name' => 'required',
             'age' => 'nullable|numeric',
@@ -47,19 +52,19 @@ class UserController extends Controller
 
     public function books(User $user, BooksDataTable $dataTable)
     {
-        $this->authorize('view-user', $user);
+        $this->authorize('show-user', $user);
         return $dataTable->render('user.books', compact('user'));
     }
     
     public function transactions(User $user, TransactionsDataTable $dataTable)
     {
-        $this->authorize('view-user', $user);
+        $this->authorize('show-user', $user);
         return $dataTable->render('user.transactions', compact('user'));
     }
 
     public function returnBook(User $user, Book $book)
     {
-        $this->authorize('view-user', $user);
+        $this->authorize('show-user', $user);
         auth()->user()->books()->wherePivot('book_id', '=', $book->id)->update([
             'returned_at' => Carbon::now()
         ]);
@@ -68,13 +73,13 @@ class UserController extends Controller
 
     public function changePassword(User $user)
     {
-        $this->authorize('view-user', $user);
+        $this->authorize('show-user', $user);
         return view('user.change-password', compact('user'));
     }
 
     public function updatePassword(User $user)
     {
-        $this->authorize('view-user', $user);
+        $this->authorize('show-user', $user);
         request()->validate([
             'current_password' => ['required', new MatchOldPassword],
             'password' => ['required'],
