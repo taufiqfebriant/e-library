@@ -34,7 +34,7 @@
                     <div class="col-12 pb-4">
                         <h1>Kenapa kami?</h1>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-4 py-2">
                         <div class="card">
                             <div class="card-body text-center">
                                 <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-4 py-2">
                         <div class="card">
                             <div class="card-body text-center">
                                 <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
@@ -50,7 +50,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-4">
+                    <div class="col-md-4 py-2">
                         <div class="card">
                             <div class="card-body text-center">
                                 <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
