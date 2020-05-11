@@ -2,9 +2,6 @@
 
 namespace App\Http\Controllers;
 use App\Book;
-use App\Review;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -12,6 +9,9 @@ class HomeController extends Controller
     {
         $top10Books = Book::withCount('users')->has('users', '>', 0)->take(10)->get();
         $latestBooks = Book::latest()->take(10)->get();
-        return view('home.index', compact('latestBooks', 'top10Books'));
+
+        $bukucategori =  auth()->check() && auth()->user()->books()->exists () ? Book::where('category_id',auth()->user()->books->pluck('category_id')->toArray())->whereNotIn('id', auth()->user()->books->pluck('id')->toArray())->take(5)->get() : [];
+        
+        return view('home.index', compact('latestBooks', 'top10Books','bukucategori'));
     }
 }

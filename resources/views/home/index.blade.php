@@ -120,13 +120,13 @@
                     <div class="row">
                         <div class="col-12 pb-3">
                             <div class="d-flex align-items-center justify-content-between">
-                                <h3 class="mb-0 pl-2">Berdasarkan kategori yang Anda sukai</h3>
+                                <h3 class="mb-0 pl-2">Saran buku</h3>
                             </div>
                         </div>
                         <div class="col-12">
                             @if (auth()->user()->categories()->exists())
                                 <div class="book-carousel">
-                                    @foreach (auth()->user()->categories as $category)
+                                    @foreach (auth()->user()->categories->take(5) as $category)
                                         @foreach ($category->books as $book)
                                             <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
                                                 <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
@@ -139,6 +139,19 @@
                                             </a>
                                         @endforeach
                                     @endforeach
+                                        @if($bukucategori)
+                                            @foreach($bukucategori as $book)
+                                                <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
+                                                    <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
+                                                    <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
+                                                    <p class="text-muted">
+                                                        @foreach ($book->authors as $author)
+                                                            {{ $author->name . ($loop->last ? '' : ', ') }}
+                                                        @endforeach
+                                                    </p>
+                                                </a>
+                                            @endforeach
+                                        @endif
                                 </div>
                             @else
                                 <h5 class="text-center my-5">Tidak ada buku yang disukai.</h5>
