@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BookRequest;
-use App\DataTables\BooksDataTable;
+use App\DataTables\Admin\BooksDataTable;
 use Illuminate\Support\Arr;
 use App\Book;
 use App\Author;

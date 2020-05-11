@@ -2,45 +2,85 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Transaction;
 use App\User;
+use App\Book;
+use App\DataTables\BooksDataTable;
+use App\DataTables\TransactionsDataTable;
 use App\Rules\MatchOldPassword;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
-    public function show( User $user )
+    public function show(User $user)
     {
-        return view('user.show',compact('user'));
+        $this->authorize('view-user', $user);
+        $transaksi = Transaction::where('user_id', auth()->user()->id)->get();
+        return view('user.show', compact('user', 'transaksi'));
     }
-    public function edit($id)
-    {  
-        $users = User::findOrFail($id);
-        
-        return view('user.edit',compact('users'));
-    }
-    public function update(Request $request , $id)
+
+    public function edit(User $user)
     {
-        $validatedData = $request->validate([
-            'whatsapp' => 'required|numeric',
-            'facebook' => 'required',
-            'instagram' => 'required',
-            'twitter' => 'required'
+        $this->authorize('view-user', $user);
+        return view('user.edit', compact('user'));
+    }
+    
+    public function update(User $user)
+    {
+        $this->authorize('view-user', $user);
+        $validatedData = request()->validate([
+            'name' => 'required',
+            'age' => 'nullable|numeric',
+            'address' => 'nullable',
+            'phone_number' => 'nullable',
+            'whatsapp' => 'nullable',
+            'facebook' => 'nullable',
+            'instagram' => 'nullable',
+            'twitter' => 'nullable'
         ]);
-
-        User::whereId($id)->update($validatedData);
-        return redirect('/users/'.$id)->with('success','Success Updated');
+        auth()->user()->update(Arr::only($validatedData, ['name']));
+        auth()->user()->profile()->updateOrCreate(['user_id' => auth()->user()->id], Arr::except($validatedData, ['name']));
+        return redirect()->route('users.show', compact('user'))->with(['type' => 'success', 'message' => 'Berhasil mengubah data pribadi.']);
     }
-    public function changepassword(Request $request , $id)
+
+    public function books(User $user, BooksDataTable $dataTable)
     {
-        $request->validate([
-            'current_password' => ['required' , new MatchOldPassword],
-            'new_password' => ['required'],
-            'new_confirm_password' => ['same:new_password']
+        $this->authorize('view-user', $user);
+        return $dataTable->render('user.books', compact('user'));
+    }
+    
+    public function transactions(User $user, TransactionsDataTable $dataTable)
+    {
+        $this->authorize('view-user', $user);
+        return $dataTable->render('user.transactions', compact('user'));
+    }
+
+    public function returnBook(User $user, Book $book)
+    {
+        $this->authorize('view-user', $user);
+        auth()->user()->books()->wherePivot('book_id', '=', $book->id)->update([
+            'returned_at' => Carbon::now()
         ]);
+        return back()->with(['type' => 'success', 'message' => 'Berhasil mengembalikan buku.']);
+    }
 
-        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
+    public function changePassword(User $user)
+    {
+        $this->authorize('view-user', $user);
+        return view('user.change-password', compact('user'));
+    }
 
-        return redirect('/users/'.$id)->with('success','Success Change Password');
+    public function updatePassword(User $user)
+    {
+        $this->authorize('view-user', $user);
+        request()->validate([
+            'current_password' => ['required', new MatchOldPassword],
+            'password' => ['required'],
+            'confirm_password' => ['required', 'same:password']
+        ]);
+        auth()->user()->update(['password' => Hash::make(request()->password)]);
+        return redirect()->route('users.show', compact('user'))->with(['type' => 'success', 'message' => 'Berhasil mengubah kata sandi.']);
     }
 }

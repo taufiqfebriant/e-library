@@ -27,8 +27,10 @@
                     <dd class="col-9">{{ $book->publisher->name }}</dd>
                     <dt class="col-3">Jumlah halaman</dt>
                     <dd class="col-9">{{ $book->countPages($book->file) }} halaman</dd>
+                    <dt class="col-3">Jumlah peminjaman</dt>
+                    <dd class="col-9">{{ $book->users_count ? "{$book->users_count} kali" : 'Belum ada peminjaman' }}</dd>
                 </dl>
-                @if (auth()->check() && $book->users->contains(auth()->user()->id))
+                @if (auth()->check() && $book->hasUser())
                     <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary btn-lg">Baca</a>
                 @else
                     <div class="d-flex">
@@ -64,7 +66,7 @@
                     <h4 class="my-3">Beri buku ini penilaian</h4>
                     <div class="row align-items-center">
                         <div class="rating col-auto"></div>
-                        <input type="hidden" name="rating" id="rating" value="2">
+                        <input type="hidden" name="rating" id="rating">
                         <div class="col">
                             <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
                         </div>

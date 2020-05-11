@@ -36,7 +36,7 @@
                                     <dt class="col-sm-2">Paket</dt>
                                     <dd class="col-sm-10">{{ $transaction->plan->name }}</dd>
                                     <dt class="col-sm-2">Harga</dt>
-                                    <dd class="col-sm-10">{{ $transaction->plan->price }}</dd>
+                                    <dd class="col-sm-10">@money($transaction->plan->price, 'IDR', true)</dd>
                                     <dt class="col-sm-2">Bukti pembayaran</dt>
                                     <dd class="col-sm-10">
                                         @if ($transaction->paid_at && $transaction->receipt)

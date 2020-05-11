@@ -169,11 +169,9 @@
                             </div>
                         </form>
                         <p class="text-center mb-0 mt-4">Tidak punya akun? <a href="{{ route('register') }}" class="text-darkslategray font-weight-bold">Daftar</a></p>
-                        <div class="d-flex align-items-center justify-content-center pt-4">
-                            <a href="{{ route('home.index') }}" class="text-darkslategray">
-                                <i class="fas fa-arrow-left fa-sm mr-2"></i>
-                                <span>Kembali</span>
-                            </a>
+                        <div class="d-flex align-items-center justify-content-center pt-4 text-darkslategray">
+                            <i class="fas fa-arrow-left fa-xs mr-2"></i>
+                            <a href="{{ route('home.index') }}" class="text-darkslategray">Kembali ke Beranda</a>
                         </div>
                     </div>
                 </div>

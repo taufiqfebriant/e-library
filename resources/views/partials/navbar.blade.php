@@ -10,6 +10,10 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
+            
+                <li class="nav-item">
+                    <a href="{{ route('categories.index') }}" class="nav-link px-4">Kategori</a>
+                </li>
                 <li class="nav-item">
                     <a href="{{ route('plans.index') }}" class="nav-link px-4">Paket</a>
                 </li>

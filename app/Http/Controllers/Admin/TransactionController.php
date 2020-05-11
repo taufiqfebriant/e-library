@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\DataTables\TransactionsDataTable;
+use App\DataTables\Admin\TransactionsDataTable;
 use App\Http\Requests\TransactionRequest;
 use App\Transaction;
 use App\Subscription;
@@ -27,12 +27,19 @@ class TransactionController extends Controller
             'confirmed_by' => auth()->user()->id,
             'confirmed_at' => Carbon::now()
         ]);
-        Subscription::create([
-            'user_id' => $transaction->user_id,
-            'created_at' => $transaction->confirmed_at,
-            'updated_at' => $transaction->confirmed_at,
-            'ends_at' => (new Carbon($transaction->confirmed_at))->addDays($transaction->plan->months * 30)
-        ]);
+        if ($transaction->user->subscription()->exists()) {
+            $transaction->user->subscription()->update([
+                'updated_at' => $transaction->confirmed_at,
+                'ends_at' => (new Carbon($transaction->user->subscription->ends_at))->addDays($transaction->plan->months * 30)
+            ]);
+        } else {
+            Subscription::create([
+                'user_id' => $transaction->user_id,
+                'created_at' => $transaction->confirmed_at,
+                'updated_at' => $transaction->confirmed_at,
+                'ends_at' => (new Carbon($transaction->confirmed_at))->addDays($transaction->plan->months * 30)
+            ]);
+        }
         return redirect()->route('admin.transactions.index');
     }
 

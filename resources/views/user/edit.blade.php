@@ -1,53 +1,110 @@
 @extends('layouts.body')
+@section('title', 'Ubah Data Pribadi')
 
-@section('title', 'Akun saya')
+@section('links')
+    <link rel="stylesheet" href="{{ asset('vendors/intl-tel-input/build/css/intlTelInput.css') }}">
+@endsection
 
 @section('content')
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header">
-                            Form Edit profile
-                        </div>
-                        <div class="card-body">
-                        @if ($errors->any())
-                        <div class="alert alert-danger">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div><br />
-                        @endif
-                        <form method="post" action="{{ route('users.update',$users->id) }}">
-                            @csrf
+    @include('partials.navbar')
+    <div class="container space-2">
+        <div class="row pt-5">
+            <div class="col-3">
+                @include('user.partials.sidenav')
+            </div>
+            <div class="col-9">
+                <h3 class="mb-0">Ubah Data Pribadi</h3>
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <form method="post" action="{{ route('users.update', compact('user')) }}">
                             @method('PATCH')
-                            <div class="form-group">
-                                <label for="Whatsapp">Whatsapp</label>
-                                <input id="Whatsapp" class="form-control" type="number" name="whatsapp" value="{{ $users->whatsapp }}" >
+                            @csrf
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-2 col-form-label">Nama</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" placeholder="Nama" name="name" id="name" required value="{{ old('name', $user->name) }}">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="faceboook">Faceboook</label>
-                                <input id="faceboook" class="form-control" type="text" name="facebook" value="{{ $users->facebook }}">
+                            <div class="form-group row">
+                                <label for="age" class="col-sm-2 col-form-label">Usia</label>
+                                <div class="col-sm-10">
+                                    <input type="number" min="1" class="form-control" placeholder="Usia" name="age" id="age" value="{{ old('age', $user->profile->age ?? '') }}">
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="instagram">Instagram</label>
-                                <input id="instagram" class="form-control" type="text" name="instagram" value="{{ $users->instagram }}">
+                            <div class="form-group row">
+                                <label for="address" class="col-sm-2 col-form-label">Alamat</label>
+                                <div class="col-sm-10">
+                                    <textarea class="form-control" placeholder="Alamat" name="address" id="address" rows="4">{{ old('address', $user->profile->address ?? '') }}</textarea>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="twitter">Twitter</label>
-                                <input id="twitter" class="form-control" type="text" name="twitter" value="{{ $users->twitter }}">
+                            <div class="form-group row">
+                                <label for="phone_number" class="col-sm-2 col-form-label">Nomor ponsel</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" id="phone_number" class="form-control" value="{{ old('phone_number', $user->profile->phone_number ?? '') }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <input type="submit" class="btn btn-primary" value="Update Profile">
-                        </div>
+                            <div class="form-group row">
+                                <label for="whatsapp" class="col-sm-2 col-form-label">WhatsApp</label>
+                                <div class="col-sm-10">
+                                    <input type="tel" id="whatsapp" class="form-control" value="{{ old('whatsapp', $user->profile->whatsapp ?? '') }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="instagram" class="col-sm-2 col-form-label">Instagram</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="instagram-addon">instagram.com/</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Nama Pengguna Instagram" aria-label="Nama Pengguna Instagram" aria-describedby="instagram-addon" id="instagram" name="instagram" value="{{ old('instagram', $user->profile->instagram ?? '') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="facebook" class="col-sm-2 col-form-label">Facebook</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="facebook-addon">facebook.com/</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Nama Pengguna Facebook" aria-label="Nama Pengguna Facebook" aria-describedby="facebook-addon" id="facebook" value="{{ old('facebook', $user->profile->facebook ?? '') }}" name="facebook">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="twitter" class="col-sm-2 col-form-label">Twitter</label>
+                                <div class="col-sm-10">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="twitter-addon">twitter.com/</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="Nama Pengguna Twitter" aria-label="Nama Pengguna Twitter" aria-describedby="twitter-addon" id="twitter" name="twitter" {{ old('twitter', $user->profile->twitter ?? '') }}>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+                                <button class="btn btn-darkslategray float-right">Perbarui</button>
+                            </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-    </body>
+    </div>
+    @include('partials.footer')
 @endsection
+
+@push('scripts')
+    <script src="{{ asset('vendors/intl-tel-input/build/js/intlTelInput-jquery.min.js') }}"></script>
+    <script>
+        $(function () {
+            var options = {
+                preferredCountries: ["id"],
+                separateDialCode: true,
+                utilsScript: '{{ asset("vendors/intl-tel-input/build/js/utils.js") }}'
+            }
+            $('#phone_number').intlTelInput({...options, hiddenInput: 'phone_number'})
+            $('#whatsapp').intlTelInput({...options, hiddenInput: 'whatsapp'})
+        })
+    </script>
+@endpush

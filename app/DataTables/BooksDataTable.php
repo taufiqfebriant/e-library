@@ -8,6 +8,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Carbon\Carbon;
 
 class BooksDataTable extends DataTable
 {
@@ -21,7 +22,21 @@ class BooksDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin.book.partials.action');
+            ->addColumn('action', function (Book $book) {
+                return view('user.partials.actions.books', compact('book'));
+            })
+            ->editColumn('created_at', function (Book $book) {
+                return $book->created_at ? with(new Carbon($book->created_at))->format('Y-m-d H:i:s') : '';
+            })
+            ->editColumn('ends_at', function (Book $book) {
+                return $book->ends_at ? with(new Carbon($book->ends_at))->format('Y-m-d H:i:s') : '';
+            })
+            ->filterColumn('created_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
+            })
+            ->filterColumn('ends_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(ends_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
+            });
     }
 
     /**
@@ -30,9 +45,9 @@ class BooksDataTable extends DataTable
      * @param \App\Book $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Book $model)
+    public function query()
     {
-        return $model->newQuery();
+        return auth()->user()->books();
     }
 
     /**
@@ -43,7 +58,7 @@ class BooksDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('book-table')
+                    ->setTableId('books-table')
                     ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
@@ -55,7 +70,9 @@ class BooksDataTable extends DataTable
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
-                    );
+                    )->parameters([
+                        'responsive' => true
+                    ]);
     }
 
     /**
@@ -67,7 +84,10 @@ class BooksDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('title')->title('Judul'),
+            Column::make('title')->title('Judul buku'),
+            Column::make('created_at')->title('Tanggal pinjam'),
+            Column::make('ends_at')->title('Tanggal berakhir'),
+            Column::make('returned_at')->title('Tanggal pengembalian'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
@@ -84,6 +104,6 @@ class BooksDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Book_' . date('YmdHis');
+        return 'Books_' . date('YmdHis');
     }
 }

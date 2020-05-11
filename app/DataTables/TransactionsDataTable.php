@@ -8,6 +8,7 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Carbon\Carbon;
 
 class TransactionsDataTable extends DataTable
 {
@@ -31,7 +32,17 @@ class TransactionsDataTable extends DataTable
                 }
                 return 'Belum membayar';
             })
-            ->addColumn('action', 'admin.transaction.partials.action');
+            ->addColumn('action', function (Transaction $transaction) {
+                return view('user.partials.actions.transactions', compact('transaction'));
+            })
+            ->editColumn('created_at', function (Transaction $transaction) {
+                return $transaction->created_at ? with(new Carbon($transaction->created_at))->format('Y-m-d H:i:s') : '';
+            })
+            ->editColumn('paid_at', $paid_at ?? '-')
+            ->editColumn('confirmed_at', $confirmed_at ?? '-')
+            ->filterColumn('created_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
+            });
     }
 
     /**
@@ -40,9 +51,9 @@ class TransactionsDataTable extends DataTable
      * @param \App\Transaction $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Transaction $model)
+    public function query()
     {
-        return $model->newQuery()->with(['user', 'plan'])->select('transactions.*');
+        return auth()->user()->transactions()->with(['plan'])->select('transactions.*');
     }
 
     /**
@@ -53,7 +64,7 @@ class TransactionsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('transaction-table')
+                    ->setTableId('transactions-table')
                     ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
@@ -65,7 +76,9 @@ class TransactionsDataTable extends DataTable
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
-                    );
+                    )->parameters([
+                        'responsive' => true
+                    ]);
     }
 
     /**
@@ -77,8 +90,10 @@ class TransactionsDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('user.name')->title('Nama'),
             Column::make('plan.name')->title('Paket'),
+            Column::make('created_at')->title('Tanggal beli'),
+            Column::make('paid_at')->title('Tanggal bayar'),
+            Column::make('confirmed_at')->title('Tanggal konfirmasi'),
             Column::computed('status'),
             Column::computed('action')
                   ->exportable(false)
@@ -96,6 +111,6 @@ class TransactionsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Transaction_' . date('YmdHis');
+        return 'Transactions_' . date('YmdHis');
     }
 }

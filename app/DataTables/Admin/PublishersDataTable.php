@@ -1,15 +1,15 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Admin;
 
-use App\Author;
+use App\Publisher;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class AuthorsDataTable extends DataTable
+class PublishersDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,16 +21,16 @@ class AuthorsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin.author.partials.action');
+            ->addColumn('action', 'admin.publisher.partials.action');
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Author $model
+     * @param \App\Publisher $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Author $model)
+    public function query(Publisher $model)
     {
         return $model->newQuery();
     }
@@ -43,7 +43,7 @@ class AuthorsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('author-table')
+                    ->setTableId('publisher-table')
                     ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
@@ -84,6 +84,6 @@ class AuthorsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Author_' . date('YmdHis');
+        return 'Publisher_' . date('YmdHis');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataTables;
+namespace App\DataTables\Admin;
 
 use App\Subscription;
 use Carbon\Carbon;
@@ -32,13 +32,13 @@ class SubscriptionsDataTable extends DataTable
                 return $subscription->ends_at ? with(new Carbon($subscription->ends_at))->format('Y-m-d H:i:s') : '';
             })
             ->filterColumn('created_at', function ($query, $keyword) {
-                $query->whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') like ?", ["%keyword%"]);
+                $query->whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
             })
             ->filterColumn('updated_at', function ($query, $keyword) {
-                $query->whereRaw("DATE_FORMAT(updated_at, '%Y-%m-%d') like ?", ["%keyword%"]);
+                $query->whereRaw("DATE_FORMAT(updated_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
             })
             ->filterColumn('ends_at', function ($query, $keyword) {
-                $query->whereRaw("DATE_FORMAT(ends_at, '%Y-%m-%d') like ?", ["%keyword%"]);
+                $query->whereRaw("DATE_FORMAT(ends_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
             });
     }
 

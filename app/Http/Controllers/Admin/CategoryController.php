@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
-use App\DataTables\CategoriesDataTable;
+use App\DataTables\Admin\CategoriesDataTable;
 use App\Category;
 
 class CategoryController extends Controller

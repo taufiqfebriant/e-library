@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PublisherRequest;
-use App\DataTables\PublishersDataTable;
+use App\DataTables\Admin\PublishersDataTable;
 use App\Publisher;
 
 class PublisherController extends Controller

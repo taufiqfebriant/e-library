@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DataTables\UsersDataTable;
+use App\DataTables\Admin\UsersDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
 use App\User;
