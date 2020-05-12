@@ -8,7 +8,7 @@
             <div class="col-12 text-center pb-4">
                 <h1 class="text-uppercase font-weight-bold text-darkslategray">Transaksi</h1>
             </div>
-            <div class="col-auto py-4 pr-4 border-right">
+            <div class="col-lg-auto py-4 pr-4 border-lg-right">
                 <h5 class="text-black-50">Nomor Transaksi</h5>
                 <h3 class="mb-4">#{{ $transaction->id }}</h3>
                 <h5 class="text-black-50">Tanggal transaksi</h5>

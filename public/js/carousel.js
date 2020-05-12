@@ -1,35 +1,30 @@
 $(function () {
     $('.book-carousel').slick({
         slidesToShow: 6,
-        reponsive: [
+        responsive: [
             {
-                breakpoint: 1200,
-                setting: {
-                    slidesToShow: 5,
-                    slidesToScroll: 5,
+                breakpoint: 576,
+                settings: {
+                    arrows: false,
+                    slidesToShow: 1,
+                    slidesToScroll: 1
                 }
             },
             {
-                breakpoint: 1008,
-                setting: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                }
-            },
-            {
-                breakpoint: 800,
-                setting: {
+                breakpoint: 768,
+                settings: {
+                    arrows: false,
                     slidesToShow: 2,
-                    slidesToScroll: 2
+                    slidesToScroll: 1
                 }
             },
             {
-                setting: 'unslick'
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1
+                }
             }
         ]
-    });
-
-    $(window).on('resize', function() {
-        $('.book-carousel').slick('resize');
-    });
+    })
 })

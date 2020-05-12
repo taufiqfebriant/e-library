@@ -138,7 +138,7 @@
         </div>
     </div> -->
     <div class="row h-100 no-gutters">
-        <div class="col-7 h-100">
+        <div class="col-lg-7 h-100">
             <div class="container h-100">
                 <div class="row h-100 justify-content-center align-items-center">
                     <div class="col-8">
@@ -177,7 +177,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-5 h-100">
+        <div class="col-lg-5 d-none d-lg-block h-100">
             <img src="{{ asset('images/pexels/photo-of-person-s-hand-holding-ipad-3806168.webp') }}" alt="Photo of person's hand holding ipad" class="w-100 h-100 object-cover">
             <span class="position-absolute text-white font-weight-bold image-creator">Foto oleh <a class="text-white" href="https://www.pexels.com/@fotios-photos" target="_blank" rel="noopener noreferrer">Lisa Fotios</a> dari <a class="text-white" href="https://www.pexels.com" target="_blank" rel="noopener noreferrer">Pexels</a></span>
         </div>

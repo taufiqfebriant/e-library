@@ -11,7 +11,7 @@
         </div>
         <div class="row justify-content-center mt-4">
             @foreach ($plans as $plan)
-            <form class="col-md-4" action="{{ route('transactions.store') }}" method="post">
+            <form class="col-lg-4 mb-3 mb-lg-0" action="{{ route('transactions.store') }}" method="post">
                 @csrf
                 <input type="hidden" name="plan_id" value="{{ $plan->id }}">
                 <div class="card plan text-center h-100">
