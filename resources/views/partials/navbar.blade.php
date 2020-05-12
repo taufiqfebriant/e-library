@@ -24,31 +24,16 @@
                     <li class="nav-item dropdown px-2">
                         <a id="notificationsDropdown" class="nav-link font-weight-semibold position-relative" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="far fa-bell fa-lg"></i>
-                            @if (auth()->user()->unreadNotifications)
-                                <span class="badge badge-danger navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
+                            @if (auth()->user()->unreadNotifications->isNotEmpty())
+                                <span class="badge badge-darkslategray navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
                             @endif
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right py-0" aria-labelledby="notificationsDropdown">
-                            @forelse (auth()->user()->notifications as $notification)
-                                @if (!$loop->first)
-                                    <div class="dropdown-divider"></div>
-                                @endif
-                                @switch($notification->type)
-                                    @case('App\Notifications\SubscriptionExpirationReminder')
-                                        <a class="dropdown-item p-3" href="{{ route('users.show', ['user' => auth()->user()]) }}">
-                                            <div class="d-flex align-items-center">
-                                                <span class="text-base mr-3 text-darkslategray">&bull;</span>
-                                                <p class="mb-0">Langganan Anda akan segera berakhir.</p>
-                                            </div>
-                                            <span class="text-muted ml-4">{{ $notification->created_at->diffForHumans() }}</span>
-                                        </a>
-                                        @break
-                                    @default
-                                        <span class="dropdown-item p-3 text-center">Kesalahan tipe notifikasi.</span>
-                                @endswitch
-                            @empty
-                                <span class="dropdown-item p-3 text-center">Tidak ada notifikasi.</span>
-                            @endforelse                    
+                        <div class="dropdown-menu dropdown-menu-right py-0 overflow-auto" aria-labelledby="notificationsDropdown" style="max-height: 300px; width: 350px">
+                            <div class="d-flex justify-content-center h-100 align-items-center py-3">
+                                <div class="spinner-border" role="status">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                            </div>
                         </div>
                     </li>
                     <li class="nav-item dropdown">

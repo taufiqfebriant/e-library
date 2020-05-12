@@ -2,6 +2,23 @@ body {
     background-color: #fff;
 }
 
+.badge-darkslategray {
+    color: #fff;
+    background-color: #363062;
+}
+
+a.badge-darkslategray:hover,
+a.badge-darkslategray:focus {
+    color: #fff;
+    background-color: #231f40;
+}
+
+a.badge-darkslategray:focus,
+a.badge-darkslategray.focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem #363062;
+}
+
 @media (min-width: 576px) {
     .border-right-0 {
         border-right: 0 !important;
@@ -556,11 +573,16 @@ a.text-darkslategray:focus {
     width: 100%;
 }
 
+#notificationsDropdown {
+    width: 2.2rem;
+    height: 2.2rem;
+}
+
 .navbar-badge {
     font-size: .6rem;
     font-weight: 300;
     padding: 2px 4px;
     position: absolute;
-    right: 5px;
-    top: 9px;
+    right: 3px;
+    top: 7px;
 }
