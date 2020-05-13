@@ -10,6 +10,6 @@ $factory->define(Review::class, function (Faker $faker) {
         'book_id' => 1,
         'user_id' => factory(\App\User::class)->create(),
         'rating'  => $faker->randomDigit,
-        'comment' => $faker->text,
+        'comment' => $faker->text($maxNbChars = 150),
     ];
 });

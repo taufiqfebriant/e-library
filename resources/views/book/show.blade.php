@@ -47,7 +47,7 @@
         <h4 class="mt-5 mb-3">Penilaian</h4>
         <hr>
         <section class="reviews">
-            @forelse ($book->reviews as $review)
+            @forelse ($rivi as $review)
                 @if (auth()->check() && $book->users->contains(auth()->user()->id))
                 <!-- <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
                     @csrf
@@ -99,7 +99,8 @@
                 @endif
             @endforelse
 
-            {{ $review->links() }}
+            {{ $rivi->links() }}
+
         </section>
     </div>
     @include('partials.footer')

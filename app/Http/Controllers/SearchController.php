@@ -25,8 +25,9 @@ class SearchController extends Controller
                 $query->havingRaw('SUM(rating) >= ' . request()->rating);
             });
         }
-        $books = $books->get();
-        $categories = $categories->get();
-        return view('search.index', compact('books', 'categories'));
+        $books = $books->paginate(9);
+        // $categories = $categories ? $categories->get() : [];
+
+        return view('search.index', compact('books'));
     }
 }
