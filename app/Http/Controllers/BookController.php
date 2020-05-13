@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Book;
+use App\Review;
 use App\Transaction;
 use Carbon\Carbon;
 
@@ -11,7 +12,10 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book = $book->withCount('users')->get()->find($book->id);
-        return view('book.show', compact('book'));
+        // pagination review
+        $rivi = Review::where('book_id',$book->id)->paginate(5);
+        // dd($rivi);exit;
+        return view('book.show', compact('book','rivi'));
     }
 
     public function update(Book $book)

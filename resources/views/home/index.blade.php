@@ -88,20 +88,24 @@
                             <h3 class="pl-2">Buku yang sering dipinjam</h3>
                         </div>
                         <div class="col-12">
-                            <div class="book-carousel">
-                                @foreach ($top10Books as $book)
-                                    <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
-                                        <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
-                                        <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
-                                        <p class="text-muted mb-0">
-                                            @foreach ($book->authors as $author)
-                                                {{ $author->name . ($loop->last ? '' : ', ') }}
-                                            @endforeach
-                                        </p>
-                                        <small class="text-body">{{ $book->users_count }}x</small>
-                                    </a>
-                                @endforeach
-                            </div>
+                            @if ($top10Books->isNotEmpty())
+                                <div class="book-carousel">
+                                    @foreach ($top10Books as $book)
+                                        <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
+                                            <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
+                                            <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
+                                            <p class="text-muted mb-0">
+                                                @foreach ($book->authors as $author)
+                                                    {{ $author->name . ($loop->last ? '' : ', ') }}
+                                                @endforeach
+                                            </p>
+                                            <small class="text-body">{{ $book->users_count }}x</small>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @else
+                                <p class="text-center mt-3 mb-5">Tidak ada data.</p>
+                            @endif
                         </div>
                     </div>
                 </div>

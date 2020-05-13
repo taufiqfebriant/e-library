@@ -38,10 +38,20 @@ class TransactionsDataTable extends DataTable
             ->editColumn('created_at', function (Transaction $transaction) {
                 return $transaction->created_at ? with(new Carbon($transaction->created_at))->format('Y-m-d H:i:s') : '';
             })
-            ->editColumn('paid_at', $paid_at ?? '-')
-            ->editColumn('confirmed_at', $confirmed_at ?? '-')
+            ->editColumn('paid_at', function (Transaction $transaction) {
+                return $transaction->paid_at ? with(new Carbon($transaction->paid_at))->format('Y-m-d H:i:s') : '';
+            })
+            ->editColumn('confirmed_at', function (Transaction $transaction) {
+                return $transaction->confirmed_at ? with(new Carbon($transaction->confirmed_at))->format('Y-m-d H:i:s') : '';
+            })
             ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
+            })
+            ->filterColumn('paid_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(paid_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
+            })
+            ->filterColumn('confirmed_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(confirmed_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
             });
     }
 

@@ -26,6 +26,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('books/read/{book}', 'BookController@read')->name('books.read');
     Route::get('books/files/{file}', 'BookController@file')->name('books.file');
     Route::post('reviews', 'ReviewController@store')->name('reviews.store');
+    Route::get('notifications', 'NotificationController@index')->name('notifications.index');
+    Route::post('notifications/mark-as-read', 'NotificationController@markAsRead')->name('notifications.mark-as-read');
 });
 
 // search book testing

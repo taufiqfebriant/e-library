@@ -1,4 +1,15 @@
+const get_url = document.location
+const host = get_url.host === "localhost" ? `/${get_url.pathname.split("/")[1]}` : ""
+const base_url = get_url.origin + host
+
 $(function () {
+    // Ajax headers
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    })
+
     $('.toast').toast('show')
     changeNavbarUser() 
     
@@ -27,4 +38,23 @@ $(function () {
             $('.navbar-user .nav-link.btn-light').removeClass('text-body btn-light').addClass('btn-primary text-white')
         }
     }
+
+    // Notifikasi member
+    $('#notificationsDropdown').parent('.dropdown').on('shown.bs.dropdown', function () {
+        $(this).find('.navbar-badge').remove()
+        let dropdownMenu = $(this).find('.dropdown-menu')
+        if ($(this).find('.spinner-border').length) {
+            $.ajax({
+                method: 'GET',
+                url: `${base_url}/notifications`,
+                success: function (response) {
+                    dropdownMenu.html(response)
+                    $.ajax({
+                        method: 'POST',
+                        url: `${base_url}/notifications/mark-as-read`
+                    })
+                }
+            })
+        }
+    })
 })

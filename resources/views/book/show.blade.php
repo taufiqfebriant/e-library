@@ -47,9 +47,9 @@
         <h4 class="mt-5 mb-3">Penilaian</h4>
         <hr>
         <section class="reviews">
-            @forelse ($book->reviews as $review)
+            @forelse ($rivi as $review)
                 @if (auth()->check() && $book->users->contains(auth()->user()->id))
-                <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
+                <!-- <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
                     @csrf
 
                     <input type="hidden" name="book_id" value="{{ $book->id }}">
@@ -64,7 +64,7 @@
                     <div class="clearfix">
                         <button class="btn btn-primary mt-3 float-right">Kirim Penilaian</button>
                     </div>
-                </form>
+                </form> -->
                 @endif
                 <h5>{{ $review->user->name }}</h5>
                 <div class="stars">
@@ -75,6 +75,7 @@
                     @endfor
                 </div>
                 <p class="mt-2">{{ $review->comment }}</p>
+
             @empty
                 @if (auth()->check() && $book->users->contains(auth()->user()->id))
                 <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
@@ -97,6 +98,9 @@
                     <p>Tidak ada penilaian</p>
                 @endif
             @endforelse
+
+            {{ $rivi->links() }}
+
         </section>
     </div>
     @include('partials.footer')

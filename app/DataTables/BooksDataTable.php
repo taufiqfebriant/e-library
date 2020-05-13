@@ -31,11 +31,17 @@ class BooksDataTable extends DataTable
             ->editColumn('ends_at', function (Book $book) {
                 return $book->ends_at ? with(new Carbon($book->ends_at))->format('Y-m-d H:i:s') : '';
             })
+            ->editColumn('returned_at', function (Book $book) {
+                return $book->returned_at ? with(new Carbon($book->returned_at))->format('Y-m-d H:i:s') : '-';
+            })
             ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
             })
             ->filterColumn('ends_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(ends_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
+            })
+            ->filterColumn('returned_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(returned_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
             });
     }
 

@@ -338,6 +338,7 @@
                 "strings",
                 "uppercase",
                 "words"
+<<<<<<< HEAD
             ],
             "funding": [
                 {
@@ -353,6 +354,23 @@
                     "type": "tidelift"
                 }
             ],
+=======
+            ],
+            "funding": [
+                {
+                    "url": "https://www.doctrine-project.org/sponsorship.html",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://www.patreon.com/phpdoctrine",
+                    "type": "patreon"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/doctrine%2Finflector",
+                    "type": "tidelift"
+                }
+            ],
+>>>>>>> 91295c35787f57a8aac93f51af48ed88ec53d3f5
             "time": "2020-05-09T15:09:09+00:00"
         },
         {

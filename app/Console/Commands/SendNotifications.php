@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Notifications\LoanExpiration;
 use App\Notifications\SubscriptionExpirationReminder;
 use App\User;
 use Carbon\Carbon;
@@ -41,11 +42,23 @@ class SendNotifications extends Command
      */
     public function handle()
     {
-        $users = User::whereHas('subscription', function ($query) {
+        $subscribers = User::whereHas('subscription', function ($query) {
             $query->whereDate(DB::raw("DATE_FORMAT(ends_at, '%Y-%m-%d')"), '=', Carbon::now()->addDays(3)->format('Y-m-d'));
         })->get();
-        foreach ($users as $user) {
-            $user->notify(new SubscriptionExpirationReminder());
+        
+        $readers = User::with('books')->whereHas('books', function ($query) {
+            $query->whereNull('returned_at')
+                ->whereDate(DB::raw("DATE_FORMAT(ends_at, '%Y-%m-%d')"), '=', Carbon::now()->addDays(2)->format('Y-m-d'));
+        })->get();
+        
+        foreach ($subscribers as $subscriber) {
+            $subscriber->notify(new SubscriptionExpirationReminder());
+        }
+
+        foreach ($readers as $reader) {
+            foreach ($reader->books as $book) {
+                $reader->notify(new LoanExpiration($book));
+            }
         }
     }
 }
