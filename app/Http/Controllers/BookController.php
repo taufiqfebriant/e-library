@@ -14,7 +14,7 @@ class BookController extends Controller
         $book = $book->withCount('users')->get()->find($book->id);
         // pagination review
         $rivi = Review::where('book_id',$book->id)->paginate(5);
-        // dd($rivi);exit;
+        
         return view('book.show', compact('book','rivi'));
     }
 
