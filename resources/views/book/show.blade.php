@@ -51,25 +51,25 @@
         <h4 class="mt-5 mb-3">Penilaian</h4>
         <hr>
         <section class="reviews">
-            @forelse ($book->reviews as $review)
-                @if (auth()->check() && $book->users->contains(auth()->user()->id))
-                <!-- <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
-                    @csrf
+            @if (auth()->check() && $book->users->contains(auth()->user()->id))
+            <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
+                @csrf
+                <input type="hidden" name="book_id" value="{{ $book->id }}">
+                <h4 class="my-3">Beri buku ini penilaian</h4>
+                <div class="row align-items-center">
+                    <div class="rating col-md-auto mb-3 mb-md-0"></div>
+                    <input type="hidden" name="rating" id="rating">
+                    <div class="col">
+                        <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
+                    </div>
+                </div>
+                <div class="clearfix">
+                    <button class="btn btn-primary mt-3 float-right" name="submit">Kirim Penilaian</button>
+                </div>
+            </form>
+            @endif
 
-                    <input type="hidden" name="book_id" value="{{ $book->id }}">
-                    <h4 class="my-3">Beri buku ini penilaian</h4>
-                    <div class="row align-items-center">
-                        <div class="rating col-md-auto mb-3 mb-md-0"></div>
-                        <input type="hidden" name="rating" id="rating">
-                        <div class="col">
-                            <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
-                        </div>
-                    </div>
-                    <div class="clearfix">
-                        <button class="btn btn-primary mt-3 float-right">Kirim Penilaian</button>
-                    </div>
-                </form> -->
-                @endif
+            @forelse ($rivi as $review)
                 <h5>{{ $review->user->name }}</h5>
                 <div class="stars">
                     @for ($i = 1; $i <= 5; $i++)
@@ -103,7 +103,8 @@
                 @endif
             @endforelse
 
-            {{ $review->links() }}
+            {{ $rivi->links() }}
+
         </section>
     </div>
     @include('partials.footer')

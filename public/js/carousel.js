@@ -1,12 +1,14 @@
 $(function () {
     $('.book-carousel').slick({
         slidesToShow: 6,
+        autoplay: true,
+        autoplaySpeed: 3000,
         responsive: [
             {
                 breakpoint: 576,
                 settings: {
                     arrows: false,
-                    slidesToShow: 1,
+                    slidesToShow: 2,
                     slidesToScroll: 1
                 }
             },
@@ -14,7 +16,7 @@ $(function () {
                 breakpoint: 768,
                 settings: {
                     arrows: false,
-                    slidesToShow: 2,
+                    slidesToShow: 3,
                     slidesToScroll: 1
                 }
             },
