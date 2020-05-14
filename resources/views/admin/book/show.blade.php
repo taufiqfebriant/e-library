@@ -31,12 +31,12 @@
                         <div class="card">
                             <div class="card-body">
                                 <dl class="row mb-0">
-                                    <dt class="col-sm-2">Judul</dt>
-                                    <dd class="col-sm-10">{{ $book->title }}</dd>
-                                    <dt class="col-sm-2">Sinopsis</dt>
-                                    <dd class="col-sm-10">{{ $book->synopsis }}</dd>
-                                    <dt class="col-sm-2">Sampul</dt>
-                                    <dd class="col-sm-10">
+                                    <dt class="col-sm-3">Judul</dt>
+                                    <dd class="col-sm-9">{{ $book->title }}</dd>
+                                    <dt class="col-sm-3">Sinopsis</dt>
+                                    <dd class="col-sm-9">{{ $book->synopsis }}</dd>
+                                    <dt class="col-sm-3">Sampul</dt>
+                                    <dd class="col-sm-9">
                                         @if ($book->cover)
                                         <a href="{{ asset("storage/{$book->cover}") }}" data-toggle="lightbox">
                                             <img src="{{ asset("storage/{$book->cover}") }}" class="img-thumbnail"
@@ -46,20 +46,22 @@
                                         Tidak ada sampul
                                         @endif
                                     </dd>
-                                    <dt class="col-sm-2">Penulis</dt>
-                                    <dd class="col-sm-10">
+                                    <dt class="col-sm-3">Penulis</dt>
+                                    <dd class="col-sm-9">
                                         @foreach ($book->authors as $author)
                                         {{ $author->name . ($loop->last ? '' : ', ') }}
                                         @endforeach
                                     </dd>
-                                    <dt class="col-sm-2">Kategori</dt>
-                                    <dd class="col-sm-10">{{ $book->category->name }}</dd>
-                                    <dt class="col-sm-2">Penerbit</dt>
-                                    <dd class="col-sm-10">{{ $book->publisher->name }}</dd>
-                                    <dt class="col-sm-2">Jumlah halaman</dt>
-                                    <dd class="col-sm-10">{{ $book->countPages($book->file) }} halaman</dd>
-                                    <dt class="col-sm-2">Dokumen</dt>
-                                    <dd class="col-sm-10">
+                                    <dt class="col-sm-3">Kategori</dt>
+                                    <dd class="col-sm-9">{{ $book->category->name }}</dd>
+                                    <dt class="col-sm-3">Penerbit</dt>
+                                    <dd class="col-sm-9">{{ $book->publisher->name }}</dd>
+                                    <dt class="col-sm-3">Jumlah halaman</dt>
+                                    <dd class="col-sm-9">{{ $book->countPages($book->file) }} halaman</dd>
+                                    <dt class="col-sm-3">Tampilkan sebagai buku unggulan</dt>
+                                    <dd class="col-sm-9">{{ $book->featured ? 'Ya' : 'Tidak' }}</dd>
+                                    <dt class="col-sm-3">Dokumen</dt>
+                                    <dd class="col-sm-9">
                                         <div class="btn-group">
                                             <button type="button" class="btn btn-primary btn-sm">PDF</button>
                                             <button type="button"

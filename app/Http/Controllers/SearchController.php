@@ -11,10 +11,26 @@ class SearchController extends Controller
     {
         $books = Book::with(['reviews', 'authors'])->withCount('reviews');
         if (request()->has('q')) {
-            $categories = Category::whereHas('books', function ($query) {
-                $query->where('title', 'like', request()->q . '%');
+            $categories = Category::where('name', 'like', request()->q . '%')
+            ->orWhereHas('books', function ($query) {
+                $query->where('title', 'like', request()->q . '%')
+                ->orWhereHas('publisher', function ($query) {
+                    $query->where('name', 'like', request()->q . '%');
+                })
+                ->orWhereHas('authors', function ($query) {
+                    $query->where('name', 'like', request()->q . '%');
+                });
             });
-            $books = $books->where('title', 'like', request()->q . '%');
+            $books = $books->where('title', 'like', request()->q . '%')
+            ->orWhereHas('category', function ($query) {
+                $query->where('name', 'like', request()->q . '%');
+            })
+            ->orWhereHas('publisher', function ($query) {
+                $query->where('name', 'like', request()->q . '%');
+            })
+            ->orWhereHas('authors', function ($query) {
+                $query->where('name', 'like', request()->q . '%');
+            });
         }
         if (request()->has('category_id')) {
             $categories = Category::where('id', request()->category_id);

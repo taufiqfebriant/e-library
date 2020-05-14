@@ -12,14 +12,14 @@
                 <div class="modal-body">
                     <h5 class="mb-3">Saring data</h5>
                     <form method="get" action={{ route('search.index')}}>
-                        <input type="text" name="q" value="{{ request()->q }}" class="form-control" placeholder="Ketik judul buku...">
+                        <input type="text" name="q" value="{{ request()->q }}" class="form-control" placeholder="Ketik judul buku, penulis, kategori, atau penerbit...">
                         <div class="card mt-3">
                             <div class="card-header">Kategori</div>
                             <div class="card-body">
                                 @foreach ($categories as $category)
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="category{{ $category->id }}" name="category_id" value="{{ $category->id }}" {{ request()->category_id == $category->id ? 'checked' : '' }}>
-                                        <label class="custom-control-label" for="category{{ $category->id }}">{{ $category->name }}</label>
+                                        <input type="radio" class="custom-control-input" id="category_{{ $category->id }}" name="category_id" value="{{ $category->id }}" {{ request()->category_id == $category->id ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="category_{{ $category->id }}">{{ $category->name }}</label>
                                     </div>
                                 @endforeach
                             </div>
@@ -27,7 +27,7 @@
                         <div class="card mt-3">
                             <div class="card-header">Minimal Penilaian</div>
                             <div class="card-body">
-                                <div class="rating"></div>
+                                <div class="rating" id="ratingWrapper1"></div>
                             </div>
                         </div>
                         <button class="btn btn-darkslategray text-uppercase btn-block mt-3">Terapkan</button>
@@ -48,7 +48,7 @@
                 </div>
             </div>
             <form class="col-lg-3 d-none d-lg-block" method="get" action={{ route('search.index')}}>
-                <input type="text" name="q" value="{{ request()->q }}" class="form-control" placeholder="Ketik judul buku...">
+                <input type="text" name="q" value="{{ request()->q }}" class="form-control" placeholder="Ketik judul buku, penulis, kategori, atau penerbit...">
                 <div class="card mt-3">
                     <div class="card-header">Kategori</div>
                     <div class="card-body">
@@ -63,14 +63,14 @@
                 <div class="card mt-3">
                     <div class="card-header">Minimal Penilaian</div>
                     <div class="card-body">
-                        <div class="rating"></div>
+                        <div class="rating" id="ratingWrapper2"></div>
                     </div>
                 </div>
                 <button class="btn btn-darkslategray text-uppercase btn-block mt-3">Terapkan</button>
             </form>
             <div class="col-lg-9">
-                <div class="row">
-                    @foreach ($books as $book)
+                <div class="row h-100">
+                    @forelse ($books as $book)
                         <div class="col-md-3 col-sm-6 col-xs-6">
                             <a href="{{ route('books.show', compact('book')) }}" class="text-decoration-none transition-3d-hover">
                                 <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid rounded">
@@ -93,7 +93,11 @@
                                 </div>
                             </a>
                         </div>
-                    @endforeach
+                    @empty
+                        <div class="col-12 my-auto">
+                            <h5 class="text-center">Tidak ada data</h5>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -106,10 +110,9 @@
     <script>
         $(function () {
             const urlParams = new URLSearchParams(window.location.search);
-            const ratingParam = urlParams.get('rating');
-            let rating = $('.rating')
+            const ratingParam = parseInt(urlParams.get('rating'));
 
-            rating.starRating({
+            $('#ratingWrapper1').starRating({
                 starSize: 25,
                 useFullStars: true,
                 disableAfterRate: false,
@@ -117,13 +120,29 @@
                     if ($('#rating').length > 0) {
                         $('#rating').val(currentRating)                        
                     } else {
-                        rating.parent().append(`<input type="hidden" name="rating" id="rating" value="${currentRating}">`)
+                        console.log($(this))
+                        $('#ratingWrapper1').parent().append(`<input type="hidden" name="rating" id="rating" value="${currentRating}">`)
                     }
                 }
             });
 
+            $('#ratingWrapper2').starRating({
+                starSize: 25,
+                useFullStars: true,
+                disableAfterRate: false,
+                callback: function(currentRating) {
+                    if ($('#rating').length > 0) {
+                        $('#rating').val(currentRating)                        
+                    } else {
+                        console.log($(this))
+                        $('#ratingWrapper2').parent().append(`<input type="hidden" name="rating" id="rating" value="${currentRating}">`)
+                    }
+                }
+            });
+            
             if (ratingParam) {
-                rating.starRating('setRating', ratingParam)
+                $('#ratingWrapper1').starRating('setRating', ratingParam)
+                $('#ratingWrapper2').starRating('setRating', ratingParam)
             }
         })
     </script>

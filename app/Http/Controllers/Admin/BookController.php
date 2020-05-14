@@ -125,7 +125,7 @@ class BookController extends Controller
         }
         abort(404);
     }
-
+    
     private function storeFiles($book)
     {
         if (request()->hasFile('cover')) {

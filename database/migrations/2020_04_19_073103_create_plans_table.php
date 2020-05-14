@@ -20,6 +20,7 @@ class CreatePlansTable extends Migration
             $table->unsignedInteger('price');
             $table->unsignedTinyInteger('months');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

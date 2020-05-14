@@ -51,7 +51,7 @@
 @section('body')
     <body>
         <div id="app" class="vh-100">
-            @includeWhen(session('message'), 'partials.toast', ['message' => session('message'), 'type' => session('type')])
+            @include('partials.toast')
             @yield('content')
         </div>
         <!-- Scripts -->

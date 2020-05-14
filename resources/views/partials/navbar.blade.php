@@ -9,8 +9,14 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item border-right border-dark pr-2">
+                <li class="nav-item pr-2">
                     <a href="{{ route('plans.index') }}" class="nav-link font-weight-semibold">Paket</a>
+                </li>
+                <li class="nav-item border-left border-dark position-relative">
+                    <a href="{{ route('cart.index') }}" class="nav-link font-weight-semibold">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="badge badge-darkslategray navbar-badge" id="badgeCart">{{ \Cart::session(auth()->user()->id)->getContent()->count() }}</span>
+                    </a>
                 </li>
                 <!-- Authentication Links -->
                 @guest
@@ -21,9 +27,9 @@
                         <a class="btn btn-light nav-link px-3 text-body font-weight-semibold" href="{{ route('login') }}">Masuk</a>
                     </li>
                 @else
-                    <li class="nav-item dropdown px-2">
-                        <a id="notificationsDropdown" class="nav-link font-weight-semibold position-relative" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="far fa-bell fa-lg"></i>
+                    <li class="nav-item dropdown pl-2">
+                        <a id="notificationsDropdown" class="nav-link font-weight-semibold position-relative text-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell"></i>
                             @if (auth()->user()->unreadNotifications->isNotEmpty())
                                 <span class="badge badge-darkslategray navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
                             @endif

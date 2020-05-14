@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BookRequest extends FormRequest
 {
@@ -30,8 +31,13 @@ class BookRequest extends FormRequest
             'author_id' => 'required',
             'category_id' => 'required',
             'publisher_id' => 'required',
-            'file' => 'required|file|mimes:pdf',
-            'preview' => 'nullable|file|mimes:pdf'
+            'file' => [
+                Rule::requiredIf(request()->isMethod('post')),
+                'file',
+                'mimes:pdf'
+            ],
+            'preview' => 'nullable|file|mimes:pdf',
+            'featured' => 'required|numeric'
         ];
     }
 }

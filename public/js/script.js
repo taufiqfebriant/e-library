@@ -10,7 +10,9 @@ $(function () {
         }
     })
 
-    $('.toast').toast('show')
+    if ($('.toast .toast-message').is(':not(:empty)')) {
+        $('.toast').toast('show')
+    }
     changeNavbarUser() 
     
     if (window.location.pathname === '/')  {
@@ -56,5 +58,22 @@ $(function () {
                 }
             })
         }
+    })
+
+    $('.add-to-cart').click(function () {
+        let pathArray = window.location.pathname.split('/');
+        $.ajax({
+            data: {
+                id: pathArray[2]
+            },
+            method: 'POST',
+            url: `${base_url}/cart`,
+            success: function (response) {
+                $('.toast-body').addClass('bg-success');
+                $('.toast-message').text('Berhasil menambahkan buku ke dalam keranjang.');
+                $('.toast').toast('show')
+                $('#badgeCart').text(response.total)
+            }
+        })
     })
 })

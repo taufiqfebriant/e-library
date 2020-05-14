@@ -13,7 +13,7 @@
     </div>
     @include('partials.navbar')
     <div class="container space-2">
-        <div class="row pt-5">
+        <div class="row pt-5 pb-3">
             <div class="col-lg-3 d-none d-lg-block">
                 @include('user.partials.sidenav')
             </div>
@@ -58,7 +58,7 @@
                                 <div class="card p-3">
                                     <h4>Langganan</h4>
                                     <div class="row align-items-center mt-3">
-                                        @if (auth()->user()->subscription->exists())
+                                        @if (auth()->user()->subscription)
                                             <div class="col-lg-4 text-uppercase tracking-widest small font-weight-bold">Tanggal berlangganan</div>
                                             <div class="col-lg-8">{{ auth()->user()->subscription->created_at }}</div>
                                             <div class="col-12 px-2">
@@ -72,7 +72,9 @@
                                             <div class="col-lg-4 text-uppercase tracking-widest small font-weight-bold">Berakhir pada</div>
                                             <div class="col-lg-8">{{ auth()->user()->subscription->ends_at }}</div>
                                         @else
-                                            <p>Anda belum berlangganan.</p>
+                                            <div class="col-12">
+                                                <p>Anda belum berlangganan.</p>
+                                            </div>
                                         @endif
                                     </div>
                                 </div>

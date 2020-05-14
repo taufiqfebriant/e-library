@@ -9,7 +9,10 @@ Route::get('books/{book}', 'BookController@show')->name('books.show');
 Route::get('plans', 'PlanController@index')->name('plans.index');
 Route::get('categories', 'CategoryController@index')->name('categories.index');
 Route::get('search', 'SearchController@index')->name('search.index');
+Route::get('auth/check', 'Auth\AuthController@check')->name('auth.check');
+Route::post('/toasts', 'ToastController@store')->name('toasts.store');
 Route::middleware(['auth'])->group(function () {
+    Route::resource('cart', 'CartController');
     Route::get('users/{user}', 'UserController@show')->name('users.show');
     Route::get('users/{user}/personal-info', 'UserController@personalInfo')->name('users.personal-info');
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');

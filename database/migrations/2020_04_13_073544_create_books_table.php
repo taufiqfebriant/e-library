@@ -28,7 +28,9 @@ class CreateBooksTable extends Migration
                     ->constrained()
                     ->onDelete('cascade')
                     ->onUpdate('restrict');
+            $table->unsignedTinyInteger('featured')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

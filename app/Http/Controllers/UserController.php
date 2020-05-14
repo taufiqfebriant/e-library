@@ -47,7 +47,7 @@ class UserController extends Controller
         ]);
         auth()->user()->update(Arr::only($validatedData, ['name']));
         auth()->user()->profile()->updateOrCreate(['user_id' => auth()->user()->id], Arr::except($validatedData, ['name']));
-        return redirect()->route('users.show', compact('user'))->with(['type' => 'success', 'message' => 'Berhasil mengubah data pribadi.']);
+        return redirect()->route('users.personal-info', compact('user'))->with(['type' => 'success', 'message' => 'Berhasil mengubah data pribadi.']);
     }
 
     public function books(User $user, BooksDataTable $dataTable)

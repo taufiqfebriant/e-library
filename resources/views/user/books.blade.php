@@ -19,7 +19,7 @@
     </div>
     @include('partials.navbar')
     <div class="container space-2">
-        <div class="row pt-5">
+        <div class="row pt-5 pb-3">
             <div class="col-lg-3 d-none d-lg-block">
                 @include('user.partials.sidenav')
             </div>

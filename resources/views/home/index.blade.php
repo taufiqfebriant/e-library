@@ -80,7 +80,37 @@
             </div>
         </section>
     @else
-        <div class="space-2">
+        @if ($featuredBooks->isNotEmpty())
+            <section id="featuredBooks" class="carousel slide space-top-2 space-bottom-1 bg-dark" data-ride="carousel">
+                <div class="container h-100 mt-3">
+                    <div class="carousel-inner h-100">
+                        @foreach ($featuredBooks as $book)
+                            <div class="carousel-item h-100 {{ $loop->first ? 'active' : '' }}">
+                                <div class="row justify-content-center">
+                                    <div class="col-2 h-64">
+                                        <img src="{{ asset("storage/{$book->cover}") }}" class="w-100 h-100" alt="Book's cover">
+                                    </div>
+                                    <div class="col-7 text-white my-auto">
+                                        <h3>{{ $book->title }}</h3>
+                                        <h5 class="mb-3">{{ $book->getCommaSeparatedAuthors() }}</h5>
+                                        <a href="{{ route('books.show', compact('book')) }}" class="btn btn-primary">Lihat</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <a class="carousel-control-prev" href="#featuredBooks" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#featuredBooks" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </section>
+        @endif
+        <div class="space-bottom-2 {{ $featuredBooks->isEmpty() ? 'space-top-2' : '' }}">
             <section class="top-books bg-light pt-5 pb-2">
                 <div class="container">
                     <div class="row">
@@ -112,7 +142,7 @@
             </section>
             <div class="container">
                 <form action="{{ route('search.index') }}" class="d-flex pt-4" method="get">
-                    <input type="text" name="q" id="q" class="form-control form-control-lg w-75 mr-3" placeholder="Ketik judul buku..." required>
+                    <input type="text" name="q" id="q" class="form-control form-control-lg w-75 mr-3" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." required>
                     <button class="btn btn-darkslategray w-25 text-base">
                         <i class="fas fa-search fa-sm mr-lg-1"></i>
                         <span class="d-none d-lg-unset">Cari</span>

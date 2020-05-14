@@ -34,12 +34,16 @@
                     <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary btn-lg">Baca</a>
                 @else
                     <div class="d-flex">
+                        <button class="btn btn-outline-darkslategray btn-lg mr-2 add-to-cart">
+                            <i class="fas fa-cart-plus mr-2"></i>
+                            <span>Masukkan Keranjang</span>
+                        </button>
+                        <a href="{{ route('books.read', compact('book')) }}" class="btn btn-outline-darkslategray btn-lg mr-2">Lihat Cuplikan</a>
                         <form action="{{ route('books.update', compact('book')) }}" method="post">
                             @method('PATCH')
                             @csrf
-                            <button class="btn btn-primary btn-lg mr-2">Pinjam</button>
+                            <button class="btn btn-darkslategray btn-lg">Pinjam</button>
                         </form>
-                        <a href="{{ route('books.read', compact('book')) }}" class="btn btn-darkslategray btn-lg">Lihat Cuplikan</a>
                     </div>
                 @endif
             </div>

@@ -95,12 +95,14 @@
     <div class="form-group row">
         <label for="file" class="col-sm-2 col-form-label">File</label>
         <div class="col-sm-10">
-            <div class="input-group">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file"
-                        name="file">
-                    <label class="custom-file-label" for="file">Pilih file</label>
-                </div>
+            <div class="custom-file">
+                <input type="file" class="custom-file-input @error('file') is-invalid @enderror" id="file" name="file">
+                <label class="custom-file-label" for="file">Pilih file</label>
+                @error('file')
+                    <span class="invalid-feedback" role="alert">
+                        {{ $message }}
+                    </span>
+                @enderror
             </div>
             @if ($book->file)
                 <a href="{{ route('admin.books.preview', compact('book')) }}" target="_blank" class="small float-right mt-2">Lihat file aktif</a>
@@ -120,6 +122,20 @@
             @if ($book->preview)
                 <a href="{{ route('admin.books.preview', compact('book')) }}" target="_blank" class="small float-right mt-2">Lihat cuplikan aktif</a>
             @endif
+        </div>
+    </div>
+    <div class="form-group row align-items-center">
+        <label for="featured" class="col-sm-2 col-form-label">Tampilkan sebagai buku unggulan</small></label>
+        <div class="col-sm-10">
+            <select name="featured" id="featured" class="form-control @error('featured') is-invalid @enderror">
+                <option value="0" {{ old('featured', $book->featured) ? 'selected' : '' }}>Tidak</option>
+                <option value="1" {{ old('featured', $book->featured) ? 'selected' : '' }}>Ya</option>
+            </select>
+            @error('featured')
+                <span class="invalid-feedback" role="alert">
+                    {{ $message }}
+                </span>
+            @enderror
         </div>
     </div>
 </div>

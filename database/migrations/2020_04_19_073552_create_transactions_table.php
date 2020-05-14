@@ -28,6 +28,7 @@ class CreateTransactionsTable extends Migration
             $table->string('receipt')->nullable();
             $table->unsignedBigInteger('confirmed_by')->nullable();
             $table->timestamp('confirmed_at')->nullable();
+            $table->softDeletes();
 
             $table->foreign('confirmed_by')
                 ->references('id')

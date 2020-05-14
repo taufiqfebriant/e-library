@@ -21,6 +21,7 @@ class CreateSubscriptionsTable extends Migration
                 ->onDelete('cascade');
             $table->timestamps();
             $table->timestamp('ends_at')->nullable();
+            $table->softDeletes();
         });
     }
 
