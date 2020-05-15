@@ -28,20 +28,22 @@
                     <dt class="col-md-3">Jumlah halaman</dt>
                     <dd class="col-md-9">{{ $book->countPages($book->file) }} halaman</dd>
                     <dt class="col-md-3">Jumlah peminjaman</dt>
-                    <dd class="col-md-9">{{ $book->users_count ? "{$book->users_count} kali" : 'Belum ada peminjaman' }}</dd>
+                    <dd class="col-md-9">{{ $book->loans_count ? "{$book->loans_count} kali" : 'Belum ada peminjaman' }}</dd>
                 </dl>
-                @if (auth()->check() && $book->hasUser())
+                @if (auth()->check() && $book->inTheLoanPeriod())
                     <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary btn-lg">Baca</a>
                 @else
                     <div class="d-flex">
-                        <button class="btn btn-outline-darkslategray btn-lg mr-2 add-to-cart">
-                            <i class="fas fa-cart-plus mr-2"></i>
-                            <span>Masukkan Keranjang</span>
-                        </button>
+                        @if (!$existsInCart && auth()->user()->loans()->active()->count() < 2)
+                            <button class="btn btn-outline-darkslategray btn-lg mr-2 add-to-cart">
+                                <i class="fas fa-cart-plus mr-2"></i>
+                                <span>Masukkan Keranjang</span>
+                            </button>
+                        @endif
                         <a href="{{ route('books.read', compact('book')) }}" class="btn btn-outline-darkslategray btn-lg mr-2">Lihat Cuplikan</a>
-                        <form action="{{ route('books.update', compact('book')) }}" method="post">
-                            @method('PATCH')
+                        <form action="{{ route('loans.store') }}" method="post">
                             @csrf
+                            <input type="hidden" name="book_id" value="{{ $book->id }}">
                             <button class="btn btn-darkslategray btn-lg">Pinjam</button>
                         </form>
                     </div>
@@ -51,24 +53,23 @@
         <h4 class="mt-5 mb-3">Penilaian</h4>
         <hr>
         <section class="reviews">
-            @if (auth()->check() && $book->users->contains(auth()->user()->id))
-            <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
-                @csrf
-                <input type="hidden" name="book_id" value="{{ $book->id }}">
-                <h4 class="my-3">Beri buku ini penilaian</h4>
-                <div class="row align-items-center">
-                    <div class="rating col-md-auto mb-3 mb-md-0"></div>
-                    <input type="hidden" name="rating" id="rating">
-                    <div class="col">
-                        <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
+            {{-- @if (auth()->check() && $book->users->contains(auth()->user()->id))
+                <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
+                    @csrf
+                    <input type="hidden" name="book_id" value="{{ $book->id }}">
+                    <h4 class="my-3">Beri buku ini penilaian</h4>
+                    <div class="row align-items-center">
+                        <div class="rating col-md-auto mb-3 mb-md-0"></div>
+                        <input type="hidden" name="rating" id="rating">
+                        <div class="col">
+                            <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="clearfix">
-                    <button class="btn btn-primary mt-3 float-right" name="submit">Kirim Penilaian</button>
-                </div>
-            </form>
-            @endif
-
+                    <div class="clearfix">
+                        <button class="btn btn-primary mt-3 float-right" name="submit">Kirim Penilaian</button>
+                    </div>
+                </form>
+            @endif --}}
             @forelse ($rivi as $review)
                 <h5>{{ $review->user->name }}</h5>
                 <div class="stars">
@@ -81,26 +82,26 @@
                 <p class="mt-2">{{ $review->comment }}</p>
 
             @empty
-                @if (auth()->check() && $book->users->contains(auth()->user()->id))
-                <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
-                    @csrf
+                {{-- @if (auth()->check() && $book->users->contains(auth()->user()->id))
+                    <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
+                        @csrf
 
-                    <input type="hidden" name="book_id" value="{{ $book->id }}">
-                    <h4 class="my-3">Beri buku ini penilaian</h4>
-                    <div class="row align-items-center">
-                        <div class="rating col-md-auto mb-3 mb-md-0"></div>
-                        <input type="hidden" name="rating" id="rating">
-                        <div class="col">
-                            <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
+                        <input type="hidden" name="book_id" value="{{ $book->id }}">
+                        <h4 class="my-3">Beri buku ini penilaian</h4>
+                        <div class="row align-items-center">
+                            <div class="rating col-md-auto mb-3 mb-md-0"></div>
+                            <input type="hidden" name="rating" id="rating">
+                            <div class="col">
+                                <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="clearfix">
-                        <button class="btn btn-primary mt-3 float-right">Kirim Penilaian</button>
-                    </div>
-                </form>
+                        <div class="clearfix">
+                            <button class="btn btn-primary mt-3 float-right">Kirim Penilaian</button>
+                        </div>
+                    </form>
                 @else
                     <p>Tidak ada penilaian</p>
-                @endif
+                @endif --}}
             @endforelse
 
             {{ $rivi->links() }}

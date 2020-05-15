@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Book;
+use App\Loan;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -10,7 +10,7 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Carbon\Carbon;
 
-class BooksDataTable extends DataTable
+class LoansDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -22,17 +22,17 @@ class BooksDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function (Book $book) {
-                return view('user.partials.actions.books', compact('book'));
+            ->addColumn('action', function (Loan $loan) {
+                return view('user.partials.actions.loans', compact('loan'));
             })
-            ->editColumn('created_at', function (Book $book) {
-                return $book->created_at ? with(new Carbon($book->created_at))->format('Y-m-d H:i:s') : '';
+            ->editColumn('created_at', function (Loan $loan) {
+                return $loan->created_at ? with(new Carbon($loan->created_at))->format('Y-m-d H:i:s') : '';
             })
-            ->editColumn('ends_at', function (Book $book) {
-                return $book->ends_at ? with(new Carbon($book->ends_at))->format('Y-m-d H:i:s') : '';
+            ->editColumn('ends_at', function (Loan $loan) {
+                return $loan->ends_at ? with(new Carbon($loan->ends_at))->format('Y-m-d H:i:s') : '';
             })
-            ->editColumn('returned_at', function (Book $book) {
-                return $book->returned_at ? with(new Carbon($book->returned_at))->format('Y-m-d H:i:s') : '-';
+            ->editColumn('returned_at', function (Loan $loan) {
+                return $loan->returned_at ? with(new Carbon($loan->returned_at))->format('Y-m-d H:i:s') : '-';
             })
             ->filterColumn('created_at', function ($query, $keyword) {
                 $query->whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
@@ -53,7 +53,7 @@ class BooksDataTable extends DataTable
      */
     public function query()
     {
-        return auth()->user()->books();
+        return auth()->user()->loans()->with('book')->select('loans.*');
     }
 
     /**
@@ -90,7 +90,7 @@ class BooksDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('title')->title('Judul buku'),
+            Column::make('book.title')->title('Judul buku'),
             Column::make('created_at')->title('Tanggal pinjam'),
             Column::make('ends_at')->title('Tanggal berakhir'),
             Column::make('returned_at')->title('Tanggal pengembalian'),

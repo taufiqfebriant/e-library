@@ -14,14 +14,14 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $totalBukudiPinjam  = DB::table('book_user')->count();
+        $totalBukudiPinjam  = DB::table('loans')->count();
         $totalSemuaBuku     = DB::table('books')->count();
-        $kategoriLaris      = DB::table('book_user')
-                            ->leftJoin('books', 'book_user.book_id' , '=' , 'books.id')
-                            ->leftJoin('categories', 'books.category_id' , '=' , 'categories.id')
-                            ->get();
+        // $kategoriLaris      = DB::table('book_user')
+        //                     ->leftJoin('books', 'book_user.book_id' , '=' , 'books.id')
+        //                     ->leftJoin('categories', 'books.category_id' , '=' , 'categories.id')
+        //                     ->get();
 
-        dd($kategoriLaris);exit;
+        // dd($kategoriLaris);exit;
                         
         return view('admin.dashboard.index',compact('totalBukudiPinjam','totalSemuaBuku'));
     }

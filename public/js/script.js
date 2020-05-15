@@ -63,6 +63,7 @@ $(function () {
     $('.add-to-cart').click(function () {
         let pathArray = window.location.pathname.split('/');
         $.ajax({
+            context: $(this),
             data: {
                 id: pathArray[2]
             },
@@ -72,7 +73,10 @@ $(function () {
                 $('.toast-body').addClass('bg-success');
                 $('.toast-message').text('Berhasil menambahkan buku ke dalam keranjang.');
                 $('.toast').toast('show')
-                $('#badgeCart').text(response.total)
+                $(this).remove()
+                $('.cart-icon-wrapper a').append(`
+                    <span class="badge badge-darkslategray navbar-badge">${response.total}</span>
+                `)
             }
         })
     })

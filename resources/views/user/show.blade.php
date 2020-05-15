@@ -31,7 +31,7 @@
                                 <div class="card flex-row align-items-center p-3">
                                     <i class="fas fa-book fa-3x"></i>
                                     <div class="pl-3">
-                                        <h4>{{ auth()->user()->books()->count() }}</h4>
+                                        <h4>{{ auth()->user()->loans()->count() }}</h4>
                                         <span>Buku dipinjam</span>
                                     </div>
                                 </div>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookUserTable extends Migration
+class CreateLoansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,21 @@ class CreateBookUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('book_user', function (Blueprint $table) {
-            $table->unsignedBigInteger('book_id');
-            $table->unsignedBigInteger('user_id');
-            $table->timestamps();
-            $table->timestamp('ends_at')->nullable();
-            $table->timestamp('returned_at')->nullable();
-
-            $table->foreign('book_id')
-                ->references('id')
-                ->on('books')
+        Schema::create('loans', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('book_id')
+                ->constrained()
                 ->onUpdate('restrict')
                 ->onDelete('cascade');
-            $table->foreign('user_id')
+            $table->foreignId('user_id')
                 ->references('id')
                 ->on('users')
                 ->onUpdate('restrict')
                 ->onDelete('cascade');
+            $table->timestamps();
+            $table->timestamp('ends_at')->nullable();
+            $table->timestamp('returned_at')->nullable();
+
         });
     }
 
@@ -40,6 +38,6 @@ class CreateBookUserTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('book_user');
+        Schema::dropIfExists('loans');
     }
 }

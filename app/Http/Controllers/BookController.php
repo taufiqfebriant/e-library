@@ -11,17 +11,17 @@ class BookController extends Controller
 {
     public function show(Book $book)
     {
-        $book = $book->withCount('users')->get()->find($book->id);
+        $book = $book->withCount('loans')->get()->find($book->id);
         // pagination review
         $rivi = Review::where('book_id',$book->id)->paginate(5);
-        
-        return view('book.show', compact('book','rivi'));
+        $existsInCart = in_array($book->title, \Cart::session(auth()->user()->id)->getContent()->pluck('name')->toArray());
+        return view('book.show', compact('book', 'rivi', 'existsInCart'));
     }
 
     public function update(Book $book)
     {
         if (auth()->user()->subscribed()) {
-            if (auth()->user()->books->count() === 2) {
+            if (auth()->user()->loans->active()->count() === 2) {
                 return back()->with(['type' => 'danger', 'message' => 'Gagal meminjam buku. Jumlah peminjaman buku telah mencapai angka maksimal']);
             }
             $book->users()->attach([auth()->user()->id => ['ends_at' => Carbon::now()->addDays(7)]]);
@@ -37,7 +37,6 @@ class BookController extends Controller
 
     public function read(Book $book)
     {
-        $book->has_file = in_array($book->id, auth()->user()->books->pluck('id')->toArray());
         return view('book.read', compact('book'));
     }
 

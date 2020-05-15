@@ -42,6 +42,7 @@ class CartController extends Controller
             'price' => 0,
             'quantity' => 1,
             'attributes' => [
+                'book_id' => $book->id,
                 'cover' => $book->cover,
                 'authors' => $book->getCommaSeparatedAuthors()
             ],
@@ -94,5 +95,11 @@ class CartController extends Controller
     {
         \Cart::session(auth()->user()->id)->remove($id);
         return back()->with(['type' => 'success', 'message' => 'Berhasil menghapus buku dari keranjang.']);
+    }
+
+    public function multipleDestroy()
+    {
+        \Cart::session(auth()->user()->id)->clear();
+        return back()->with(['type' => 'success', 'message' => 'Berhasil menghapus semua buku dari keranjang.']);
     }
 }

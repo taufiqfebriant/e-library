@@ -29,14 +29,19 @@ class Book extends Model
         return $num;
     }
 
-    public function hasUser()
-    {
-        return $this->users()->where('user_id', auth()->user()->id)->wherePivot('returned_at', NULL)->exists();
-    }
-
     public function getCommaSeparatedAuthors()
     {
         return $this->authors()->pluck('name')->implode(', ');
+    }
+
+    public function inTheLoanPeriod()
+    {
+        return $this->loans()->where('user_id', auth()->user()->id)->whereNull('returned_at')->exists();
+    }
+
+    public function loans()
+    {
+        return $this->hasMany('App\Loan');
     }
 
     public function publisher()
@@ -52,10 +57,5 @@ class Book extends Model
     public function scopeFeatured($query)
     {
         return $query->where('featured', 1);
-    }
-
-    public function users()
-    {
-        return $this->belongsToMany('App\User')->withTimestamps()->withPivot('returned_at');
     }
 }

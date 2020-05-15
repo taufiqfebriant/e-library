@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Transaction;
 use App\User;
 use App\Book;
-use App\DataTables\BooksDataTable;
+use App\DataTables\LoansDataTable;
 use App\DataTables\TransactionsDataTable;
 use App\Rules\MatchOldPassword;
 use Carbon\Carbon;
@@ -50,10 +50,10 @@ class UserController extends Controller
         return redirect()->route('users.personal-info', compact('user'))->with(['type' => 'success', 'message' => 'Berhasil mengubah data pribadi.']);
     }
 
-    public function books(User $user, BooksDataTable $dataTable)
+    public function loans(User $user, LoansDataTable $dataTable)
     {
         $this->authorize('show-user', $user);
-        return $dataTable->render('user.books', compact('user'));
+        return $dataTable->render('user.loans', compact('user'));
     }
     
     public function transactions(User $user, TransactionsDataTable $dataTable)

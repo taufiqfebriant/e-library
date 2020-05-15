@@ -40,15 +40,15 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function books()
-    {
-        return $this->belongsToMany('App\Book')->withTimestamps()->withPivot('returned_at');
-    }
     
     public function categories()
     {
         return $this->belongsToMany('App\Category')->withTimestamps();
+    }
+
+    public function loans()
+    {
+        return $this->hasMany('App\Loan');
     }
 
     public function profile()

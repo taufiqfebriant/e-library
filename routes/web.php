@@ -12,12 +12,15 @@ Route::get('search', 'SearchController@index')->name('search.index');
 Route::get('auth/check', 'Auth\AuthController@check')->name('auth.check');
 Route::post('/toasts', 'ToastController@store')->name('toasts.store');
 Route::middleware(['auth'])->group(function () {
+    Route::resource('loans', 'LoanController');
+    Route::post('loans/cart', 'LoanController@storeFromCart')->name('loans.cart');
     Route::resource('cart', 'CartController');
+    Route::delete('cart', 'CartController@multipleDestroy')->name('cart.multiple-destroy');
     Route::get('users/{user}', 'UserController@show')->name('users.show');
     Route::get('users/{user}/personal-info', 'UserController@personalInfo')->name('users.personal-info');
     Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
     Route::patch('users/{user}', 'UserController@update')->name('users.update');
-    Route::get('users/{user}/books', 'UserController@books')->name('users.books');
+    Route::get('users/{user}/loans', 'UserController@loans')->name('users.loans');
     Route::patch('users/{user}/books/{book}', 'UserController@returnBook')->name('users.return-book');
     Route::get('users/{user}/transactions', 'UserController@transactions')->name('users.transactions');
     Route::get('users/{user}/change-password', 'UserController@changePassword')->name('users.change-password');

@@ -12,10 +12,12 @@
                 <li class="nav-item pr-2">
                     <a href="{{ route('plans.index') }}" class="nav-link font-weight-semibold">Paket</a>
                 </li>
-                <li class="nav-item border-left border-dark position-relative">
+                <li class="nav-item border-left border-dark position-relative cart-icon-wrapper">
                     <a href="{{ route('cart.index') }}" class="nav-link font-weight-semibold">
                         <i class="fas fa-shopping-cart"></i>
-                        <span class="badge badge-darkslategray navbar-badge" id="badgeCart">{{ \Cart::session(auth()->user()->id)->getContent()->count() }}</span>
+                        @if (auth()->check() && \Cart::session(auth()->user()->id)->getContent()->count())
+                            <span class="badge badge-darkslategray navbar-badge">{{ \Cart::session(auth()->user()->id)->getContent()->count() }}</span>
+                        @endif
                     </a>
                 </li>
                 <!-- Authentication Links -->
