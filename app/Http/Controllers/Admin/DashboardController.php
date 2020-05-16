@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
+use App\Loan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 class DashboardController extends Controller
@@ -16,14 +19,20 @@ class DashboardController extends Controller
     {
         $totalBukudiPinjam  = DB::table('loans')->count();
         $totalSemuaBuku     = DB::table('books')->count();
-        // $kategoriLaris      = DB::table('book_user')
-        //                     ->leftJoin('books', 'book_user.book_id' , '=' , 'books.id')
-        //                     ->leftJoin('categories', 'books.category_id' , '=' , 'categories.id')
-        //                     ->get();
-
-        // dd($kategoriLaris);exit;
+        $kategoriTerfavorit = Category::withCount('loans')
+                            ->has('loans' , '>' , 0)
+                            ->orderBy('loans_count' , 'desc')
+                            ->take(3)
+                            ->get();
+        $judulBukuTerfavorit = DB::table('loans')
+                            ->select('book_id')
+                            ->groupBy('book_id')
+                            ->havingRaw('COUNT(*) > 1')
+                            ->orderBy('book_id','desc')
+                            ->limit(3)
+                            ->get();
                         
-        return view('admin.dashboard.index',compact('totalBukudiPinjam','totalSemuaBuku'));
+        return view('admin.dashboard.index',compact('totalBukudiPinjam','totalSemuaBuku','kategoriTerfavorit','judulBukuTerfavorit'));
     }
 
     /**

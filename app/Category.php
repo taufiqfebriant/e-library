@@ -16,6 +16,11 @@ class Category extends Model
         return $this->hasMany('App\Book');
     }
 
+    public function loans()
+    {
+        return $this->hasManyThrough('App\Loan','App\Book');
+    }
+
     public function users()
     {
         return $this->belongsToMany('App\Category');
