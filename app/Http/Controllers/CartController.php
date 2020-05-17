@@ -37,12 +37,11 @@ class CartController extends Controller
     {
         $book = Book::find(request()->id);
         \Cart::session(auth()->user()->id)->add([
-            'id' => uniqid(),
+            'id' => $book->id,
             'name' => $book->title,
             'price' => 0,
             'quantity' => 1,
             'attributes' => [
-                'book_id' => $book->id,
                 'cover' => $book->cover,
                 'authors' => $book->getCommaSeparatedAuthors()
             ],

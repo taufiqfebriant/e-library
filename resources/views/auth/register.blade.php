@@ -128,13 +128,13 @@
                                 @enderror
                             </div>
                             <div class="clearfix">
-                                <button type="submit" class="btn btn-darkslategray btn-block btn-lg text-base">Daftar</button>
+                                <button type="submit" class="btn btn-primary btn-block btn-lg text-base">Daftar</button>
                             </div>
                         </form>
-                        <p class="text-center mb-0 mt-4">Sudah mempunyai akun? <a href="{{ route('login') }}" class="text-darkslategray font-weight-bold">Masuk</a></p>
-                        <div class="d-flex align-items-center justify-content-center pt-4 text-darkslategray">
+                        <p class="text-center mb-0 mt-4">Sudah mempunyai akun? <a href="{{ route('login') }}" class="text-primary font-weight-bold">Masuk</a></p>
+                        <div class="d-flex align-items-center justify-content-center pt-4 text-primary">
                             <i class="fas fa-arrow-left fa-xs mr-2"></i>
-                            <a href="{{ route('home.index') }}" class="text-darkslategray">Kembali ke Beranda</a>
+                            <a href="{{ route('home.index') }}" class="text-primary">Kembali ke Beranda</a>
                         </div>
                     </div>
                 </div>

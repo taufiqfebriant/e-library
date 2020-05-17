@@ -9,7 +9,7 @@
     @include('partials.navbar')
     <div class="container pt-5">
         <div class="row mt-5 mb-4">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <img src="{{ asset("storage/{$book->cover}") }}" class="img-thumbnail border-0 bg-transparent p-0">
             </div>
             <div class="col-md-8">
@@ -31,33 +31,32 @@
                     <dd class="col-md-9">{{ $book->loans_count ? "{$book->loans_count} kali" : 'Belum ada peminjaman' }}</dd>
                 </dl>
                 @if (auth()->check() && $book->inTheLoanPeriod())
-                    <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary btn-lg">Baca</a>
+                    <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary font-weight-semibold px-3 py-2">Baca</a>
                 @else
                     <div class="d-flex">
-                        @if (!$existsInCart && auth()->user()->loans()->active()->count() < 2)
-                            <button class="btn btn-outline-darkslategray btn-lg mr-2 add-to-cart">
+                        @if (auth()->check() && !$existsInCart && auth()->user()->loans()->active()->count() < 2)
+                            <button class="btn btn-outline-primary font-weight-semibold px-3 py-2 mr-2 add-to-cart">
                                 <i class="fas fa-cart-plus mr-2"></i>
                                 <span>Masukkan Keranjang</span>
                             </button>
                         @endif
-                        <a href="{{ route('books.read', compact('book')) }}" class="btn btn-outline-darkslategray btn-lg mr-2">Lihat Cuplikan</a>
+                        <a href="{{ route('books.read', compact('book')) }}" class="btn btn-outline-primary font-weight-semibold px-3 py-2 mr-2">Lihat Cuplikan</a>
                         <form action="{{ route('loans.store') }}" method="post">
                             @csrf
                             <input type="hidden" name="book_id" value="{{ $book->id }}">
-                            <button class="btn btn-darkslategray btn-lg">Pinjam</button>
+                            <button class="btn btn-primary font-weight-semibold px-3 py-2">Pinjam</button>
                         </form>
                     </div>
                 @endif
             </div>
         </div>
-        <h4 class="mt-5 mb-3">Penilaian</h4>
-        <hr>
+        <h3 class="mt-5 mb-3">Penilaian</h3>
         <section class="reviews">
-            {{-- @if (auth()->check() && $book->users->contains(auth()->user()->id))
+            @if (auth()->check() && $book->loans()->where('user_id', auth()->user()->id)->exists() && $book->reviews()->where('user_id', auth()->user()->id)->doesntExist())
                 <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
                     @csrf
                     <input type="hidden" name="book_id" value="{{ $book->id }}">
-                    <h4 class="my-3">Beri buku ini penilaian</h4>
+                    <h5 class="my-3">Beri buku ini penilaian</h5>
                     <div class="row align-items-center">
                         <div class="rating col-md-auto mb-3 mb-md-0"></div>
                         <input type="hidden" name="rating" id="rating">
@@ -69,18 +68,19 @@
                         <button class="btn btn-primary mt-3 float-right" name="submit">Kirim Penilaian</button>
                     </div>
                 </form>
-            @endif --}}
+            @endif
             @forelse ($rivi as $review)
-                <h5>{{ $review->user->name }}</h5>
-                <div class="stars">
-                    @for ($i = 1; $i <= 5; $i++)
-                        <span class="text-{{ $i <= $review->rating ? 'warning' : 'lightgray' }}">
-                            <i class="fas fa-star"></i>
-                        </span>
-                    @endfor
+                <div class="review pt-3 pb-1 {{ !$loop->last ? 'border-bottom' : '' }}">
+                    <h5>{{ $review->user->name }}</h5>
+                    <div class="stars">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <span class="text-{{ $i <= $review->rating ? 'warning' : 'lightgray' }}">
+                                <i class="fas fa-star"></i>
+                            </span>
+                        @endfor
+                    </div>
+                    <p class="mt-2">{{ $review->comment }}</p>
                 </div>
-                <p class="mt-2">{{ $review->comment }}</p>
-
             @empty
                 {{-- @if (auth()->check() && $book->users->contains(auth()->user()->id))
                     <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
@@ -103,9 +103,11 @@
                     <p>Tidak ada penilaian</p>
                 @endif --}}
             @endforelse
-
-            {{ $rivi->links() }}
-
+            <div class="clearfix">
+                <div class="float-right">
+                    {{ $rivi->links() }}
+                </div>
+            </div>
         </section>
     </div>
     @include('partials.footer')

@@ -8,13 +8,13 @@
 @section('content')
     @include('partials.navbar')
     @guest
-        <section class="hero-section bg-darkslategray vh-100 text-white">
+        <section class="hero-section vh-100">
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center">
                     <div class="col-lg-6">
-                        <h1 class="display-4">Temukan <span class="text-primary">ribuan</span> buku.</h1>
+                        <h1 class="display-4 font-weight-semibold">Temukan <span class="text-primary">ribuan</span> buku</h1>
                         <p class="text-base">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque provident natus hic, nobis, impedit, perferendis animi.</p>
-                        <a href="{{ route('plans.index') }}" class="btn btn-primary text-uppercase tracking-widest">Berlangganan sekarang</a>
+                        <a href="{{ route('plans.index') }}" class="btn btn-primary text-uppercase font-weight-semibold px-3 py-2 tracking-wide">Langganan sekarang</a>
                     </div>
                     <div class="col-lg-6 d-none d-lg-block">
                         <img src="{{ asset('images/undraw_reading_list_4boi.svg') }}" class="w-100" alt="Ilustrasi membaca">
@@ -22,16 +22,17 @@
                 </div>
             </div>
         </section>
-        <section class="why-us py-5">
+        <section class="why-us space-bottom-2 border-bottom">
             <div class="container">
                 <div class="row">
                     <div class="col-12 pb-4">
-                        <h1>Kenapa kami?</h1>
+                        <h2>Cara kerja e-library</h2>
                     </div>
                     <div class="col-lg-4 pb-3 pb-lg-0">
                         <div class="card">
                             <div class="card-body text-center">
                                 <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
+                                <h5 class="card-title">Temukan buku</h5>
                                 <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, facilis.</p>
                             </div>
                         </div>
@@ -40,6 +41,7 @@
                         <div class="card">
                             <div class="card-body text-center">
                                 <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
+                                <h5 class="card-title">Berlangganan</h5>
                                 <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, facilis.</p>
                             </div>
                         </div>
@@ -48,6 +50,7 @@
                         <div class="card">
                             <div class="card-body text-center">
                                 <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
+                                <h5 class="card-title">Mulai membaca</h5>
                                 <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, facilis.</p>
                             </div>
                         </div>
@@ -55,11 +58,11 @@
                 </div>
             </div>
         </section>
-        <section class="latest-books py-5">
+        <section class="latest-books pt-5 space-bottom-2">
             <div class="container">
                 <div class="row">
                     <div class="col-12 pb-3">
-                        <h1>Buku terbaru untuk Anda</h1>
+                        <h2>Buku terbaru untuk Anda</h2>
                     </div>
                     <div class="col-12">
                         <div class="book-carousel">
@@ -143,7 +146,7 @@
             <div class="container">
                 <form action="{{ route('search.index') }}" class="d-flex pt-4" method="get">
                     <input type="text" name="q" id="q" class="form-control form-control-lg w-75 mr-3" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." required>
-                    <button class="btn btn-darkslategray w-25 text-base">
+                    <button class="btn btn-primary w-25 text-base">
                         <i class="fas fa-search fa-sm mr-lg-1"></i>
                         <span class="d-none d-lg-unset">Cari</span>
                     </button>

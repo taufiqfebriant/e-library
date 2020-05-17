@@ -1,36 +1,38 @@
-<nav class="navbar navbar-expand-md navbar-dark pt-3 pb-2 bg-transparent fixed-top navbar-user {{ auth()->check() ? 'navbar-authenticated' : '' }}">
-    <div class="container">
-        <a class="navbar-brand pt-0" href="{{ url('/') }}">
+<nav class="navbar navbar-expand-md navbar-light fixed-top navbar-member bg-white">
+    <div class="container justify-content-center">
+        <a class="navbar-brand font-weight-semibold text-lowercase" href="{{ url('/') }}">
             {{ config('app.name', 'E-Library') }}
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse justify-content between" id="navbarSupportedContent">
             <!-- Right Side Of Navbar -->
-            <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
-                <li class="nav-item pr-2">
-                    <a href="{{ route('plans.index') }}" class="nav-link font-weight-semibold">Paket</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item px-2">
+                    <a href="#" class="nav-link text-body">Temukan Buku</a>
                 </li>
-                <li class="nav-item border-left border-dark position-relative cart-icon-wrapper">
-                    <a href="{{ route('cart.index') }}" class="nav-link font-weight-semibold">
+                <li class="nav-item px-2">
+                    <a href="{{ route('plans.index') }}" class="nav-link text-body">Paket</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item position-relative cart-icon-wrapper px-2">
+                    <a href="{{ route('cart.index') }}" class="nav-link text-body">
                         <i class="fas fa-shopping-cart"></i>
                         @if (auth()->check() && \Cart::session(auth()->user()->id)->getContent()->count())
-                            <span class="badge badge-darkslategray navbar-badge">{{ \Cart::session(auth()->user()->id)->getContent()->count() }}</span>
+                            <span class="badge badge-primary navbar-badge">{{ \Cart::session(auth()->user()->id)->getContent()->count() }}</span>
                         @endif
                     </a>
                 </li>
                 <!-- Authentication Links -->
                 @guest
-                    <li class="nav-item d-md-none">
-                        <a href="{{ route('login') }}" class="nav-link font-weight-semibold">Masuk</a>
-                    </li>
-                    <li class="nav-item d-none d-md-list-item">
-                        <a class="btn btn-light nav-link px-3 text-body font-weight-semibold" href="{{ route('login') }}">Masuk</a>
+                    <li class="nav-item pl-2">
+                        <a href="{{ route('login') }}" class="nav-link text-body">Masuk</a>
                     </li>
                 @else
-                    <li class="nav-item dropdown pl-2">
-                        <a id="notificationsDropdown" class="nav-link font-weight-semibold position-relative text-center" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <li class="nav-item dropdown px-2">
+                        <a id="notificationsDropdown" class="nav-link font-weight-semibold position-relative text-body" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell"></i>
                             @if (auth()->user()->unreadNotifications->isNotEmpty())
                                 <span class="badge badge-darkslategray navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
@@ -45,7 +47,7 @@
                         </div>
                     </li>
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link font-weight-semibold dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link font-weight-semibold dropdown-toggle text-body" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

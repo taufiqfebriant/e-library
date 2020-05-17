@@ -16,12 +16,12 @@
                         <div class="card mt-3">
                             <div class="card-header">Kategori</div>
                             <div class="card-body">
-                               {{-- @foreach ($categories as $category)
+                               @foreach ($categories as $category)
                                     <div class="custom-control custom-radio">
                                         <input type="radio" class="custom-control-input" id="category_{{ $category->id }}" name="category_id" value="{{ $category->id }}" {{ request()->category_id == $category->id ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="category_{{ $category->id }}">{{ $category->name }}</label>
                                     </div>
-                                @endforeach --}}
+                                @endforeach
                             </div>
                         </div>
                         <div class="card mt-3">
@@ -52,12 +52,12 @@
                 <div class="card mt-3">
                     <div class="card-header">Kategori</div>
                     <div class="card-body">
-                        {{--  @foreach ($categories as $category)
+                         @foreach ($categories as $category)
                             <div class="custom-control custom-radio">
                                 <input type="radio" class="custom-control-input" id="category{{ $category->id }}" name="category_id" value="{{ $category->id }}" {{ request()->category_id == $category->id ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="category{{ $category->id }}">{{ $category->name }}</label>
                             </div>
-                        @endforeach --}}
+                        @endforeach
                     </div>
                 </div>
                 <div class="card mt-3">
@@ -66,7 +66,7 @@
                         <div class="rating" id="ratingWrapper2"></div>
                     </div>
                 </div>
-                <button class="btn btn-darkslategray text-uppercase btn-block mt-3">Terapkan</button>
+                <button class="btn btn-primary text-uppercase btn-block mt-3" disabled>Terapkan</button>
             </form>
             <div class="col-lg-9">
                 <div class="row h-100">
@@ -81,9 +81,9 @@
                                     @endforeach
                                 </p>
                                 <div class="stars">
-                                    @if ($book->reviews_count)
+                                    @if ($book->ratings)
                                         @for ($i = 1; $i <= 5; $i++)
-                                            <span class="text-{{ $i <= $book->reviews->sum('rating') / $book->reviews_count ? 'warning' : 'lightgray' }}">
+                                            <span class="text-{{ $i <= $book->ratings ? 'warning' : 'lightgray' }}">
                                                 <i class="fas fa-star"></i>
                                             </span>
                                         @endfor
@@ -99,7 +99,11 @@
                         </div>
                     @endforelse
                 </div>
-                    {{ $books->links() }}
+                <div class="clearfix">
+                    <div class="float-right">
+                        {{ $books->withQueryString()->links() }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

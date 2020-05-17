@@ -14,7 +14,7 @@ class BookController extends Controller
         $book = $book->withCount('loans')->get()->find($book->id);
         // pagination review
         $rivi = Review::where('book_id',$book->id)->paginate(5);
-        $existsInCart = in_array($book->title, \Cart::session(auth()->user()->id)->getContent()->pluck('name')->toArray());
+        $existsInCart = auth()->check() ? in_array($book->id, \Cart::session(auth()->user()->id)->getContent()->pluck('id')->toArray()) : [];
         return view('book.show', compact('book', 'rivi', 'existsInCart'));
     }
 

@@ -47,6 +47,7 @@ class LoanController extends Controller
                 'ends_at' => Carbon::now()->addDays(7)
             ]));
             auth()->user()->categories()->syncWithoutDetaching([$loan->book->id]);
+            \Cart::session(auth()->user()->id)->remove($loan->book->id);
             return redirect()->route('books.read', ['book' => $loan->book]);
         } else {
             $paidTransactions = Transaction::whereNotNull(['paid_at', 'receipt'])->where('user_id', auth()->user()->id)->first();

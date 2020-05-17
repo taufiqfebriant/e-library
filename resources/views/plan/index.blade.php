@@ -3,10 +3,10 @@
 
 @section('content')
     @include('partials.navbar')
-    <div class="container space-top-3 space-bottom-2">
-        <div class="row">
-            <div class="col-12 text-center">
-                <h1 class="text-uppercase font-weight-bold text-darkslategray">Paket</h1>
+    <div class="container space-2">
+        <div class="row mt-5">
+            <div class="col-12">
+                <h1 class="font-weight-semibold text-center">Paket</h1>
             </div>
         </div>
         <div class="row justify-content-center mt-4">

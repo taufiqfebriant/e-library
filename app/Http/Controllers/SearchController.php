@@ -9,41 +9,28 @@ class SearchController extends Controller
 {
     public function index()
     {
-        $books = Book::with(['reviews', 'authors'])->withCount('reviews');
+        $categories = Category::all();
+        $books = Book::select('books.id', 'books.title', 'books.cover')
+            ->selectRaw('ROUND(SUM(reviews.rating) / COUNT(reviews.rating)) AS ratings')
+            ->leftJoin('reviews', 'books.id', '=', 'reviews.book_id')
+            ->join('author_book', 'books.id', '=', 'author_book.book_id')
+            ->join('authors', 'author_book.author_id', '=', 'authors.id')
+            ->join('categories', 'books.category_id', '=', 'categories.id')
+            ->join('publishers', 'books.publisher_id', '=', 'publishers.id')
+            ->groupBy('books.id', 'books.title', 'books.cover');
         if (request()->has('q')) {
-            $categories = Category::where('name', 'like', request()->q . '%')
-            ->orWhereHas('books', function ($query) {
-                $query->where('title', 'like', request()->q . '%')
-                ->orWhereHas('publisher', function ($query) {
-                    $query->where('name', 'like', request()->q . '%');
-                })
-                ->orWhereHas('authors', function ($query) {
-                    $query->where('name', 'like', request()->q . '%');
-                });
-            });
-            $books = $books->where('title', 'like', request()->q . '%')
-            ->orWhereHas('category', function ($query) {
-                $query->where('name', 'like', request()->q . '%');
-            })
-            ->orWhereHas('publisher', function ($query) {
-                $query->where('name', 'like', request()->q . '%');
-            })
-            ->orWhereHas('authors', function ($query) {
-                $query->where('name', 'like', request()->q . '%');
-            });
-        }
-        if (request()->has('category_id')) {
-            $categories = Category::where('id', request()->category_id);
-            $books = $books->where('category_id', request()->category_id);
+            $books = $books->where('title', 'like', '%' . request()->q . '%')
+                ->orWhere('authors.name', 'like', '%' . request()->q . '%')
+                ->orWhere('categories.name', 'like', '%' . request()->q . '%')
+                ->orWhere('publishers.name', 'like', '%' . request()->q . '%');
         }
         if (request()->has('rating')) {
-            $books = $books->whereHas('reviews', function ($query) {
-                $query->havingRaw('SUM(rating) >= ' . request()->rating);
-            });
+            $books = $books->havingRaw('ROUND(SUM(reviews.rating) / COUNT(reviews.rating)) >= ?', [request()->rating]);
+        }
+        if (request()->has('category_id')) {
+            $books = $books->where('category_id', request()->category_id);
         }
         $books = $books->paginate(9);
-        // $categories = $categories ? $categories->get() : [];
-
-        return view('search.index', compact('books'));
+        return view('search.index', compact('books', 'categories'));
     }
 }
