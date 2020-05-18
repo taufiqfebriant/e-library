@@ -4,7 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
-use App\User;
+use App\Loan;
 use Carbon\Carbon;
 
 class Kernel extends ConsoleKernel
@@ -30,14 +30,10 @@ class Kernel extends ConsoleKernel
 
         // Otomatis mengembalikan buku
         $schedule->call(function () {
-            $user = User::with('books')->whereHas('books', function ($query) {
-                $query->where('returned_at', NULL);
-            })->get();
-            foreach ($user as $user) {
-                foreach ($user->books as $book) {
-                    if (Carbon::now() >= $book->pivot->ends_at) {
-                        $book->pivot->update(['returned_at' => Carbon::now()]);
-                    }
+            $loans = Loan::active();
+            foreach ($loans as $loan) {
+                if (Carbon::now() >= $loan->ends_at) {
+                    $loan->update(['returned_at' => Carbon::now()]);
                 }
             }
         })->everyMinute();

@@ -1,22 +1,62 @@
 <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-member bg-white">
-    <div class="container justify-content-center">
+    <div class="container align-items-center flex-wrap">
         <a class="navbar-brand font-weight-semibold text-lowercase" href="{{ url('/') }}">
             {{ config('app.name', 'E-Library') }}
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content between" id="navbarSupportedContent">
-            <!-- Right Side Of Navbar -->
+        <div class="ml-auto d-flex d-md-none">
+            @auth
+                <div class="dropdown" style="position: unset">
+                    <a id="mobileNotificationsDropdown" class="nav-link font-weight-semibold position-relative text-body dropdown-toggler" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-bell"></i>
+                        @if (auth()->user()->unreadNotifications->isNotEmpty())
+                            <span class="badge badge-darkslategray navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
+                        @endif
+                    </a>
+                    <div class="dropdown-menu py-0 overflow-auto mw-100 mt-0 rounded-0" aria-labelledby="mobileNotificationsDropdown" style="max-height: 300px;">
+                        <div class="d-flex justify-content-center h-100 align-items-center py-3">
+                            <div class="spinner-border" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endauth
+            <button class="btn btn-light bg-transparent border btn-sm mr-2 navbar-search-toggler">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="btn btn-sm border" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item px-2">
-                    <a href="#" class="nav-link text-body">Temukan Buku</a>
+                    <a href="{{ route('home.index') }}" class="nav-link text-body">Beranda</a>
+                </li>
+                <li class="nav-item px-2">
+                    <a href="{{ route('categories.index') }}" class="nav-link text-body">Kategori</a>
                 </li>
                 <li class="nav-item px-2">
                     <a href="{{ route('plans.index') }}" class="nav-link text-body">Paket</a>
                 </li>
             </ul>
-            <ul class="navbar-nav">
+            <form action="{{ route('search.index') }}" method="get" class="w-100 mx-md-5 d-none d-lg-block">
+                <div class="input-group">
+                    <input type="text" class="form-control form-control-sm" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." aria-label="Ketik judul buku, penulis, kategori, atau penerbit..." aria-describedby="search-button" name="q" value="{{ request()->q }}" required>
+                    <div class="input-group-append">
+                        <button button class="btn btn-primary btn-sm" type="button" id="search-button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav @if (!auth()->check()) ml-auto @endif">
+                <li class="nav-item px-2 d-none d-md-block d-lg-none my-auto">
+                    <button class="btn btn-light bg-transparent navbar-search-toggler py-0">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </li>
                 <li class="nav-item position-relative cart-icon-wrapper px-2">
                     <a href="{{ route('cart.index') }}" class="nav-link text-body">
                         <i class="fas fa-shopping-cart"></i>
@@ -32,7 +72,7 @@
                     </li>
                 @else
                     <li class="nav-item dropdown px-2">
-                        <a id="notificationsDropdown" class="nav-link font-weight-semibold position-relative text-body" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a id="notificationsDropdown" class="nav-link font-weight-semibold position-relative text-body dropdown-toggler" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell"></i>
                             @if (auth()->user()->unreadNotifications->isNotEmpty())
                                 <span class="badge badge-darkslategray navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
@@ -71,5 +111,15 @@
                 @endguest
             </ul>
         </div>
+        <form action="{{ route('search.index') }}" method="get" class="w-100 navbar-search collapse d-lg-none">
+            <div class="input-group py-2">
+                <input type="text" class="form-control form-control-sm" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." aria-label="Ketik judul buku, penulis, kategori, atau penerbit..." aria-describedby="search-button" name="q" value="{{ request()->q }}" required>
+                <div class="input-group-append">
+                    <button button class="btn btn-primary btn-sm" type="button" id="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
 </nav>

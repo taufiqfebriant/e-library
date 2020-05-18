@@ -10,9 +10,7 @@
                 <a href="{{ url()->previous() }}" class="btn btn-primary mt-3">Kembali</a>
             </div>
             <div class="col-lg-9">
-                <object data="{{ $book->inTheLoanPeriod() ? route('books.file', $book->id) : asset("storage/{$book->preview}") }}#toolbar=0" type="text/html" class="w-100 h-100">
-                    <embed src="{{ $book->inTheLoanPeriod() ? route('books.file', $book->id) : asset("storage/{$book->preview}") }}#toolbar=0" type="text/html">
-                </object>
+                <iframe src="https://docs.google.com/viewer?url={{ $book->inTheLoanPeriod() ? route('books.file', $book->id) : asset("storage/{$book->preview}") }}&embedded=true" frameborder="0" class="w-100 h-100"></iframe>
             </div>
         </div>
     </div>

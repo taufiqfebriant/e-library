@@ -82,26 +82,7 @@
                     <p class="mt-2">{{ $review->comment }}</p>
                 </div>
             @empty
-                {{-- @if (auth()->check() && $book->users->contains(auth()->user()->id))
-                    <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
-                        @csrf
-
-                        <input type="hidden" name="book_id" value="{{ $book->id }}">
-                        <h4 class="my-3">Beri buku ini penilaian</h4>
-                        <div class="row align-items-center">
-                            <div class="rating col-md-auto mb-3 mb-md-0"></div>
-                            <input type="hidden" name="rating" id="rating">
-                            <div class="col">
-                                <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
-                            </div>
-                        </div>
-                        <div class="clearfix">
-                            <button class="btn btn-primary mt-3 float-right">Kirim Penilaian</button>
-                        </div>
-                    </form>
-                @else
-                    <p>Tidak ada penilaian</p>
-                @endif --}}
+                <p>Tidak ada penilaian</p>
             @endforelse
             <div class="clearfix">
                 <div class="float-right">

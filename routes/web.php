@@ -3,35 +3,35 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::get('/', 'HomeController@index')->name('home.index');
 Route::get('books/{book}', 'BookController@show')->name('books.show');
 Route::get('plans', 'PlanController@index')->name('plans.index');
 Route::get('categories', 'CategoryController@index')->name('categories.index');
 Route::get('search', 'SearchController@index')->name('search.index');
 Route::get('auth/check', 'Auth\AuthController@check')->name('auth.check');
-Route::post('/toasts', 'ToastController@store')->name('toasts.store');
-Route::middleware(['auth'])->group(function () {
-    Route::resource('loans', 'LoanController');
-    Route::post('loans/cart', 'LoanController@storeFromCart')->name('loans.cart');
+Route::middleware('auth')->group(function () {
     Route::resource('cart', 'CartController');
+    Route::middleware('verified')->group(function () {
+        Route::resource('loans', 'LoanController');
+        Route::post('loans/cart', 'LoanController@storeFromCart')->name('loans.cart');
+        Route::get('users/{user}', 'UserController@show')->name('users.show');
+        Route::get('users/{user}/personal-info', 'UserController@personalInfo')->name('users.personal-info');
+        Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
+        Route::patch('users/{user}', 'UserController@update')->name('users.update');
+        Route::get('users/{user}/loans', 'UserController@loans')->name('users.loans');
+        Route::patch('users/{user}/books/{book}', 'UserController@returnBook')->name('users.return-book');
+        Route::get('users/{user}/transactions', 'UserController@transactions')->name('users.transactions');
+        Route::get('users/{user}/change-password', 'UserController@changePassword')->name('users.change-password');
+        Route::patch('users/{user}/update-password', 'UserController@updatePassword')->name('users.update-password');
+        Route::post('transactions', 'TransactionController@store')->name('transactions.store');
+        Route::get('transactions/{transaction}', 'TransactionController@show')->name('transactions.show');
+        Route::patch('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
+        Route::get('books/read/{book}', 'BookController@read')->name('books.read');
+        Route::get('books/files/{file}', 'BookController@file')->name('books.file');
+        Route::post('reviews', 'ReviewController@store')->name('reviews.store');
+    });
     Route::delete('cart', 'CartController@multipleDestroy')->name('cart.multiple-destroy');
-    Route::get('users/{user}', 'UserController@show')->name('users.show');
-    Route::get('users/{user}/personal-info', 'UserController@personalInfo')->name('users.personal-info');
-    Route::get('users/{user}/edit', 'UserController@edit')->name('users.edit');
-    Route::patch('users/{user}', 'UserController@update')->name('users.update');
-    Route::get('users/{user}/loans', 'UserController@loans')->name('users.loans');
-    Route::patch('users/{user}/books/{book}', 'UserController@returnBook')->name('users.return-book');
-    Route::get('users/{user}/transactions', 'UserController@transactions')->name('users.transactions');
-    Route::get('users/{user}/change-password', 'UserController@changePassword')->name('users.change-password');
-    Route::patch('users/{user}/update-password', 'UserController@updatePassword')->name('users.update-password');
-    Route::post('transactions', 'TransactionController@store')->name('transactions.store');
-    Route::get('transactions/{transaction}', 'TransactionController@show')->name('transactions.show');
-    Route::patch('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
-    Route::patch('books/{book}', 'BookController@update')->name('books.update');
-    Route::get('books/read/{book}', 'BookController@read')->name('books.read');
-    Route::get('books/files/{file}', 'BookController@file')->name('books.file');
-    Route::post('reviews', 'ReviewController@store')->name('reviews.store');
     Route::get('notifications', 'NotificationController@index')->name('notifications.index');
     Route::post('notifications/mark-as-read', 'NotificationController@markAsRead')->name('notifications.mark-as-read');
 });
@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
 // search book testing
 // Route::get('/search' , 'FrontpageController@searchBooks')->name('search');
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
-    Route::resource('dashboard', 'DashboardController');
+    Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
     Route::resource('authors', 'AuthorController');
     Route::resource('categories', 'CategoryController');
     Route::resource('publishers', 'PublisherController');

@@ -23,7 +23,6 @@
                     </div>
                 </div><!-- /.container-fluid -->
             </section>
-
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -33,12 +32,11 @@
                             <div class="inner">
                                 <h3>{{ $totalBukudiPinjam }}</h3>
 
-                                <p>Buku sedang Pinjam</p>
+                                <p>Buku terpinjam</p>
                             </div>
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                         <div class="col-lg-6 col-6">
@@ -52,7 +50,6 @@
                             <div class="icon">
                                 <i class="ion ion-bag"></i>
                             </div>
-                            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -60,7 +57,7 @@
                         <div class="col-lg-6 ">
                             <div class="card">
                                 <div class="card-header border-transparent">
-                                    <h3 class="card-title">3 Besar kategori terfavorit</h3>
+                                    <h3 class="card-title">Kategori terlaris bulan ini</h3>
 
                                     <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -79,21 +76,17 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Kategori</th>
+                                                    <th>Jumlah pinjaman</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                
-                                                <?php $no = 1;?>
-
                                                 @foreach($kategoriTerfavorit as $kl)
                                                 <tr>
-                                                    <td> {{ $no }} </td>
-                                                    <td> {{ $kl->name }} </td>
-
-                                                    <?php $no++;?>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $kl->name }}</td>
+                                                    <td>{{ $kl->loans_count }}</td>
                                                 </tr>
                                                 @endforeach
-                                                
                                             </tbody>
                                         </table>
                                     </div>
@@ -105,8 +98,7 @@
                         <div class="col-lg-6 ">
                             <div class="card">
                                 <div class="card-header border-transparent">
-                                    <h3 class="card-title">3 Besar judul buku terfavorit</h3>
-
+                                    <h3 class="card-title">Buku terlaris bulan ini</h3>
                                     <div class="card-tools">
                                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                                         <i class="fas fa-minus"></i>
@@ -124,17 +116,16 @@
                                                 <tr>
                                                     <th>No</th>
                                                     <th>Buku</th>
+                                                    <th>Jumlah pinjaman</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <?php $no = 1;?>
                                                 @foreach($judulBukuTerfavorit as $jbt)
-                                                <tr>
-                                                    <td> {{ $no }} </td>
-                                                    <td> {{ $jbt->book_id }} </td>
-
-                                                    <?php $no++;?>
-                                                </tr>
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $jbt->title }}</td>
+                                                        <td>{{ $jbt->loans_count }}</td>
+                                                    </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>

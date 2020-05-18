@@ -13,7 +13,7 @@
             </a>
             @break
         @case('App\Notifications\LoanExpiration')
-            <a class="dropdown-item p-3" href="{{ route('users.books', ['user' => auth()->user()]) }}">
+            <a class="dropdown-item p-3" href="{{ route('users.loans', ['user' => auth()->user()]) }}">
                 <div class="d-flex align-items-center">
                     <span class="text-base mr-3 text-darkslategray">&bull;</span>
                     <p class="mb-0 text-wrap">Masa peminjaman buku "{{ $notification->data['title'] }}" akan segera berakhir.</p>

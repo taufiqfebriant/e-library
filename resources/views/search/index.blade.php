@@ -7,12 +7,11 @@
 
 @section('content')
     <div class="modal fade" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered my-5" role="document">
             <div class="modal-content">
                 <div class="modal-body">
                     <h5 class="mb-3">Saring data</h5>
                     <form method="get" action={{ route('search.index')}}>
-                        <input type="text" name="q" value="{{ request()->q }}" class="form-control" placeholder="Ketik judul buku, penulis, kategori, atau penerbit...">
                         <div class="card mt-3">
                             <div class="card-header">Kategori</div>
                             <div class="card-body">
@@ -47,8 +46,8 @@
                     </button>
                 </div>
             </div>
-            <form class="col-lg-3 d-none d-lg-block" method="get" action={{ route('search.index')}}>
-                <input type="text" name="q" value="{{ request()->q }}" class="form-control" placeholder="Ketik judul buku, penulis, kategori, atau penerbit...">
+            <form class="col-lg-3 d-none d-lg-block" method="get" action={{ route('search.index') }}>
+                <input type="hidden" name="q" value="{{ request('q') }}">
                 <div class="card mt-3">
                     <div class="card-header">Kategori</div>
                     <div class="card-body">
@@ -66,12 +65,12 @@
                         <div class="rating" id="ratingWrapper2"></div>
                     </div>
                 </div>
-                <button class="btn btn-primary text-uppercase btn-block mt-3" disabled>Terapkan</button>
+                <button class="btn btn-primary text-uppercase btn-block mt-3">Terapkan</button>
             </form>
             <div class="col-lg-9">
                 <div class="row h-100">
                     @forelse ($books as $book)
-                        <div class="col-md-3 col-sm-6 col-xs-6">
+                        <div class="col-6 col-md-3">
                             <a href="{{ route('books.show', compact('book')) }}" class="text-decoration-none transition-3d-hover">
                                 <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid rounded">
                                 <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>

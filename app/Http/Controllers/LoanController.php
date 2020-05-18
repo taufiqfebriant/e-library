@@ -62,11 +62,15 @@ class LoanController extends Controller
     {
         $bookIds = \Cart::session(auth()->user()->id)->getContent()->pluck('attributes')->pluck('book_id');
         foreach ($bookIds as $id) {
-            Loan::create([
-                'book_id' => $id,
-                'user_id' => auth()->user()->id,
-                'ends_at' => Carbon::now()->addDays(7)
-            ]);
+            if (auth()->user()->loans()->active()->count() < 2) {
+                Loan::create([
+                    'book_id' => $id,
+                    'user_id' => auth()->user()->id,
+                    'ends_at' => Carbon::now()->addDays(7)
+                ]);
+            } else {
+                return redirect()->route('cart.index')->with(['type' => 'danger', 'message' => 'Gagal meminjam buku. Jumlah peminjaman buku telah mencapai angka maksimal']);
+            }
         }
         \Cart::session(auth()->user()->id)->clear();
         return redirect()->route('users.loans', auth()->user()->id)->with(['type' => 'success', 'message' => 'Berhasil meminjam buku']);

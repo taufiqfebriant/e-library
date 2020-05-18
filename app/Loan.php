@@ -20,6 +20,6 @@ class Loan extends Model
     
     public function user()
     {
-        return $this->belongsTo('App\Book');
+        return $this->belongsTo('App\User');
     }
 }

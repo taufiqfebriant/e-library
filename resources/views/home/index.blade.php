@@ -114,7 +114,7 @@
             </section>
         @endif
         <div class="space-bottom-2 {{ $featuredBooks->isEmpty() ? 'space-top-2' : '' }}">
-            <section class="top-books bg-light pt-5 pb-2">
+            <section class="top-books bg-light pt-4 pb-3">
                 <div class="container">
                     <div class="row">
                         <div class="col-12">
@@ -143,16 +143,7 @@
                     </div>
                 </div>
             </section>
-            <div class="container">
-                <form action="{{ route('search.index') }}" class="d-flex pt-4" method="get">
-                    <input type="text" name="q" id="q" class="form-control form-control-lg w-75 mr-3" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." required>
-                    <button class="btn btn-primary w-25 text-base">
-                        <i class="fas fa-search fa-sm mr-lg-1"></i>
-                        <span class="d-none d-lg-unset">Cari</span>
-                    </button>
-                </form>
-            </div>
-            <section class="liked-categories pt-5 pb-3">
+            <section class="liked-categories pt-4 pb-3">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 pb-3">
@@ -182,7 +173,7 @@
                     </div>
                 </div>
             </section>
-            <section class="latest-books py-3">
+            <section class="latest-books pt-4 pb-3">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 pb-3">

@@ -242,7 +242,7 @@ button.bg-lavender:focus {
 }
 
 .navbar-member .navbar-brand {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .nav-white .nav-link {
@@ -673,4 +673,11 @@ a.text-darkslategray:focus {
     position: absolute;
     right: 3px;
     top: 7px;
+}
+
+/*------------ Media queries ------------*/
+@media (min-width: 768px) {
+    .navbar-member .navbar-brand {
+        font-size: 1.5rem;
+    }
 }

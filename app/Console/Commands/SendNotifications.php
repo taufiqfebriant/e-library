@@ -46,19 +46,17 @@ class SendNotifications extends Command
             $query->whereDate(DB::raw("DATE_FORMAT(ends_at, '%Y-%m-%d')"), '=', Carbon::now()->addDays(3)->format('Y-m-d'));
         })->get();
         
-        $readers = User::with('books')->whereHas('books', function ($query) {
-            $query->whereNull('returned_at')
-                ->whereDate(DB::raw("DATE_FORMAT(ends_at, '%Y-%m-%d')"), '=', Carbon::now()->addDays(2)->format('Y-m-d'));
-        })->get();
+        $loans = \App\Loan::with(['book', 'user'])
+            ->active()
+            ->whereDate(DB::raw("DATE_FORMAT(ends_at, '%Y-%m-%d')"), '=', Carbon::now()->addDays(2)->format('Y-m-d'))
+            ->get();
         
         foreach ($subscribers as $subscriber) {
             $subscriber->notify(new SubscriptionExpirationReminder());
         }
 
-        foreach ($readers as $reader) {
-            foreach ($reader->books as $book) {
-                $reader->notify(new LoanExpiration($book));
-            }
+        foreach ($loans as $loan) {
+            $loan->user->notify(new LoanExpiration($loan->book));
         }
     }
 }

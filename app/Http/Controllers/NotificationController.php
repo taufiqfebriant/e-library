@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Notifications\DatabaseNotification;
 use App\Book;
 
 class NotificationController extends Controller
