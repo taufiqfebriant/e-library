@@ -3,10 +3,10 @@
         <a class="navbar-brand font-weight-semibold text-lowercase" href="{{ url('/') }}">
             {{ config('app.name', 'E-Library') }}
         </a>
-        <div class="ml-auto d-flex d-md-none">
+        <div class="ml-auto d-flex d-md-none align-items-center">
             @auth
-                <div class="dropdown" style="position: unset">
-                    <a id="mobileNotificationsDropdown" class="nav-link font-weight-semibold position-relative text-body dropdown-toggler" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown px-2" style="position: unset">
+                    <a id="mobileNotificationsDropdown" class="font-weight-semibold position-relative text-body dropdown-toggler" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-bell"></i>
                         @if (auth()->user()->unreadNotifications->isNotEmpty())
                             <span class="badge badge-darkslategray navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
@@ -21,10 +21,16 @@
                     </div>
                 </div>
             @endauth
-            <button class="btn btn-light bg-transparent border btn-sm mr-2 navbar-search-toggler">
+            <a href="{{ route('cart.index') }}" class="text-body px-2">
+                <i class="fas fa-shopping-cart"></i>
+                @if (auth()->check() && \Cart::session(auth()->user()->id)->getContent()->count())
+                    <span class="badge badge-primary navbar-badge">{{ \Cart::session(auth()->user()->id)->getContent()->count() }}</span>
+                @endif
+            </a>
+            <a href="#" class="text-body px-2 navbar-search-toggler">
                 <i class="fas fa-search"></i>
-            </button>
-            <button class="btn btn-sm border" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+            </a>
+            <button class="btn btn-sm border ml-2" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </div>
@@ -42,9 +48,9 @@
             </ul>
             <form action="{{ route('search.index') }}" method="get" class="w-100 mx-md-5 d-none d-lg-block">
                 <div class="input-group">
-                    <input type="text" class="form-control form-control-sm" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." aria-label="Ketik judul buku, penulis, kategori, atau penerbit..." aria-describedby="search-button" name="q" value="{{ request()->q }}" required>
+                    <input type="text" class="form-control" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." aria-label="Ketik judul buku, penulis, kategori, atau penerbit..." aria-describedby="search-button" name="q" value="{{ request()->q }}" required>
                     <div class="input-group-append">
-                        <button button class="btn btn-primary btn-sm" type="button" id="search-button">
+                        <button button class="btn btn-primary" type="button" id="search-button">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -57,7 +63,7 @@
                         <i class="fas fa-search"></i>
                     </button>
                 </li>
-                <li class="nav-item position-relative cart-icon-wrapper px-2">
+                <li class="nav-item position-relative cart-icon-wrapper px-2 d-none d-md-block">
                     <a href="{{ route('cart.index') }}" class="nav-link text-body">
                         <i class="fas fa-shopping-cart"></i>
                         @if (auth()->check() && \Cart::session(auth()->user()->id)->getContent()->count())
@@ -113,9 +119,9 @@
         </div>
         <form action="{{ route('search.index') }}" method="get" class="w-100 navbar-search collapse d-lg-none">
             <div class="input-group py-2">
-                <input type="text" class="form-control form-control-sm" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." aria-label="Ketik judul buku, penulis, kategori, atau penerbit..." aria-describedby="search-button" name="q" value="{{ request()->q }}" required>
+                <input type="text" class="form-control" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." aria-label="Ketik judul buku, penulis, kategori, atau penerbit..." aria-describedby="search-button" name="q" value="{{ request()->q }}" required>
                 <div class="input-group-append">
-                    <button button class="btn btn-primary btn-sm" type="button" id="search-button">
+                    <button button class="btn btn-primary" type="button" id="search-button">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>

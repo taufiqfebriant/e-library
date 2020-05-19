@@ -8,17 +8,50 @@
 @section('content')
     @include('partials.navbar')
     <div class="container pt-5">
-        <div class="row mt-5 mb-4">
-            <div class="col-md-3">
+        <div class="row mt-5 mb-4 no-gutters">
+            <div class="col-5 col-md-3 pr-3 pr-md-4">
                 <img src="{{ asset("storage/{$book->cover}") }}" class="img-thumbnail border-0 bg-transparent p-0">
             </div>
-            <div class="col-md-8">
-                <h2 class="mt-2 font-weight-bold">{{ $book->title }}</h2>
+            <div class="col-7 col-md-8">
+                <h2 class="mt-md-2 font-weight-bold">{{ $book->title }}</h2>
                 <h5 class="text-muted my-3">
                     @foreach ($book->authors as $author)
                         {{ $author->name . ($loop->last ? '' : ', ') }}
                     @endforeach
                 </h5>
+                <div class="d-none d-md-block">
+                    <p class="mt-3">{{ $book->synopsis }}</p>
+                    <dl class="row mb-3 mt-4">
+                        <dt class="col-md-3">Kategori</dt>
+                        <dd class="col-md-9">{{ $book->category->name }}</dd>
+                        <dt class="col-md-3">Penerbit</dt>
+                        <dd class="col-md-9">{{ $book->publisher->name }}</dd>
+                        <dt class="col-md-3">Jumlah halaman</dt>
+                        <dd class="col-md-9">{{ $book->countPages($book->file) }} halaman</dd>
+                        <dt class="col-md-3">Jumlah peminjaman</dt>
+                        <dd class="col-md-9">{{ $book->loans_count ? "{$book->loans_count} kali" : 'Belum ada peminjaman' }}</dd>
+                    </dl>
+                </div>
+                @if (auth()->check() && $book->inTheLoanPeriod())
+                    <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary font-weight-semibold px-3 py-2">Baca</a>
+                @else
+                    <div class="d-flex flex-column flex-md-row">
+                        @if (auth()->check() && !$existsInCart && auth()->user()->loans()->active()->count() < 2)
+                            <button class="btn btn-outline-primary font-weight-semibold px-3 py-2 mr-2 add-to-cart">
+                                <i class="fas fa-cart-plus mr-2"></i>
+                                <span>Masukkan Keranjang</span>
+                            </button>
+                        @endif
+                        <a href="{{ route('books.read', compact('book')) }}" class="btn btn-outline-primary font-weight-semibold px-3 py-2 mr-2 w-100 w-md-auto">Lihat Cuplikan</a>
+                        <form action="{{ route('loans.store') }}" method="post" class="mt-2 mt-md-0">
+                            @csrf
+                            <input type="hidden" name="book_id" value="{{ $book->id }}">
+                            <button class="btn btn-primary font-weight-semibold px-3 py-2 w-100 w-md-auto">Pinjam</button>
+                        </form>
+                    </div>
+                @endif
+            </div>
+            <div class="col-12 d-md-none">
                 <p class="mt-3">{{ $book->synopsis }}</p>
                 <dl class="row mb-3 mt-4">
                     <dt class="col-md-3">Kategori</dt>
@@ -30,24 +63,6 @@
                     <dt class="col-md-3">Jumlah peminjaman</dt>
                     <dd class="col-md-9">{{ $book->loans_count ? "{$book->loans_count} kali" : 'Belum ada peminjaman' }}</dd>
                 </dl>
-                @if (auth()->check() && $book->inTheLoanPeriod())
-                    <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary font-weight-semibold px-3 py-2">Baca</a>
-                @else
-                    <div class="d-flex">
-                        @if (auth()->check() && !$existsInCart && auth()->user()->loans()->active()->count() < 2)
-                            <button class="btn btn-outline-primary font-weight-semibold px-3 py-2 mr-2 add-to-cart">
-                                <i class="fas fa-cart-plus mr-2"></i>
-                                <span>Masukkan Keranjang</span>
-                            </button>
-                        @endif
-                        <a href="{{ route('books.read', compact('book')) }}" class="btn btn-outline-primary font-weight-semibold px-3 py-2 mr-2">Lihat Cuplikan</a>
-                        <form action="{{ route('loans.store') }}" method="post">
-                            @csrf
-                            <input type="hidden" name="book_id" value="{{ $book->id }}">
-                            <button class="btn btn-primary font-weight-semibold px-3 py-2">Pinjam</button>
-                        </form>
-                    </div>
-                @endif
             </div>
         </div>
         <h3 class="mt-5 mb-3">Penilaian</h3>

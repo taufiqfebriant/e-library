@@ -8,7 +8,7 @@
 @section('content')
     @include('partials.navbar')
     @guest
-        <section class="hero-section vh-100">
+        <section class="hero-mrsection vh-100">
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center">
                     <div class="col-lg-6">
@@ -88,18 +88,17 @@
                 <div class="container h-100 mt-3">
                     <div class="carousel-inner h-100">
                         @foreach ($featuredBooks as $book)
-                            <div class="carousel-item h-100 {{ $loop->first ? 'active' : '' }}">
-                                <div class="row justify-content-center">
-                                    <div class="col-2 h-64">
-                                        <img src="{{ asset("storage/{$book->cover}") }}" class="w-100 h-100" alt="Book's cover">
+                            <a href="{{ route('books.show', compact('book')) }}" class="carousel-item h-100 text-decoration-none {{ $loop->first ? 'active' : '' }}">
+                                <div class="row justify-content-center no-gutters">
+                                    <div class="col-md-3 h-64 text-center mb-3 mb-md-0">
+                                        <img src="{{ asset("storage/{$book->cover}") }}" class="w-auto h-100" alt="Book's cover">
                                     </div>
-                                    <div class="col-7 text-white my-auto">
-                                        <h3>{{ $book->title }}</h3>
-                                        <h5 class="mb-3">{{ $book->getCommaSeparatedAuthors() }}</h5>
-                                        <a href="{{ route('books.show', compact('book')) }}" class="btn btn-primary">Lihat</a>
+                                    <div class="col-md-6 text-white my-auto pl-md-3 pl-lg-0">
+                                        <h4>{{ $book->title }}</h4>
+                                        <h6 class="mb-lg-3">{{ $book->getCommaSeparatedAuthors() }}</h6>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
                     <a class="carousel-control-prev" href="#featuredBooks" role="button" data-slide="prev">

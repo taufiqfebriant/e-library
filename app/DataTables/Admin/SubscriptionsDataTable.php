@@ -73,7 +73,9 @@ class SubscriptionsDataTable extends DataTable
                         Button::make('print'),
                         Button::make('reset'),
                         Button::make('reload')
-                    );
+                    )->parameters([
+                        'responsive' => true
+                    ]);
     }
 
     /**

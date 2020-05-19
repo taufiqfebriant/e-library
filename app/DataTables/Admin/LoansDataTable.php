@@ -2,14 +2,15 @@
 
 namespace App\DataTables\Admin;
 
-use App\Author;
+use App\Loan;
+use Carbon\Carbon;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class AuthorsDataTable extends DataTable
+class LoansDataTable extends DataTable
 {
     /**
      * Build DataTable class.
@@ -21,18 +22,35 @@ class AuthorsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'admin.author.partials.action');
+            ->editColumn('created_at', function (Loan $loan) {
+                return $loan->created_at ? with(new Carbon($loan->created_at))->format('Y-m-d H:i:s') : '';
+            })
+            ->editColumn('ends_at', function (Loan $loan) {
+                return $loan->ends_at ? with(new Carbon($loan->ends_at))->format('Y-m-d H:i:s') : '';
+            })
+            ->editColumn('returned_at', function (Loan $loan) {
+                return $loan->returned_at ? with(new Carbon($loan->returned_at))->format('Y-m-d H:i:s') : '-';
+            })
+            ->filterColumn('created_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(created_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
+            })
+            ->filterColumn('ends_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(ends_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
+            })
+            ->filterColumn('returned_at', function ($query, $keyword) {
+                $query->whereRaw("DATE_FORMAT(returned_at, '%Y-%m-%d') like ?", ["%$keyword%"]);
+            });
     }
 
     /**
      * Get query source of dataTable.
      *
-     * @param \App\Author $model
+     * @param \App\Loan $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Author $model)
+    public function query(Loan $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->with(['book', 'user'])->select('loans.*');
     }
 
     /**
@@ -43,7 +61,7 @@ class AuthorsDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('author-table')
+                    ->setTableId('loans-table')
                     ->addTableClass('table-bordered table-hover w-100')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
@@ -69,13 +87,11 @@ class AuthorsDataTable extends DataTable
     {
         return [
             Column::make('id'),
-            Column::make('name')->title('Nama'),
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center')
-                  ->title('Opsi')
+            Column::make('book.title')->title('Buku'),
+            Column::make('user.name')->title('Member'),
+            Column::make('created_at')->title('Tanggal pinjam'),
+            Column::make('ends_at')->title('Berakhir pada'),
+            Column::make('returned_at')->title('Tanggal pengembalian')
         ];
     }
 
@@ -86,6 +102,6 @@ class AuthorsDataTable extends DataTable
      */
     protected function filename()
     {
-        return 'Author_' . date('YmdHis');
+        return 'Loans_' . date('YmdHis');
     }
 }

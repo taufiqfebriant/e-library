@@ -52,5 +52,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::get('transactions/receipts/{receipt}', 'TransactionController@receipt')->name('transactions.receipt');
     Route::patch('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
     Route::get('subscriptions', 'SubscriptionController@index')->name('subscriptions.index');
+    Route::get('loans', 'LoanController@index')->name('loans.index');
     Route::resource('users', 'UserController' , ['except' => ['show' , 'create' , 'store']]);
 });
