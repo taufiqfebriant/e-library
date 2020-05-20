@@ -12,10 +12,11 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $book = $book->withCount('loans')->get()->find($book->id);
+
         // pagination review
-        $rivi = Review::where('book_id',$book->id)->paginate(5);
+        $reviews = Review::where('book_id', $book->id)->orderBy('id', 'desc')->paginate(5);
         $existsInCart = auth()->check() ? in_array($book->id, \Cart::session(auth()->user()->id)->getContent()->pluck('id')->toArray()) : [];
-        return view('book.show', compact('book', 'rivi', 'existsInCart'));
+        return view('book.show', compact('book', 'reviews', 'existsInCart'));
     }
 
     public function read(Book $book)

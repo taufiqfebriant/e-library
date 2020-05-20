@@ -3,7 +3,7 @@
 use App\Role;
 use Illuminate\Database\Seeder;
 use App\User;
-use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 class UsersTableSeeder extends Seeder
@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
         $admin = User::create([
             'name' => 'Admin',
             'email' => 'admin@admin.com',
+            'email_verified_at' => Carbon::now(),
             'password' => Hash::make('password')
         ]);
         $admin->roles()->attach($adminRole);

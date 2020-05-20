@@ -84,25 +84,8 @@
                     </div>
                 </form>
             @endif
-            @forelse ($rivi as $review)
-                <div class="review pt-3 pb-1 {{ !$loop->last ? 'border-bottom' : '' }}">
-                    <h5>{{ $review->user->name }}</h5>
-                    <div class="stars">
-                        @for ($i = 1; $i <= 5; $i++)
-                            <span class="text-{{ $i <= $review->rating ? 'warning' : 'lightgray' }}">
-                                <i class="fas fa-star"></i>
-                            </span>
-                        @endfor
-                    </div>
-                    <p class="mt-2">{{ $review->comment }}</p>
-                </div>
-            @empty
-                <p>Tidak ada penilaian</p>
-            @endforelse
-            <div class="clearfix">
-                <div class="float-right">
-                    {{ $rivi->links() }}
-                </div>
+            <div class="content">
+                @include('book.partials.reviews')
             </div>
         </section>
     </div>

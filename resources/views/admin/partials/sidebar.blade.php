@@ -1,6 +1,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('admin.dashboard.index') }}" class="brand-link">
+    <a href="{{ route('home.index') }}" class="brand-link">
         <i class="fas fa-book ml-3 mr-2"></i>
         <span class="brand-text font-weight-light">{{ config('app.name', 'E-Library') }}</span>
     </a>

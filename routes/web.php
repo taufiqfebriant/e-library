@@ -10,6 +10,7 @@ Route::get('plans', 'PlanController@index')->name('plans.index');
 Route::get('categories', 'CategoryController@index')->name('categories.index');
 Route::get('search', 'SearchController@index')->name('search.index');
 Route::get('auth/check', 'Auth\AuthController@check')->name('auth.check');
+Route::get('pagination/reviews', 'PaginationController@reviews')->name('pagination.reviews');
 Route::middleware('auth')->group(function () {
     Route::resource('cart', 'CartController');
     Route::middleware('verified')->group(function () {
@@ -36,9 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::post('notifications/mark-as-read', 'NotificationController@markAsRead')->name('notifications.mark-as-read');
 });
 
-// search book testing
-// Route::get('/search' , 'FrontpageController@searchBooks')->name('search');
-Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function() {
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users', 'verified')->group(function() {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
     Route::resource('authors', 'AuthorController');
     Route::resource('categories', 'CategoryController');

@@ -1,6 +1,7 @@
 const get_url = document.location
 const host = get_url.host === "localhost" ? `/${get_url.pathname.split("/")[1]}` : ""
 const base_url = get_url.origin + host
+let segments = document.location.pathname.split('/')
 
 $(function () {
     // Ajax headers
@@ -60,5 +61,21 @@ $(function () {
         } else {
             $('.navbar-search').slideUp(300)
         }
+    })
+
+    // Pagination
+    $(document).on('click', '.reviews-pagination .pagination a', function (event) {
+        event.preventDefault()
+        let page = $(this).attr('href').split('page=')[1]
+        $.ajax({
+            data: {
+                book_id: segments[2],
+                page
+            },
+            url: `${base_url}/pagination/reviews`,
+            success: function (response) {
+                $('.reviews .content').html(response)
+            }
+        })
     })
 })

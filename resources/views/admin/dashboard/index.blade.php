@@ -80,13 +80,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($kategoriTerfavorit as $kl)
-                                                <tr>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $kl->name }}</td>
-                                                    <td>{{ $kl->loans_count }}</td>
-                                                </tr>
-                                                @endforeach
+                                                @forelse ($kategoriTerfavorit as $kl)
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $kl->name }}</td>
+                                                        <td>{{ $kl->loans_count }}</td>
+                                                    </tr>
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="3">Tidak ada data</td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
@@ -120,13 +124,17 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach($judulBukuTerfavorit as $jbt)
+                                                @forelse ($judulBukuTerfavorit as $jbt)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $jbt->title }}</td>
                                                         <td>{{ $jbt->loans_count }}</td>
                                                     </tr>
-                                                @endforeach
+                                                @empty
+                                                    <tr>
+                                                        <td colspan="3">Tidak ada data</td>
+                                                    </tr>
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
