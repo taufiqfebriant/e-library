@@ -1,4 +1,5 @@
 @extends('layouts.body')
+@section('title', 'Verifikasi Email')
 
 @section('content')
     @include('partials.navbar')

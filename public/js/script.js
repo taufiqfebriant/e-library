@@ -78,4 +78,15 @@ $(function () {
             }
         })
     })
+
+    function initStarRating() {
+        $('.rating').starRating({
+            starSize: 25,
+            useFullStars: true,
+            disableAfterRate: false,
+            callback: function(currentRating) {
+                $('.rating').next('#rating').val(currentRating)
+            }
+        });
+    }
 })

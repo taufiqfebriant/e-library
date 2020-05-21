@@ -137,7 +137,6 @@
                     if ($('#rating').length > 0) {
                         $('#rating').val(currentRating)                        
                     } else {
-                        console.log($(this))
                         $('#ratingWrapper2').parent().append(`<input type="hidden" name="rating" id="rating" value="${currentRating}">`)
                     }
                 }

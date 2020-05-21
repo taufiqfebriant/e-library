@@ -4,19 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Book;
 use App\Review;
-use App\Transaction;
-use Carbon\Carbon;
 
 class BookController extends Controller
 {
     public function show(Book $book)
     {
         $book = $book->withCount('loans')->get()->find($book->id);
-
-        // pagination review
-        $reviews = Review::where('book_id', $book->id)->orderBy('id', 'desc')->paginate(5);
-        $existsInCart = auth()->check() ? in_array($book->id, \Cart::session(auth()->user()->id)->getContent()->pluck('id')->toArray()) : [];
-        return view('book.show', compact('book', 'reviews', 'existsInCart'));
+        $reviews = Review::where('book_id', $book->id)->orderBy('id', 'desc');
+        $existsInCart = [];
+        $authUserReview = [];
+        if (auth()->check()) {
+            $reviews = $reviews->where('user_id', '!=', auth()->user()->id);
+            $existsInCart = in_array($book->id, \Cart::session(auth()->user()->id)->getContent()->pluck('id')->toArray());
+            $authUserReview = $book->reviews()->with('user')->where('user_id', auth()->user()->id)->first();
+        }
+        $reviews = $reviews->paginate(5);
+        return view('book.show', compact('book', 'reviews', 'existsInCart', 'authUserReview'));
     }
 
     public function read(Book $book)

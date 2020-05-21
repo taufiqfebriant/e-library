@@ -6,6 +6,31 @@
 @endsection
 
 @section('content')
+    @if ($authUserReview)
+        <div class="modal fade" tabindex="-1" role="dialog" id="editReviewModal">
+            <div class="modal-dialog modal-dialog-centered">
+                <form method="post" action="{{ route('reviews.update', ['review' => $authUserReview]) }}" class="modal-content">
+                    @method('PATCH')
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ubah Penilaian</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="rating text-center"></div>
+                        <input type="hidden" name="rating" id="rating" value="{{ $authUserReview->rating }}">
+                        <textarea name="comment" id="comment" class="form-control mt-4" placeholder="Komentar Anda tentang buku ini...">{{ $authUserReview->comment }}</textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Ubah</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    @endif
     @include('partials.navbar')
     <div class="container pt-5">
         <div class="row mt-5 mb-4 no-gutters">
@@ -65,8 +90,35 @@
                 </dl>
             </div>
         </div>
-        <h3 class="mt-5 mb-3">Penilaian</h3>
+        @if (auth()->check() && $book->reviews()->where('user_id', auth()->user()->id)->exists())
+            <section class="your-review">
+                <div class="d-flex align-items-center justify-content-between">
+                    <h3 class="mb-0">Penilaian Anda</h3>
+                    <div class="dropdown dropleft">
+                        <button class="btn btn-light bg-transparent" type="button" id="yourReviewAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v fa-sm"></i>
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="yourReviewAction">
+                            <button class="dropdown-item" data-toggle="modal" data-target="#editReviewModal" type="button">Ubah</button>
+                            <a class="dropdown-item" href="#">Hapus</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="review pt-3 pb-1">
+                    <h5>{{ $authUserReview->user->name }}</h5>
+                    <div class="stars">
+                        @for ($i = 1; $i <= 5; $i++)
+                            <span class="text-{{ $i <= $authUserReview->rating ? 'warning' : 'lightgray' }}">
+                                <i class="fas fa-star"></i>
+                            </span>
+                        @endfor
+                    </div>
+                    <p class="mt-2">{{ $authUserReview->comment }}</p>
+                </div>
+            </section>
+        @endif
         <section class="reviews">
+            <h3 class="mt-4 mb-3">Penilaian</h3>
             @if (auth()->check() && $book->loans()->where('user_id', auth()->user()->id)->exists() && $book->reviews()->where('user_id', auth()->user()->id)->doesntExist())
                 <form action="{{ route('reviews.store') }}" method="post" class="pb-3">
                     @csrf
@@ -76,7 +128,7 @@
                         <div class="rating col-md-auto mb-3 mb-md-0"></div>
                         <input type="hidden" name="rating" id="rating">
                         <div class="col">
-                            <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini ..."></textarea>
+                            <textarea name="comment" id="comment" class="form-control" placeholder="Komentar Anda tentang buku ini..."></textarea>
                         </div>
                     </div>
                     <div class="clearfix">
@@ -106,6 +158,8 @@
                     rating.next('#rating').val(currentRating)
                 }
             });
+
+            rating.starRating('setRating', $('#rating').val())
         })
     </script>
 @endpush
