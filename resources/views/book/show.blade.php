@@ -150,16 +150,18 @@
         $(function () {
             let rating = $('.rating')
 
-            rating.starRating({
-                starSize: 25,
-                useFullStars: true,
-                disableAfterRate: false,
-                callback: function(currentRating) {
-                    rating.next('#rating').val(currentRating)
-                }
-            });
-
-            rating.starRating('setRating', $('#rating').val())
+            if (rating.length > 0) {
+                rating.starRating({
+                    starSize: 25,
+                    useFullStars: true,
+                    disableAfterRate: false,
+                    callback: function(currentRating) {
+                        rating.next('#rating').val(currentRating)
+                    }
+                });
+    
+                rating.starRating('setRating', $('#rating').val())
+            }
         })
     </script>
 @endpush

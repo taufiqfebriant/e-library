@@ -9,7 +9,7 @@
 @section('body')
     <body>
         <div id="app" class="vh-100">
-            @include('partials.toast')
+            @includeWhen(session('message'), 'partials.toast', ['message' => session('message'), 'type' => session('type')])
             @yield('content')
         </div>
         <!-- Scripts -->

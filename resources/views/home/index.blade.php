@@ -155,7 +155,7 @@
                             </div>
                         </div>
                         <div class="col-12">
-                            @if (auth()->user()->categories()->exists())
+                            @if ($recommendedBooks->isNotEmpty())
                                 <div class="book-carousel">
                                     @foreach ($recommendedBooks as $book)
                                         <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
@@ -170,7 +170,7 @@
                                     @endforeach
                                 </div>
                             @else
-                                <h5 class="text-center my-5">Tidak ada buku yang disukai.</h5>
+                                <p class="text-center my-5">Tidak ada data.</p>
                             @endif
                         </div>
                     </div>
@@ -183,19 +183,23 @@
                             <h3 class="pl-2">Buku terbaru</h3>
                         </div>
                         <div class="col-12">
-                            <div class="book-carousel">
-                                @foreach ($latestBooks as $book)
-                                    <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
-                                        <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
-                                        <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
-                                        <p class="text-muted">
-                                            @foreach ($book->authors as $author)
-                                                {{ $author->name . ($loop->last ? '' : ', ') }}
-                                            @endforeach
-                                        </p>
-                                    </a>
-                                @endforeach
-                            </div>
+                            @if ($latestBooks->isNotEmpty())
+                                <div class="book-carousel">
+                                    @foreach ($latestBooks as $book)
+                                        <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
+                                            <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
+                                            <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
+                                            <p class="text-muted">
+                                                @foreach ($book->authors as $author)
+                                                    {{ $author->name . ($loop->last ? '' : ', ') }}
+                                                @endforeach
+                                            </p>
+                                        </a>
+                                    @endforeach
+                                </div>
+                            @else
+                                <p class="text-center my-5">Tidak ada data.</p>
+                            @endif
                         </div>
                     </div>
                 </div>

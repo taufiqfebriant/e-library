@@ -5,79 +5,13 @@
     <!-- Select2 -->
     <link rel="stylesheet" href="{{ asset('vendors/admin-lte/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/admin-lte/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
-    {{-- <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/util.css">  --}}
 @endsection
 
 @section('content')
-    {{-- <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <div class="login100-form-title" style="background-color: darkcyan;">
-                    <span class="login100-form-title-1">
-                        {{ __('Register') }}
-                    </span>
-                </div>
-
-                <form class="login100-form validate-form" method="POST" action="{{ route('register') }}">
-                    @csrf
-                    <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-                        <span class="label-input100">{{ __('Name') }}</span>
-                        <input id="name" type="text" class="input100 @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                        <span class="focus-input100"></span>
-                        @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                    
-                    <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
-                        <span class="label-input100">{{ __('E-Mail Address') }}</span>
-                        <input id="email" type="email" class="input100 @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                        <span class="focus-input100"></span>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                        <span class="label-input100">{{ __('Password') }}</span>
-                        <input id="password" type="password" class="input100 @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                        <span class="focus-input100"></span>
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="wrap-input100 validate-input m-b-18" data-validate="Password is required">
-                        <span class="label-input100">{{ __('Confirm Password') }}</span>
-                        <input id="password-confirm" type="password" class="input100" name="password_confirmation" required autocomplete="new-password">
-                        <span class="focus-input100"></span>
-                    </div>
-                    
-                    
-                        <div class="container-login100-form-btn">
-                        <button class="login100-form-btn" type="submit">
-                        {{ __('Register') }}
-                        </button>
-                    </div>
-                    <div class="container-goto-register">
-                        <br>
-                        <p>Already have Account? <a href="{{ route('login') }}">SignUp!</a></p>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div> --}}
     <div class="row h-100 no-gutters">
         <div class="col-lg-7 h-100">
             <div class="container h-100">
-                <div class="row h-100 justify-content-center align-items-center">
+                <div class="row h-100 py-5 justify-content-center align-items-center overflow-auto">
                     <div class="col-8">
                         <h4 class="mb-4">Daftar</h4>
                         <form action="{{ route('register') }}" method="post">

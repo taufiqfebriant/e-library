@@ -18,19 +18,9 @@
                                     <div class="col-9 pl-0">
                                         <h5 class="card-title">{{ $item->name }}</h5>
                                         <form action="{{ route("cart.destroy", ['cart' => $item->id]) }}" method="post">
-                                            class="col-3">
-                                            <img src="{{ asset("storage/{$item->attributes->cover}") }}" alt="Book cover" class="img-fluid">
-                                        </div>
-                                        <div class="col-9">
-                                            <h5 class="card-title">{{ $item->name }}</h5>
-                                            <form action="{{ route("cart.destroy", ['cart' => $item->id]) }}" method="post">
-                                                @method('DELETE')
-                                                @csrf
-                                                <button class="btn btn-link">Hapus</button>
-                                            </form>
-                                        </di          @method('DELETE')
+                                            @method('DELETE')
                                             @csrf
-                                            <button class="btn btn-link px-0">Hapus</button>
+                                            <button class="btn btn-link pl-0">Hapus</button>
                                         </form>
                                     </div>
                                 </div>
