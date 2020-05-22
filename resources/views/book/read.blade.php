@@ -16,7 +16,6 @@
                 <h3>{{ $book->title }}</h3>
             </div>
         </div>
-        {{-- <a href="{{ url()->previous() }}" class="btn btn-primary mt-3">Kembali</a> --}}
-        <iframe src="https://docs.google.com/viewer?url=https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf&embedded=true" frameborder="0" class="w-100 h-100"></iframe>
+        <iframe src="https://docs.google.com/viewer?url={{ $book->inTheLoanPeriod() ? route('books.file', $book->id) : asset("storage/{$book->preview}") }}" frameborder="0" class="w-100 h-100"></iframe>
     </div>
 @endsection
