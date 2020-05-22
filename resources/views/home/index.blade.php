@@ -65,19 +65,23 @@
                         <h2>Buku terbaru untuk Anda</h2>
                     </div>
                     <div class="col-12">
-                        <div class="book-carousel">
-                            @foreach ($latestBooks as $book)
-                                <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
-                                    <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
-                                    <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
-                                    <p class="text-muted">
-                                        @foreach ($book->authors as $author)
-                                            {{ $author->name . ($loop->last ? '' : ', ') }}
-                                        @endforeach
-                                    </p>
-                                </a>
-                            @endforeach
-                        </div>
+                        @if ($latestBooks->isEmpty())
+                            <p class="text-center my-3">Tidak ada buku.</p>
+                        @else
+                            <div class="book-carousel">
+                                @foreach ($latestBooks as $book)
+                                    <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
+                                        <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
+                                        <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
+                                        <p class="text-muted">
+                                            @foreach ($book->authors as $author)
+                                                {{ $author->name . ($loop->last ? '' : ', ') }}
+                                            @endforeach
+                                        </p>
+                                    </a>
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

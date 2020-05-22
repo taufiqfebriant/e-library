@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@if (!Request::is('/')) @yield('title') | @endif {{ config('app.name', 'E-Library') }}</title>
+    <title>@if (!Request::is('/')) @yield('title') | @endif {{ Str::of(config('app.name', 'Rumah_Cahaya_FLP_Saudi_Arabia'))->replace('_', ' ') }}</title>
     @yield('head')
 </head>
 @yield('body')

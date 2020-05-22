@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-member bg-white">
     <div class="container align-items-center flex-wrap">
-        <a class="navbar-brand font-weight-semibold text-lowercase" href="{{ url('/') }}">
-            {{ config('app.name', 'E-Library') }}
+        <a class="navbar-brand" href="{{ url('/') }}">
+            <img src="{{ asset('images/logo/logo.webp') }}" alt="Logo">
         </a>
         <div class="ml-auto d-flex d-md-none align-items-center">
             @auth

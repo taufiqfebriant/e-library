@@ -2,6 +2,6 @@
     <div class="float-right d-none d-sm-block">
         <b>Beta Version</b>
     </div>
-    <strong>Copyright &copy; {{ now()->year }} {{ config('app.name', 'E-Library') }}.</strong> All rights
+    <strong>Copyright &copy; {{ now()->year }} {{ Str::of(config('app.name', 'Rumah_Cahaya_FLP_Saudi_Arabia'))->replace('_', ' ') }}.</strong> All rights
     reserved.
 </footer>

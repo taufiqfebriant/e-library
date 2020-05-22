@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <a href="{{ route('home.index') }}" class="brand-link">
         <i class="fas fa-book ml-3 mr-2"></i>
-        <span class="brand-text font-weight-light">{{ config('app.name', 'E-Library') }}</span>
+        <span class="brand-text font-weight-light">{{ Str::of(config('app.name', 'Rumah_Cahaya_FLP_Saudi_Arabia'))->replace('_', ' ') }}</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">

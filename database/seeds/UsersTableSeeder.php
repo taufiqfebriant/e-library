@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
         $adminRole  = Role::where('name', 'admin')->first();
         $admin = User::create([
             'name' => 'Admin',
-            'email' => 'admin@admin.com',
+            'email' => 'rumahcahayasaudi@gmail.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('password')
         ]);

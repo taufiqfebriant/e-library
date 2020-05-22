@@ -7,7 +7,7 @@
         <div class="container">
             <h3 class="mt-4">Kategori</h3>
             <div class="row">
-                @foreach ($categories as $category)
+                @forelse ($categories as $category)
                     <div class="col-sm-6 col-md-4 py-3">
                         <a href="{{ route('search.index', ['category_id' => $category->id]) }}" class="card text-decoration-none">
                             <div class="card-body">
@@ -15,7 +15,9 @@
                             </div>
                         </a>
                     </div>
-                @endforeach
+                @empty
+                <div class="col-12 text-center space-3">Tidak ada data.</div>
+                @endforelse
             </div>
         </div>
     </main>
