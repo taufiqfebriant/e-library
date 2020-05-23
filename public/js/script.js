@@ -10,7 +10,7 @@ $(function () {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     })
-
+    
     if ($('.toast .toast-message').is(':not(:empty)')) {
         $('.toast').toast('show')
     }

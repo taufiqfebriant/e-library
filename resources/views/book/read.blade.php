@@ -16,6 +16,8 @@
                 <h3>{{ $book->title }}</h3>
             </div>
         </div>
-        <iframe src="https://docs.google.com/viewer?url={{ $book->inTheLoanPeriod() ? route('books.file', $book->id) : asset("storage/{$book->preview}") }}" frameborder="0" class="w-100 h-100"></iframe>
+        <object data="{{ $book->inTheLoanPeriod() ? route('books.file', $book->id) : asset("storage/{$book->preview}") }}#toolbar=0" type="text/html" class="w-100 h-100">
+            <embed src="{{ $book->inTheLoanPeriod() ? route('books.file', $book->id) : asset("storage/{$book->preview}") }}#toolbar=0" type="text/html">
+        </object>
     </div>
 @endsection
