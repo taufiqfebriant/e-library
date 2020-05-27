@@ -21,7 +21,7 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <h3 class="mb-0">Data Pribadi</h3>
                     <div>
-                        <a href="{{ route('users.edit', compact('user')) }}" class="btn btn-darkslategray">Ubah</a>
+                        <a href="{{ route('users.edit', compact('user')) }}" class="btn btn-primary">Ubah</a>
                         <button class="btn btn-lavender d-lg-none" data-toggle="modal" data-target="#userNavModal">
                             <i class="fas fa-ellipsis-h fa-lg"></i>
                         </button>

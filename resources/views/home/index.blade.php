@@ -13,7 +13,7 @@
                 <div class="row h-100 align-items-center justify-content-center">
                     <div class="col-lg-6">
                         <h1 class="display-4 font-weight-semibold">Temukan <span class="text-primary">ribuan</span> buku</h1>
-                        <p class="text-base">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Atque provident natus hic, nobis, impedit, perferendis animi.</p>
+                        <p class="text-base">Jelajahi koleksi buku kami dan baca secara online, dimana saja.</p>
                         <a href="{{ route('plans.index') }}" class="btn btn-primary text-uppercase font-weight-semibold px-3 py-2 tracking-wide">Langganan sekarang</a>
                     </div>
                     <div class="col-lg-6 d-none d-lg-block">
@@ -31,7 +31,7 @@
                     <div class="col-lg-4 pb-3 pb-lg-0">
                         <div class="card">
                             <div class="card-body text-center">
-                                <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
+                                <i class="fas fa-folder-open fa-5x mb-4"></i>
                                 <h5 class="card-title">Temukan buku</h5>
                                 <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, facilis.</p>
                             </div>
@@ -40,7 +40,7 @@
                     <div class="col-lg-4 pb-3 pb-lg-0">
                         <div class="card">
                             <div class="card-body text-center">
-                                <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
+                                <i class="fas fa-money-check-alt fa-5x mb-4"></i>
                                 <h5 class="card-title">Berlangganan</h5>
                                 <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, facilis.</p>
                             </div>
@@ -49,7 +49,7 @@
                     <div class="col-lg-4">
                         <div class="card">
                             <div class="card-body text-center">
-                                <img src="{{ asset('images/undraw_Books_l33t.svg') }}" alt="Ilustrasi bagian kenapa kami" class="rounded-circle">
+                                <i class="fas fa-book-open fa-5x mb-4"></i>
                                 <h5 class="card-title">Mulai membaca</h5>
                                 <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, facilis.</p>
                             </div>

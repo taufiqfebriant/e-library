@@ -63,7 +63,7 @@
                                 </div>
                             </div>
                             <div class="clearfix">
-                                <button class="btn btn-darkslategray float-right">Ubah</button>
+                                <button class="btn btn-primary float-right">Ubah</button>
                             </div>
                         </form>
                     </div>

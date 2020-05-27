@@ -9,7 +9,7 @@
                     <a id="mobileNotificationsDropdown" class="font-weight-semibold position-relative text-body dropdown-toggler" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-bell"></i>
                         @if (auth()->user()->unreadNotifications->isNotEmpty())
-                            <span class="badge badge-darkslategray navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
+                            <span class="badge badge-primary navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
                         @endif
                     </a>
                     <div class="dropdown-menu py-0 overflow-auto mw-100 mt-0 rounded-0" aria-labelledby="mobileNotificationsDropdown" style="max-height: 300px;">
@@ -81,7 +81,7 @@
                         <a id="notificationsDropdown" class="nav-link font-weight-semibold position-relative text-body dropdown-toggler" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-bell"></i>
                             @if (auth()->user()->unreadNotifications->isNotEmpty())
-                                <span class="badge badge-darkslategray navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
+                                <span class="badge badge-primary navbar-badge">{{ auth()->user()->unreadNotifications->count() }}</span>
                             @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-right py-0 overflow-auto" aria-labelledby="notificationsDropdown" style="max-height: 300px; width: 350px">

@@ -29,7 +29,7 @@
                                 <div class="rating" id="ratingWrapper1"></div>
                             </div>
                         </div>
-                        <button class="btn btn-darkslategray text-uppercase btn-block mt-3">Terapkan</button>
+                        <button class="btn btn-primary text-uppercase btn-block mt-3">Terapkan</button>
                     </form>
                 </div>
             </div>

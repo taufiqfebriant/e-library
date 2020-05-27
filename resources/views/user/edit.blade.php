@@ -97,7 +97,7 @@
                                 </div>
                             </div>
                             <div class="clearfix">
-                                <button class="btn btn-darkslategray float-right">Perbarui</button>
+                                <button class="btn btn-primary float-right">Perbarui</button>
                             </div>
                         </form>
                     </div>

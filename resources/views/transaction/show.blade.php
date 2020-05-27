@@ -6,7 +6,7 @@
     <div class="container space-top-3 space-bottom-2">
         <div class="row">
             <div class="col-12 text-center pb-4">
-                <h1 class="text-uppercase font-weight-bold text-darkslategray">Transaksi</h1>
+                <h1 class="text-uppercase font-weight-bold text-primary">Transaksi</h1>
             </div>
             <div class="col-lg-auto py-4 pr-4 border-lg-right">
                 <h5 class="text-black-50">Nomor Transaksi</h5>
@@ -24,7 +24,7 @@
                         <h5>Transfer ke nomor rekening</h5>
                         <h3 class="mb-0">BCA 0123456789</h3>
                     </div>
-                    <span class="text-darkslategray">
+                    <span class="text-primary">
                         <i class="fas fa-exchange-alt fa-4x"></i>
                     </span>
                 </div>
