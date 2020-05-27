@@ -26,14 +26,14 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12 pb-4">
-                        <h2>Cara kerja e-library</h2>
+                        <h2>Cara kerja</h2>
                     </div>
                     <div class="col-lg-4 pb-3 pb-lg-0">
                         <div class="card">
                             <div class="card-body text-center">
                                 <i class="fas fa-folder-open fa-5x mb-4"></i>
                                 <h5 class="card-title">Temukan buku</h5>
-                                <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, facilis.</p>
+                                <p class="text-muted">Pastikan buku yang Anda cari tersedia di sini.</p>
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                             <div class="card-body text-center">
                                 <i class="fas fa-money-check-alt fa-5x mb-4"></i>
                                 <h5 class="card-title">Berlangganan</h5>
-                                <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, facilis.</p>
+                                <p class="text-muted">Pilih paket yang Anda mau.</p>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                             <div class="card-body text-center">
                                 <i class="fas fa-book-open fa-5x mb-4"></i>
                                 <h5 class="card-title">Mulai membaca</h5>
-                                <p class="text-muted">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, facilis.</p>
+                                <p class="text-muted">Baca secara online kapan & di mana saja.</p>
                             </div>
                         </div>
                     </div>
