@@ -30,7 +30,7 @@ class BookController extends Controller
 
     public function file($id)
     {
-        $book = Book::find($id)->firstOrFail();
+        $book = Book::where('id', $id)->first();
         $book->file = base64_encode(Storage::get($book->file));
         return response()->json($book);
     }

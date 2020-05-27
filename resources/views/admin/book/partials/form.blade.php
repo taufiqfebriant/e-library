@@ -110,18 +110,19 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="preview" class="col-sm-2 col-form-label">Cuplikan <small>(opsional)</small></label>
+        <label for="preview" class="col-sm-2 col-form-label">Cuplikan</label>
         <div class="col-sm-10">
-            <div class="input-group">
-                <div class="custom-file">
-                    <input type="file" class="custom-file-input @error('preview') is-invalid @enderror" id="preview"
-                        name="preview">
-                    <label class="custom-file-label" for="preview">Pilih file</label>
+            <div class="input-group @error('preview') is-invalid @enderror">
+                <input type="number" class="form-control" name="preview" placeholder="Jumlah halaman cuplikan" aria-label="Jumlah halaman cuplikan" aria-describedby="preview-addon" value="{{ old('preview', $book->preview) }}" min="0">
+                <div class="input-group-append">
+                    <span class="input-group-text" id="preview-addon">halaman</span>
                 </div>
             </div>
-            @if ($book->preview)
-                <a href="{{ route('admin.books.preview', compact('book')) }}" target="_blank" class="small float-right mt-2">Lihat cuplikan aktif</a>
-            @endif
+            @error('preview')
+                <span class="invalid-feedback" role="alert">
+                    {{ $message }}
+                </span>
+            @enderror
         </div>
     </div>
     <div class="form-group row align-items-center">

@@ -58,28 +58,17 @@
                                     <dd class="col-sm-9">{{ $book->publisher->name }}</dd>
                                     <dt class="col-sm-3">Jumlah halaman</dt>
                                     <dd class="col-sm-9">{{ $book->countPages($book->file) }} halaman</dd>
+                                    <dt class="col-sm-3">Jumlah halaman cuplikan</dt>
+                                    <dd class="col-sm-9">{{ $book->preview }} halaman</dd>
                                     <dt class="col-sm-3">Tampilkan sebagai buku unggulan</dt>
                                     <dd class="col-sm-9">{{ $book->featured ? 'Ya' : 'Tidak' }}</dd>
-                                    <dt class="col-sm-3">Dokumen</dt>
-                                    <dd class="col-sm-9">
-                                        <div class="btn-group">
-                                            <button type="button" class="btn btn-primary btn-sm">PDF</button>
-                                            <button type="button"
-                                                class="btn btn-primary btn-sm dropdown-toggle dropdown-toggle-split"
-                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                <span class="sr-only">Toggle Dropdown</span>
-                                            </button>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item" href="{{ route('admin.books.file', compact('book')) }}">File</a>
-                                                <div class="dropdown-divider"></div>
-                                                <a class="dropdown-item" href="{{ route('admin.books.preview', compact('book')) }}">Cuplikan</a>
-                                            </div>
-                                        </div>
-                                    </dd>
                                 </dl>
                             </div>
                             <div class="card-footer">
-                                <a href="{{ route('admin.books.index') }}" class="btn btn-default">Kembali</a>
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ route('admin.books.index') }}" class="btn btn-default">Kembali</a>
+                                    <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary">Lihat buku</a>
+                                </div>
                             </div>
                             <!-- /.card-body -->
                         </div>

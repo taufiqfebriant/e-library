@@ -91,9 +91,6 @@ class BookController extends Controller
         if ($request->hasFile('file')) {
             Storage::delete($book->file);
         }
-        if ($request->hasFile('preview')) {
-            Storage::disk('public')->delete($book->preview);
-        }
         $book->update(Arr::except($request->validated(), 'author_id'));
         $this->storeFiles($book);
         $book->authors()->sync($request->author_id);
@@ -112,19 +109,6 @@ class BookController extends Controller
         $book->delete();
         return redirect()->route('admin.books.index');
     }
-
-    public function preview(Book $book)
-    {
-        return view('admin.book.pdf', compact('book'));
-    }
-
-    public function file(Book $book)
-    {
-        if (file_exists(storage_path("app/{$book->file}"))) {
-            return response()->file(storage_path("app/{$book->file}"));
-        }
-        abort(404);
-    }
     
     private function storeFiles($book)
     {
@@ -134,10 +118,6 @@ class BookController extends Controller
         
         if (request()->hasFile('file')) {
             $book->update(['file' => request()->file->store('uploads/book/files/pdfs')]);
-        }
-
-        if (request()->hasFile('preview')) {
-            $book->update(['preview' => request()->preview->store('uploads/book/previews/pdfs', 'public')]);
         }
     }
 }

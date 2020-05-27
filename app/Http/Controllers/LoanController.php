@@ -125,11 +125,17 @@ class LoanController extends Controller
     public function authUser()
     {
         if (request()->ajax()) {
-            $loan = Loan::where([
-                ['book_id', '=', request()->book_id],
-                ['user_id', '=', auth()->user()->id],
-            ])->whereNull('returned_at')->first();
-            return response()->json($loan);
+            $hasAccess = true;
+            if (auth()->user()->isMember()) {
+                $loan = Loan::where([
+                    ['book_id', '=', request()->book_id],
+                    ['user_id', '=', auth()->user()->id],
+                ])->whereNull('returned_at')->first();
+                if (!$loan) {
+                    $hasAccess = false;
+                }
+            }
+            return response()->json(['has_access' => $hasAccess]);
         }
     }
 }

@@ -1,10 +1,11 @@
 $(function() {
+    
     let file, loadingTask, limit;
 
     var myState = {
         pdf: null,
         currentPage: 1,
-        zoom: 1
+        zoom: 1.2
     }
 
     function base64ToUint8Array(base64) {
@@ -15,12 +16,12 @@ $(function() {
         }
         return uint8Array;
     }
-    
-    // // Book data
+
     $.ajax({
         url: `${base_url}/books/files/${segments[3]}`,
-        success: function(response) {
-            file = base64ToUint8Array(response.file);
+        success: function(book) {
+            // File buku
+            file = base64ToUint8Array(book.file);
             loadingTask = pdfjsLib.getDocument(file)
             loadingTask.promise.then(function (pdf) {
                 myState.pdf = pdf;
@@ -30,11 +31,11 @@ $(function() {
                         book_id: segments[3]
                     },
                     url: `${base_url}/loans/auth-user`,
-                    success: function(response) {
-                        if (Object.keys(response).length === 0 && response.constructor === Object) {
-                            limit = 10
-                        } else {
+                    success: function (loan) {
+                        if (loan.has_access) {
                             limit = myState.pdf._pdfInfo.numPages
+                        } else {
+                            limit = book.preview
                         }
                     }
                 });
@@ -57,6 +58,12 @@ $(function() {
         });
     }
 
+    document.addEventListener("keydown", function(e) {
+        if (e.keyCode == 83 && (navigator.platform.match("Mac") ? e.metaKey : e.ctrlKey)) {
+            e.preventDefault();
+        }
+    }, false);
+    
     document.getElementById('go_previous').addEventListener('click', (e) => {
         if (myState.pdf == null
            || myState.currentPage == 1) return;
@@ -78,7 +85,7 @@ $(function() {
 
     document.getElementById('current_page')
     .addEventListener('keypress', (e) => {
-        if(myState.pdf == null) return;
+        if (myState.pdf == null || myState.currentPage >= limit) return;
      
         // Get key code
         var code = (e.keyCode ? e.keyCode : e.which);

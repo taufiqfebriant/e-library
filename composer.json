@@ -11,6 +11,7 @@
         "php": "^7.2.5",
         "akaunting/money": "^1.1",
         "darryldecode/cart": "^4.1",
+        "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "gufy/pdftohtml-php": "~2",

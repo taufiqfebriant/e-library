@@ -36,7 +36,7 @@ class BookRequest extends FormRequest
                 'file',
                 'mimes:pdf'
             ],
-            'preview' => 'nullable|file|mimes:pdf',
+            'preview' => 'required|numeric',
             'featured' => 'required|numeric'
         ];
     }
