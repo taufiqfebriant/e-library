@@ -686,3 +686,27 @@ a.text-darkslategray:focus {
     right: 3px;
     top: 7px;
 }
+
+#canvas_container {
+    width: 100%;
+    height: 95vh;
+    overflow: auto;
+    background: #333;
+    text-align: center;
+}
+
+#canvas_container::after {
+    content: "";
+    opacity: 1;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+}
+
+@media print {
+    #my_pdf_viewer {
+        display: none;
+    }
+}

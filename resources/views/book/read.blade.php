@@ -2,22 +2,38 @@
 @section('title', "Baca {$book->title}")
 
 @section('content')
-    <div class="container-fluid px-0 h-100">
-        <div class="row no-gutters">
-            <div class="col-auto border-right">
-                <a href="{{ url()->previous() }}" class="btn btn-light m-0 rounded-0 h-100 px-4">
-                    <div class="d-flex align-items-center h-100">
-                        <i class="fas fa-chevron-left fa-2x"></i>
-                    </div>
-                </a>
-            </div>
-            <div class="col pl-3 py-2">
-                <h6 class="text-muted">Anda sedang membaca</h6>
-                <h3>{{ $book->title }}</h3>
-            </div>
+    <div class="d-flex" style="height: 5vh">
+        <div id="navigation_controls" class="d-flex w-100">
+            <a href="{{ url()->previous() }}" class="btn btn-sm btn-outline-primary rounded-0 py-0">
+                <div class="d-flex align-items-center h-100">
+                    <span>Kembali</span>
+                </div>
+            </a>
+            <button id="go_previous" class="btn btn-outline-primary btn-sm rounded-0">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <input id="current_page" value="1" type="number" class="form-control rounded-0 h-100">
+            <button id="go_next" class="btn btn-outline-primary btn-sm rounded-0">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
-        <object data="{{ $book->inTheLoanPeriod() ? route('books.file', $book->id) : asset("storage/{$book->preview}") }}#toolbar=0" type="text/html" class="w-100 h-100">
-            <embed src="{{ $book->inTheLoanPeriod() ? route('books.file', $book->id) : asset("storage/{$book->preview}") }}#toolbar=0" type="text/html">
-        </object>
+        <div id="zoom_controls" class="d-flex">  
+            <button id="zoom_in" class="btn btn-outline-primary rounded-0 btn-sm">
+                <i class="fas fa-plus"></i>
+            </button>
+            <button id="zoom_out" class="btn btn-outline-primary rounded-0 btn-sm">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+    </div>
+    <div id="my_pdf_viewer">
+        <div id="canvas_container" class="position-relative">
+            <canvas id="pdf_renderer"></canvas>
+        </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script src="https://unpkg.com/pdfjs-dist@latest/build/pdf.min.js"></script>
+    <script src="{{ asset('js/pdf-viewer.js') }}"></script>
+@endpush

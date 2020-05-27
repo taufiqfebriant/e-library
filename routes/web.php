@@ -14,6 +14,7 @@ Route::get('pagination/reviews', 'PaginationController@reviews')->name('paginati
 Route::middleware('auth')->group(function () {
     Route::resource('cart', 'CartController');
     Route::middleware('verified')->group(function () {
+        Route::get('loans/auth-user', 'LoanController@authUser');
         Route::resource('loans', 'LoanController');
         Route::post('loans/cart', 'LoanController@storeFromCart')->name('loans.cart');
         Route::get('users/{user}', 'UserController@show')->name('users.show');

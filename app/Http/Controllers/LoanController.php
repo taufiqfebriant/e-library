@@ -121,4 +121,15 @@ class LoanController extends Controller
     {
         //
     }
+
+    public function authUser()
+    {
+        if (request()->ajax()) {
+            $loan = Loan::where([
+                ['book_id', '=', request()->book_id],
+                ['user_id', '=', auth()->user()->id],
+            ])->whereNull('returned_at')->first();
+            return response()->json($loan);
+        }
+    }
 }
