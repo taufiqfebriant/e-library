@@ -1,8 +1,7 @@
 $(function () {
     $('.book-carousel').slick({
         slidesToShow: 6,
-        autoplay: true,
-        autoplaySpeed: 3000,
+        variableWidth: true,
         responsive: [
             {
                 breakpoint: 576,

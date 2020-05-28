@@ -8,7 +8,7 @@
 @section('content')
     @include('partials.navbar')
     @guest
-        <section class="hero-mrsection vh-100">
+        <section class="hero-section vh-100">
             <div class="container h-100">
                 <div class="row h-100 align-items-center justify-content-center">
                     <div class="col-lg-6">
@@ -58,34 +58,6 @@
                 </div>
             </div>
         </section>
-        <section class="latest-books pt-5 space-bottom-2">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12 pb-3">
-                        <h2>Buku terbaru untuk Anda</h2>
-                    </div>
-                    <div class="col-12">
-                        @if ($latestBooks->isEmpty())
-                            <p class="text-center my-3">Tidak ada buku.</p>
-                        @else
-                            <div class="book-carousel">
-                                @foreach ($latestBooks as $book)
-                                    <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
-                                        <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
-                                        <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
-                                        <p class="text-muted">
-                                            @foreach ($book->authors as $author)
-                                                {{ $author->name . ($loop->last ? '' : ', ') }}
-                                            @endforeach
-                                        </p>
-                                    </a>
-                                @endforeach
-                            </div>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </section>
     @else
         @if ($featuredBooks->isNotEmpty())
             <section id="featuredBooks" class="carousel slide space-top-2 space-bottom-1 bg-dark" data-ride="carousel">
@@ -128,13 +100,9 @@
                                 <div class="book-carousel">
                                     @foreach ($top10Books as $book)
                                         <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
-                                            <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
-                                            <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
-                                            <p class="text-muted mb-0">
-                                                @foreach ($book->authors as $author)
-                                                    {{ $author->name . ($loop->last ? '' : ', ') }}
-                                                @endforeach
-                                            </p>
+                                            <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="mw-100 object-cover">
+                                            <h6 class="text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
+                                            <p class="small text-muted mb-0">{{ $book->getCommaSeparatedAuthors() }}</p>
                                             <small class="text-body">{{ $book->loans_count }}x</small>
                                         </a>
                                     @endforeach
@@ -159,41 +127,9 @@
                                 <div class="book-carousel">
                                     @foreach ($recommendedBooks as $book)
                                         <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
-                                            <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
-                                            <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
-                                            <p class="text-muted">
-                                                @foreach ($book->authors as $author)
-                                                    {{ $author->name . ($loop->last ? '' : ', ') }}
-                                                @endforeach
-                                            </p>
-                                        </a>
-                                    @endforeach
-                                </div>
-                            @else
-                                <p class="text-center my-5">Tidak ada data.</p>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section class="latest-books pt-4 pb-3">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 pb-3">
-                            <h3 class="pl-2">Buku terbaru</h3>
-                        </div>
-                        <div class="col-12">
-                            @if ($latestBooks->isNotEmpty())
-                                <div class="book-carousel">
-                                    @foreach ($latestBooks as $book)
-                                        <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
-                                            <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid">
-                                            <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
-                                            <p class="text-muted">
-                                                @foreach ($book->authors as $author)
-                                                    {{ $author->name . ($loop->last ? '' : ', ') }}
-                                                @endforeach
-                                            </p>
+                                            <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="mw-100 object-cover">
+                                            <h6 class="text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
+                                            <p class="text-muted small">{{ $book->getCommaSeparatedAuthors() }}</p>
                                         </a>
                                     @endforeach
                                 </div>
@@ -206,6 +142,30 @@
             </section>
         </div>
     @endguest
+    <section class="latest-books pt-4 pb-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 pb-3">
+                    <h2 class="pl-2">Buku terbaru</h2>
+                </div>
+                <div class="col-12">
+                    @if ($latestBooks->isNotEmpty())
+                        <div class="book-carousel">
+                            @foreach ($latestBooks as $book)
+                                <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
+                                    <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="mw-100 object-cover">
+                                    <h6 class="text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
+                                    <p class="small text-muted">{{ $book->getCommaSeparatedAuthors() }}</p>
+                                </a>
+                            @endforeach
+                        </div>
+                    @else
+                        <p class="text-center my-5">Tidak ada data.</p>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </section>
     @include('partials.footer')
 @endsection
 

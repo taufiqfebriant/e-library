@@ -710,3 +710,32 @@ a.text-darkslategray:focus {
         display: none;
     }
 }
+
+.book-carousel .slick-track {
+    display: flex !important;
+}
+
+.book-carousel .slick-slide > div {
+    height: 100%;
+} 
+
+.book-carousel .slick-slide {
+    width: 7.4375em;
+    height: inherit !important;
+}
+
+.book-carousel .slick-slide img {
+    width: 117px;
+    height: 155px;
+}
+
+@media (min-width: 576px) {
+    .book-carousel .slick-slide {
+        width: 185px;
+    }
+    
+    .book-carousel .slick-slide img {
+        width: 169px;
+        height: 252px;
+    }
+}

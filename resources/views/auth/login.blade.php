@@ -29,6 +29,11 @@
                                     </span>
                                 @enderror
                             </div>
+                            <div class="clearfix mb-3">
+                                @if (Route::has('password.request'))
+                                    <a class="float-right" href="{{ route('password.request') }}">Lupa password?</a>
+                                @endif
+                            </div>
                             <div class="clearfix">
                                 <button type="submit" class="btn btn-primary btn-block btn-lg text-base">Masuk</button>
                             </div>
