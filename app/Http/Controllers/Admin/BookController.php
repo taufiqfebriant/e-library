@@ -11,6 +11,7 @@ use App\Author;
 use App\Category;
 use App\Publisher;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class BookController extends Controller
 {
@@ -114,6 +115,8 @@ class BookController extends Controller
     {
         if (request()->hasFile('cover')) {
             $book->update(['cover' => request()->cover->store('uploads/book/covers', 'public')]);
+            $image = Image::make(public_path("storage/{$book->cover}"))->fit(216, 287);
+            $image->save();
         }
         
         if (request()->hasFile('file')) {

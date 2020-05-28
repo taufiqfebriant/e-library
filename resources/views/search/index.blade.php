@@ -47,7 +47,9 @@
                 </div>
             </div>
             <form class="col-lg-3 d-none d-lg-block" method="get" action={{ route('search.index') }}>
-                <input type="hidden" name="q" value="{{ request('q') }}">
+                @if (request()->q)
+                    <input type="hidden" name="q" value="{{ request('q') }}">
+                @endif
                 <div class="card mt-3">
                     <div class="card-header">Kategori</div>
                     <div class="card-body">

@@ -35,7 +35,7 @@
     <div class="container pt-5">
         <div class="row mt-5 mb-4 no-gutters">
             <div class="col-5 col-md-3 pr-3 pr-md-4">
-                <img src="{{ asset("storage/{$book->cover}") }}" class="img-thumbnail border-0 bg-transparent p-0">
+                <img src="{{ asset("storage/{$book->cover}") }}" class="mw-100 border-0 bg-transparent p-0 object-cover w-100">
             </div>
             <div class="col-7 col-md-8">
                 <h2 class="mt-md-2 font-weight-bold">{{ $book->title }}</h2>
