@@ -17,14 +17,6 @@
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
-        <div id="zoom_controls" class="d-flex">  
-            <button id="zoom_in" class="btn btn-outline-primary rounded-0 btn-sm">
-                <i class="fas fa-plus"></i>
-            </button>
-            <button id="zoom_out" class="btn btn-outline-primary rounded-0 btn-sm">
-                <i class="fas fa-minus"></i>
-            </button>
-        </div>
     </div>
     <div id="my_pdf_viewer">
         <div id="canvas_container" class="position-relative">

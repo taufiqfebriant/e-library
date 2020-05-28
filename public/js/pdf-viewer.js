@@ -5,7 +5,7 @@ $(function() {
     var myState = {
         pdf: null,
         currentPage: 1,
-        zoom: 1.2
+        zoom: 2
     }
 
     function base64ToUint8Array(base64) {
@@ -51,6 +51,7 @@ $(function() {
             var viewport = page.getViewport({scale: myState.zoom});
             canvas.width = viewport.width;
             canvas.height = viewport.height;
+            canvas.style.width = "100%";
             page.render({
                 canvasContext: ctx,
                 viewport: viewport
@@ -109,7 +110,7 @@ $(function() {
 
     document.getElementById('zoom_in')
     .addEventListener('click', (e) => {
-        if(myState.pdf == null) return;
+        if (myState.pdf == null) return;
         myState.zoom += 0.1;
         render();
     });
