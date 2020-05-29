@@ -58,7 +58,7 @@
                     </dl>
                 </div>
                 @if (auth()->check() && $book->inTheLoanPeriod())
-                    <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary font-weight-semibold px-3 py-2">Baca</a>
+                    <a href="{{ $book->readPath() }}" class="btn btn-primary font-weight-semibold px-3 py-2">Baca</a>
                 @else
                     <div class="d-flex flex-column flex-md-row">
                         @if (auth()->check() && !$existsInCart && auth()->user()->loans()->active()->count() < 2)
@@ -67,7 +67,7 @@
                                 <span>Masukkan Keranjang</span>
                             </button>
                         @endif
-                        <a href="{{ route('books.read', compact('book')) }}" class="btn btn-outline-primary font-weight-semibold px-3 py-2 mr-2 w-100 w-md-auto">Lihat Cuplikan</a>
+                        <a href="{{ $book->readPath() }}" class="btn btn-outline-primary font-weight-semibold px-3 py-2 mr-2 w-100 w-md-auto">Lihat Cuplikan</a>
                         <form action="{{ route('loans.store') }}" method="post" class="mt-2 mt-md-0">
                             @csrf
                             <input type="hidden" name="book_id" value="{{ $book->id }}">

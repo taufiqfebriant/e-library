@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Book extends Model
 {
@@ -49,6 +50,11 @@ class Book extends Model
         return $this->belongsTo('App\Publisher');
     }
 
+    public function readPath()
+    {
+        return route('books.read', ['book' => $this, 'slug' => Str::slug($this->title)]);
+    }
+    
     public function reviews()
     {
         return $this->hasMany('App\Review');
@@ -57,5 +63,10 @@ class Book extends Model
     public function scopeFeatured($query)
     {
         return $query->where('featured', 1);
+    }
+
+    public function showPath()
+    {
+        return route('books.show', ['book' => $this, 'slug' => Str::slug($this->title)]);
     }
 }

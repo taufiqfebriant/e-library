@@ -1,7 +1,6 @@
 $(function() {
-    
     let file, loadingTask, limit;
-
+    let book_id = segments[2].split('-')[0]
     var myState = {
         pdf: null,
         currentPage: 1,
@@ -18,7 +17,7 @@ $(function() {
     }
 
     $.ajax({
-        url: `${base_url}/books/files/${segments[3]}`,
+        url: `${base_url}/books/files/${book_id}`,
         success: function(book) {
             // File buku
             file = base64ToUint8Array(book.file);
@@ -27,9 +26,7 @@ $(function() {
                 myState.pdf = pdf;
                 // Loan data
                 $.ajax({
-                    data: {
-                        book_id: segments[3]
-                    },
+                    data: { book_id },
                     url: `${base_url}/loans/auth-user`,
                     success: function (loan) {
                         if (loan.has_access) {

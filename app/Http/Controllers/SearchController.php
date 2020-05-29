@@ -27,8 +27,8 @@ class SearchController extends Controller
         if (request()->has('rating')) {
             $books = $books->havingRaw('ROUND(SUM(reviews.rating) / COUNT(reviews.rating)) >= ?', [request()->rating]);
         }
-        if (request()->has('category_id')) {
-            $books = $books->where('category_id', request()->category_id);
+        if (request()->has('category')) {
+            $books = $books->where('categories.name', request()->category);
         }
         $books = $books->paginate(9);
         return view('search.index', compact('books', 'categories'));

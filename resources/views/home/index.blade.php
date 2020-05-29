@@ -64,7 +64,7 @@
                 <div class="container h-100 mt-3">
                     <div class="carousel-inner h-100">
                         @foreach ($featuredBooks as $book)
-                            <a href="{{ route('books.show', compact('book')) }}" class="carousel-item h-100 text-decoration-none {{ $loop->first ? 'active' : '' }}">
+                            <a href="{{ $book->showPath() }}" class="carousel-item h-100 text-decoration-none {{ $loop->first ? 'active' : '' }}">
                                 <div class="row justify-content-center no-gutters">
                                     <div class="col-md-3 h-64 text-center mb-3 mb-md-0">
                                         <img src="{{ asset("storage/{$book->cover}") }}" class="w-auto h-100" alt="Book's cover">
@@ -99,7 +99,7 @@
                             @if ($top10Books->isNotEmpty())
                                 <div class="book-carousel">
                                     @foreach ($top10Books as $book)
-                                        <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
+                                        <a href="{{ $book->showPath() }}" class="p-2 text-decoration-none transition-3d-hover">
                                             <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="mw-100 object-cover">
                                             <h6 class="text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
                                             <p class="small text-muted mb-0">{{ $book->getCommaSeparatedAuthors() }}</p>
@@ -126,7 +126,7 @@
                             @if ($recommendedBooks->isNotEmpty())
                                 <div class="book-carousel">
                                     @foreach ($recommendedBooks as $book)
-                                        <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
+                                        <a href="{{ $book->showPath() }}" class="p-2 text-decoration-none transition-3d-hover">
                                             <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="mw-100 object-cover">
                                             <h6 class="text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
                                             <p class="text-muted small">{{ $book->getCommaSeparatedAuthors() }}</p>
@@ -152,7 +152,7 @@
                     @if ($latestBooks->isNotEmpty())
                         <div class="book-carousel">
                             @foreach ($latestBooks as $book)
-                                <a href="{{ route('books.show', compact('book')) }}" class="p-2 text-decoration-none transition-3d-hover">
+                                <a href="{{ $book->showPath() }}" class="p-2 text-decoration-none transition-3d-hover">
                                     <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="mw-100 object-cover">
                                     <h6 class="text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
                                     <p class="small text-muted">{{ $book->getCommaSeparatedAuthors() }}</p>

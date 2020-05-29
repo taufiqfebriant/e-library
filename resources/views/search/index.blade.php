@@ -17,7 +17,7 @@
                             <div class="card-body">
                                @foreach ($categories as $category)
                                     <div class="custom-control custom-radio">
-                                        <input type="radio" class="custom-control-input" id="category_{{ $category->id }}" name="category_id" value="{{ $category->id }}" {{ request()->category_id == $category->id ? 'checked' : '' }}>
+                                        <input type="radio" class="custom-control-input" id="category_{{ $category->id }}" name="category" value="{{ Str::slug($category->name) }}" {{ request()->category == Str::slug($category->name) ? 'checked' : '' }}>
                                         <label class="custom-control-label" for="category_{{ $category->id }}">{{ $category->name }}</label>
                                     </div>
                                 @endforeach
@@ -55,7 +55,7 @@
                     <div class="card-body">
                          @foreach ($categories as $category)
                             <div class="custom-control custom-radio">
-                                <input type="radio" class="custom-control-input" id="category{{ $category->id }}" name="category_id" value="{{ $category->id }}" {{ request()->category_id == $category->id ? 'checked' : '' }}>
+                                <input type="radio" class="custom-control-input" id="category{{ $category->id }}" name="category" value="{{ Str::slug($category->name) }}" {{ request()->category == Str::slug($category->name) ? 'checked' : '' }}>
                                 <label class="custom-control-label" for="category{{ $category->id }}">{{ $category->name }}</label>
                             </div>
                         @endforeach
@@ -73,7 +73,7 @@
                 <div class="row h-100">
                     @forelse ($books as $book)
                         <div class="col-6 col-md-3">
-                            <a href="{{ route('books.show', compact('book')) }}" class="text-decoration-none transition-3d-hover">
+                            <a href="{{ $book->showPath() }}" class="text-decoration-none transition-3d-hover">
                                 <img src="{{ asset("storage/{$book->cover}") }}" alt="Sampul {{ $book->cover }}" class="img-fluid rounded">
                                 <h6 class="text-base text-body mt-2 mb-1">{{ Str::words($book->title, 5, '...') }}</h6>
                                 <p class="text-muted mb-0">

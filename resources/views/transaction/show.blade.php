@@ -22,10 +22,11 @@
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <h5>Transfer ke nomor rekening</h5>
-                        <h3 class="mb-0">BCA 0123456789</h3>
+                        <h3>{{ settings()->get('bank_account_number') }}</h3>
+                        <p class="mb-0">{{ settings()->get('bank_name') }}</p>
                     </div>
-                    <span class="text-primary">
-                        <i class="fas fa-exchange-alt fa-4x"></i>
+                    <span class="text-primary d-none d-md-block">
+                        <i class="fas fa-exchange-alt fa-3x"></i>
                     </span>
                 </div>
                 <hr>

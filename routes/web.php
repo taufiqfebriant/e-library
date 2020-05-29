@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes(['verify' => true]);
 Route::get('/', 'HomeController@index')->name('home.index');
-Route::get('books/{book}', 'BookController@show')->name('books.show');
+Route::get('books/{book}-{slug}', 'BookController@show')->name('books.show');
 Route::get('plans', 'PlanController@index')->name('plans.index');
 Route::get('categories', 'CategoryController@index')->name('categories.index');
 Route::get('search', 'SearchController@index')->name('search.index');
@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
         Route::post('transactions', 'TransactionController@store')->name('transactions.store');
         Route::get('transactions/{transaction}', 'TransactionController@show')->name('transactions.show');
         Route::patch('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
-        Route::get('books/read/{book}', 'BookController@read')->name('books.read');
+        Route::get('books/{book}-{slug}/read', 'BookController@read')->name('books.read');
         Route::get('books/files/{file}', 'BookController@file')->name('books.file');
         Route::post('reviews', 'ReviewController@store')->name('reviews.store');
         Route::patch('reviews/{review}', 'ReviewController@update')->name('reviews.update');
@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::post('notifications/mark-as-read', 'NotificationController@markAsRead')->name('notifications.mark-as-read');
 });
 
-Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users', 'verified')->group(function() {
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth', 'verified', 'can:manage-users')->group(function() {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
     Route::resource('authors', 'AuthorController');
     Route::resource('categories', 'CategoryController');
@@ -56,4 +56,6 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::get('subscriptions', 'SubscriptionController@index')->name('subscriptions.index');
     Route::get('loans', 'LoanController@index')->name('loans.index');
     Route::resource('users', 'UserController' , ['except' => ['show' , 'create' , 'store']]);
+    Route::get('settings', 'SettingsController@index')->name('settings.index');
+    Route::patch('settings', 'SettingsController@update')->name('settings.update');
 });
