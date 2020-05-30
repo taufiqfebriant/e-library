@@ -37,6 +37,8 @@ class Kernel extends ConsoleKernel
                 }
             }
         })->everyMinute();
+
+        $schedule->command('sitemap:generate')->daily();
     }
 
     /**
