@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Book;
+use Artesaos\SEOTools\Facades\SEOTools;
 
 class HomeController extends Controller
 {
@@ -19,6 +20,9 @@ class HomeController extends Controller
         } else {
             $recommendedBooks = [];
         }
+
+        // SEO
+        // SEOTools::setDescription('Rumah Baca dan Hasilkan Karya (Rumah Cahaya) FLP Saudi')
         return view('home.index', compact('latestBooks', 'featuredBooks', 'top10Books', 'recommendedBooks'));
     }
 }
