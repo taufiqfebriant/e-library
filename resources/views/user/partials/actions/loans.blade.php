@@ -4,7 +4,7 @@
     <form method="POST" action="{{ route('loans.update', array_merge(['user' => auth()->user()->id], compact('loan'))) }}" class="d-flex">
         @method('PATCH')
         @csrf
-        <a href="{{ route('books.read', ['book' => $loan->book]) }}" class="btn btn-primary mr-2">
+        <a href="{{ $loan->book->readPath() }}" class="btn btn-primary mr-2">
             <i class="fas fa-book-open"></i>
         </a>
         <button class="btn btn-primary">

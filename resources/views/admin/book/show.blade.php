@@ -67,7 +67,7 @@
                             <div class="card-footer">
                                 <div class="d-flex justify-content-between">
                                     <a href="{{ route('admin.books.index') }}" class="btn btn-default">Kembali</a>
-                                    <a href="{{ route('books.read', compact('book')) }}" class="btn btn-primary">Lihat buku</a>
+                                    <a href="{{ $book->readPath() }}" class="btn btn-primary">Lihat buku</a>
                                 </div>
                             </div>
                             <!-- /.card-body -->

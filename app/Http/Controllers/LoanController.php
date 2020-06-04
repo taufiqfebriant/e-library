@@ -6,6 +6,7 @@ use App\Book;
 use App\Loan;
 use App\Transaction;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class LoanController extends Controller
 {
@@ -48,7 +49,7 @@ class LoanController extends Controller
             ]));
             auth()->user()->categories()->syncWithoutDetaching([$loan->book->id]);
             \Cart::session(auth()->user()->id)->remove($loan->book->id);
-            return redirect()->route('books.read', ['book' => $loan->book]);
+            return redirect()->route('books.read', ['book' => $loan->book, 'slug' => Str::slug($loan->book->title)]);
         } else {
             $paidTransactions = Transaction::whereNotNull(['paid_at', 'receipt'])->where('user_id', auth()->user()->id)->first();
             if ($paidTransactions) {
