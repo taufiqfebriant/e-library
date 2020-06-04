@@ -29,9 +29,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('notifications:send')->daily();
 
         // Otomatis mengembalikan buku
-        $loans = Loan::active();
+        $loans = Loan::active()->get();
         if ($loans->isNotEmpty()) {
-            $schedule->call(function () {
+            $schedule->call(function () use ($loans) {
                 foreach ($loans as $loan) {
                     if (Carbon::now() >= $loan->ends_at) {
                         $loan->update(['returned_at' => Carbon::now()]);
