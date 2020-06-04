@@ -29,14 +29,16 @@ class Kernel extends ConsoleKernel
         $schedule->command('notifications:send')->daily();
 
         // Otomatis mengembalikan buku
-        $schedule->call(function () {
-            $loans = Loan::active();
-            foreach ($loans as $loan) {
-                if (Carbon::now() >= $loan->ends_at) {
-                    $loan->update(['returned_at' => Carbon::now()]);
+        $loans = Loan::active();
+        if ($loans->isNotEmpty()) {
+            $schedule->call(function () {
+                foreach ($loans as $loan) {
+                    if (Carbon::now() >= $loan->ends_at) {
+                        $loan->update(['returned_at' => Carbon::now()]);
+                    }
                 }
-            }
-        })->everyMinute();
+            })->everyMinute();
+        }
 
         $schedule->command('sitemap:generate')->daily();
     }
