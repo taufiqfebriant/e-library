@@ -77,6 +77,8 @@ class LoansDataTable extends DataTable
                         Button::make('reset'),
                         Button::make('reload')
                     )->parameters([
+                        // Menginisialisasi tooltips setelah tabel dimuat
+                        'drawCallback' => "function () { $('[data-toggle=\"tooltip\"]').tooltip() }",
                         'responsive' => true
                     ]);
     }

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Book;
+use App\Observers\BookObserver;
 use App\Settings;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;

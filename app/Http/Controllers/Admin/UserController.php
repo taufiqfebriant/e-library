@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\DataTables\Admin\UsersDataTable;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 use App\User;
 use App\Role;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -34,18 +36,18 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $user = new User();
+        $roles = Role::all();
+        return view('admin.user.create', compact('user', 'roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store()
     {
-        //
+        $validatedData = $this->validatedData();
+        Arr::set($validatedData, 'password', Hash::make($validatedData['password']));
+        $user = User::create(Arr::except($validatedData, 'roles'));
+        $user->roles()->sync($validatedData['roles']);
+        return redirect()->route('admin.users.show', compact('user'));
     }
 
     /**
@@ -56,7 +58,7 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return view('admin.user.show', compact('user'));
     }
 
     /**
@@ -85,23 +87,13 @@ class UserController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(User $user)
     {
-        //
-        $user->roles()->sync($request->roles);
-        
-        $user->name = $request->name;
-        $user->email = $request->email;
-        
-
-        if ($user->save()) {
-            $request->session()->flash('success', $user->name.' User has ben Updated');
-        } else {
-            $request->session()->flash('error','Thas was an error updating the user');
-        }
-        
-
-        return redirect()->route('admin.users.index');
+        $validatedData = $this->validatedData();
+        Arr::set($validatedData, 'password', Hash::make($validatedData['password']));
+        $user->update(Arr::except($validatedData, 'roles'));
+        $user->roles()->sync($validatedData['roles']);
+        return redirect()->route('admin.users.show', compact('user'));
     }
 
     /**
@@ -112,15 +104,23 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-
         if (Gate::denies('delete-users')) {
             return redirect(route('admin.users.index'));
         }
 
-        //
         $user->roles()->detach();
         $user->delete();
 
         return redirect()->route('admin.users.index');
+    }
+
+    private function validatedData()
+    {
+        return request()->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:App\Category,name,' . ($this->author->id ?? '')],
+            'roles' => 'required',
+            'password' => ['sometimes', 'string', 'min:8']
+        ]);
     }
 }

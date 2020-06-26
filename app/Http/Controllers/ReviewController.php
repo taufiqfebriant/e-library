@@ -23,6 +23,12 @@ class ReviewController extends Controller
         return back()->with(['type' => 'success', 'message' => 'Berhasil mengubah penilaian.']);
     }
 
+    public function destroy(Review $review)
+    {
+        $review->delete();
+        return back()->with(['type' => 'success', 'message' => 'Berhasil menghapus penilaian.'])->withInput();
+    }
+    
     public function apiGet()
     {
         $review = Review::where([

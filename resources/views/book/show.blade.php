@@ -98,10 +98,12 @@
                         <button class="btn btn-light bg-transparent" type="button" id="yourReviewAction" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v fa-sm"></i>
                         </button>
-                        <div class="dropdown-menu" aria-labelledby="yourReviewAction">
-                            <button class="dropdown-item" data-toggle="modal" data-target="#editReviewModal" type="button">Ubah</button>
-                            <a class="dropdown-item" href="#">Hapus</a>
-                        </div>
+                        <form method="POST" class="dropdown-menu" aria-labelledby="yourReviewAction" action="{{ route('reviews.destroy', ['review' => $authUserReview]) }}">
+                            @method('DELETE')
+                            @csrf
+                            <button type="button" class="dropdown-item" data-toggle="modal" data-target="#editReviewModal" type="button">Ubah</button>
+                            <button type="submit" class="dropdown-item">Hapus</button>
+                        </form>
                     </div>
                 </div>
                 <div class="review pt-3 pb-1">

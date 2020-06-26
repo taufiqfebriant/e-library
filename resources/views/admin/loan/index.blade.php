@@ -1,6 +1,6 @@
 @extends('admin.layouts.body')
 
-@section('title', 'Langganan')
+@section('title', 'Pinjaman')
 @section('body-class', 'sidebar-mini')
 
 @section('links')
@@ -24,7 +24,7 @@
                 <div class="container-fluid">
                     <div class="row mb-4">
                         <div class="col-auto">
-                            <h1>Langganan</h1>
+                            <h1>Pinjaman</h1>
                         </div>
                     </div>
                     <div class="row">

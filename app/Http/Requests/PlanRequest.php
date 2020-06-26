@@ -25,7 +25,7 @@ class PlanRequest extends FormRequest
     {
         return [
             'name' => 'required|unique:App\Plan,name,' . ($this->plan->id ?? ''),
-            'description' => 'required',
+            'description' => 'required|max:100',
             'price' => 'required|numeric',
             'months' => 'required|numeric'
         ];

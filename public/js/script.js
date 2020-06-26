@@ -87,9 +87,7 @@ $(function() {
     });
 
     // Pagination
-    $(document).on("click", ".reviews-pagination .pagination a", function(
-        event
-    ) {
+    $(document).on("click", ".reviews-pagination .pagination a", function(event) {
         event.preventDefault();
         let page = $(this)
             .attr("href")

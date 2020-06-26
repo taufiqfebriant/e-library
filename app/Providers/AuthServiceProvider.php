@@ -33,6 +33,10 @@ class AuthServiceProvider extends ServiceProvider
             return $user->id == $transaction->user_id;
         });
 
+        Gate::define('create-user', function ($user) {
+            return $user->hasRole('admin');
+        });
+        
         Gate::define('manage-users', function ($user){
             return $user->hasRole('admin');
         });

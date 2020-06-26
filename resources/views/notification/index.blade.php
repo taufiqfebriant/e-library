@@ -22,6 +22,18 @@
                 <span class="text-muted ml-4">{{ $notification->created_at->diffForHumans() }}</span>
             </a>
             @break
+        @case('App\Notifications\NewBook')
+            <a class="dropdown-item p-3" href="{{ route('books.show', ['book' => $notification->data['id'], 'slug' => Str::slug($notification->data['title'])]) }}">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <span class="text-base mr-3 text-primary">&bull;</span>
+                        <p class="mb-0 text-wrap">Buku "{{ $notification->data['title'] }}" telah tersedia.</p>
+                    </div>
+                    <img src="{{ asset("storage/{$notification->data['cover']}") }}" style="width: 48px;" class="h-auto">
+                </div>
+                <span class="text-muted ml-4">{{ $notification->created_at->diffForHumans() }}</span>
+            </a>
+            @break
         @default
             <span class="dropdown-item p-3 text-center">Kesalahan tipe notifikasi.</span>
     @endswitch

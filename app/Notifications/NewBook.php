@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class LoanExpiration extends Notification
+class NewBook extends Notification
 {
     use Queueable;
     public $book;

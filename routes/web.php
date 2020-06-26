@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::get('books/files/{file}', 'BookController@file')->name('books.file');
         Route::post('reviews', 'ReviewController@store')->name('reviews.store');
         Route::patch('reviews/{review}', 'ReviewController@update')->name('reviews.update');
+        Route::delete('reviews/{review}', 'ReviewController@destroy')->name('reviews.destroy');
         Route::get('api/reviews', 'ReviewController@apiGet');
     });
     Route::delete('cart', 'CartController@multipleDestroy')->name('cart.multiple-destroy');
@@ -40,7 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::post('notifications/mark-as-read', 'NotificationController@markAsRead')->name('notifications.mark-as-read');
 });
 
-Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth', 'verified', 'can:manage-users')->group(function() {
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth', 'can:manage-users')->group(function() {
     Route::get('dashboard', 'DashboardController@index')->name('dashboard.index');
     Route::resource('authors', 'AuthorController');
     Route::resource('categories', 'CategoryController');
@@ -55,7 +56,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('auth', '
     Route::patch('transactions/{transaction}', 'TransactionController@update')->name('transactions.update');
     Route::get('subscriptions', 'SubscriptionController@index')->name('subscriptions.index');
     Route::get('loans', 'LoanController@index')->name('loans.index');
-    Route::resource('users', 'UserController' , ['except' => ['show' , 'create' , 'store']]);
+    Route::resource('users', 'UserController');
     Route::get('settings', 'SettingsController@index')->name('settings.index');
     Route::patch('settings', 'SettingsController@update')->name('settings.update');
 });

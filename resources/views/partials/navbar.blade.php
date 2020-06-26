@@ -119,9 +119,9 @@
         </div>
         <form action="{{ route('search.index') }}" method="get" class="w-100 navbar-search collapse d-lg-none">
             <div class="input-group py-2">
-                <input type="text" class="form-control" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." aria-label="Ketik judul buku, penulis, kategori, atau penerbit..." aria-describedby="search-button" name="q" value="{{ request()->q }}" required>
+                <input type="text" class="form-control" placeholder="Ketik judul buku, penulis, kategori, atau penerbit..." aria-label="Ketik judul buku, penulis, kategori, atau penerbit..." aria-describedby="search-button-mobile" name="q" value="{{ request()->q }}" required>
                 <div class="input-group-append">
-                    <button button class="btn btn-primary" type="button" id="search-button">
+                    <button button class="btn btn-primary" type="button" id="search-button-mobile">
                         <i class="fas fa-search"></i>
                     </button>
                 </div>

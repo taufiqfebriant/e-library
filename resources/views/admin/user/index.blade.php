@@ -26,6 +26,9 @@
                         <div class="col-auto">
                             <h1>Pengguna</h1>
                         </div>
+                        <div class="col-auto">
+                            <a href={{ route('admin.users.create') }} class="btn btn-primary">Tambah</a>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-12">

@@ -14,9 +14,12 @@
         </div>
     </div>
     <div class="form-group row">
-        <label for="description" class="col-sm-2 col-form-label">Deskripsi</label>
+        <label for="planDescription" class="col-sm-2 col-form-label">Deskripsi</label>
         <div class="col-sm-10">
-            <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" placeholder="Deskripsi" rows="4">{{ old('description', $plan->description) }}</textarea>
+            <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="planDescription" placeholder="Deskripsi" rows="4" maxlength="100">{{ old('description', $plan->description) }}</textarea>
+            <p class="text-right mb-0 mt-2">
+                <span id="planDescriptionLength">{{ Str::length($plan->description) }}</span>/100
+            </p>
             @error('description')
                 <span class="invalid-feedback" role="alert">
                     {{ $message }}

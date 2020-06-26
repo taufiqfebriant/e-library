@@ -5,4 +5,10 @@ $(function() {
             alwaysShowClose: true
         });
     });
+
+    // Menghitung karakter deskripsi paket
+    $('#planDescription').on('input', function () {
+        var currentLength = $(this).val().length
+        $('#planDescriptionLength').text(currentLength)
+    })
 });

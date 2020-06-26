@@ -12,6 +12,7 @@ class NotificationController extends Controller
         foreach ($notifications as $notification) {
             switch ($notification->type) {
                 case 'App\Notifications\LoanExpiration':
+                case 'App\Notifications\NewBook':
                     $book_id = $notification->data['book_id'];
                     $notification->data = Book::select('id', 'title', 'cover')->find($book_id);
                     break;

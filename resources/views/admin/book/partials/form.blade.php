@@ -105,7 +105,7 @@
                 @enderror
             </div>
             @if ($book->file)
-                <a href="{{ route('admin.books.preview', compact('book')) }}" target="_blank" class="small float-right mt-2">Lihat file aktif</a>
+                <a href="{{ $book->readPath() }}" target="_blank" class="small float-right mt-2">Lihat file aktif</a>
             @endif
         </div>
     </div>
